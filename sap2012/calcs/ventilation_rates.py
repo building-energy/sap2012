@@ -18,6 +18,12 @@ def ventilation_rates(
         no_draft_lobby_infiltration,
         percentage_of_windows_and_doors_draught_proofed,
         number_of_sides_on_which_dwelling_is_sheltered,
+        monthly_average_wind_speed,
+        applicable_case,
+        mechanical_ventilation_air_change_rate_through_system,
+        exhaust_air_heat_pump_using_Appendix_N,
+        mechanical_ventilation_throughput_factor,
+        efficiency_allowing_for_in_use_factor,
         ):
     
     """Calculates the ventilation rates, Section 2
@@ -73,7 +79,29 @@ def ventilation_rates(
     :param number_of_sides_on_which_dwelling_is_sheltered: see (19)
     :type number_of_sides_on_which_dwelling_is_sheltered: int
     
+    :param monthly_average_wind_speed: a list of the monthly wind speeds.
+        12 items, from Jan to Dec, see (22)
+    :type monthly_average_wind_speed: list (of floats)
     
+    :param applicable_case: one of the following options:
+        'balanced mechanical ventilation with heat recovery'
+        'balanced mechanical ventilation without heat recovery'
+        'whole house extract ventilation or positive input ventilation from outside'
+        'natural ventilation or whole house positive input ventilation from loft'
+    :type applicable_case: str
+    
+    :param mechanical_ventilation_air_change_rate_through_system: see (23a)
+    :type mechanical_ventilation_air_change_rate_through_system: float
+    
+    :param exhaust_air_heat_pump_using_Appendix_N: 
+        True if exhaust air heat pump using Appendix N, otherwise False
+    :type exhaust_air_heat_pump_using_Appendix_N: bool
+    
+    :param mechanical ventilation throughput factor: F_mv, see Equation N4
+    :type mechanical ventilation throughput factor: float
+    
+    :param efficiency_allowing_for_in_use_factor: in %, see (23c)
+    :type efficiency_allowing_for_in_use_factor: float
     
     
     :return:(
@@ -91,6 +119,10 @@ def ventilation_rates(
             infiltration_rate2,
             shelter_factor,
             infiltration_rate_incorporating_shelter_factor,
+            wind_factor,
+            adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed,
+            exhaust_air_heat_pump_air_change_rate_through_system,
+            effective_air_change_rate
             )
     
         number_of_chimneys_total: (int)
@@ -104,6 +136,10 @@ def ventilation_rates(
         infiltration_rate2: (float), see (18)
         shelter_factor: (float), see (20)
         infiltration_rate_incorporating_shelter_factor: (float), see (21)
+        wind_factor: list (of floats), see (22a)
+        adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed: list (of floats), see (22b)
+        exhaust_air_heat_pump_air_change_rate_through_system, see (23b)
+        effective_air_change_rate: list (of floats), see (25)
 
     :rtype: tuple
 
@@ -171,6 +207,85 @@ def ventilation_rates(
     infiltration_rate_incorporating_shelter_factor = (infiltration_rate2 * 
                                                       shelter_factor)
     
+    # wind_factor
+    wind_factor=[None]*12
+    for i in range(12):
+        wind_factor[i]=monthly_average_wind_speed[i] / 4.0
+        
+    # adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed
+    adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed=[None]*12
+    for i in range(12):
+        adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i] = (
+            infiltration_rate_incorporating_shelter_factor / 
+            wind_factor[i]
+            )
     
+    # exhaust_air_heat_pump_air_change_rate_through_system
+    if applicable_case in ['balanced mechanical ventilation with heat recovery',
+                           'balanced mechanical ventilation without heat recovery',
+                           'whole house extract ventilation or positive input ventilation from outside']:
+        if exhaust_air_heat_pump_using_Appendix_N:
+            exhaust_air_heat_pump_air_change_rate_through_system = (
+                    mechanical_ventilation_air_change_rate_through_system * 
+                    mechanical_ventilation_throughput_factor)
+        else:
+            exhaust_air_heat_pump_air_change_rate_through_system = \
+                    mechanical_ventilation_air_change_rate_through_system
+    else:
+        exhaust_air_heat_pump_air_change_rate_through_system = None
+        
+    # effective_air_change_rate
+    effective_air_change_rate=[None]*12
     
-    return
+    if applicable_case=='balanced mechanical ventilation with heat recovery':
+        for i in range(12):
+            effective_air_change_rate[i]=(
+                adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i] + 
+                exhaust_air_heat_pump_air_change_rate_through_system * 
+                (1.0 - efficiency_allowing_for_in_use_factor / 100.0)
+                )
+            
+    elif applicable_case=='balanced mechanical ventilation without heat recovery':
+        for i in range(12):
+            effective_air_change_rate[i]=(
+                adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i] + 
+                exhaust_air_heat_pump_air_change_rate_through_system)
+            
+    elif applicable_case=='whole house extract ventilation or positive input ventilation from outside':
+        for i in range(12):
+            if (adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i] 
+                < 0.5 * exhaust_air_heat_pump_air_change_rate_through_system):
+                effective_air_change_rate[i]=exhaust_air_heat_pump_air_change_rate_through_system
+            else:
+                effective_air_change_rate[i]=(
+                    adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i] + 
+                    0.5 * exhaust_air_heat_pump_air_change_rate_through_system)
+        
+    elif applicable_case=='natural ventilation or whole house positive input ventilation from loft':
+        for i in range(12):
+            if adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i]>1:
+                effective_air_change_rate[i]=adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i]
+            else:
+                effective_air_change_rate[i]=0.5 + (adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i]**2 * 0.5)
+                
+    
+    return (
+            number_of_chimneys_total,
+            number_of_chimneys_m3_per_hour,
+            number_of_open_flues_total,
+            number_of_open_flues_m3_per_hour,
+            number_of_intermittant_fans_m3_per_hour,
+            number_of_passive_vents_m3_per_hour,
+            number_of_flueless_gas_fires_m3_per_hour,
+            infiltration_due_to_chimneys_flues_fans_PSVs,
+            additional_infiltration,
+            window_infiltration,
+            infiltration_rate,
+            infiltration_rate2,
+            shelter_factor,
+            infiltration_rate_incorporating_shelter_factor,
+            wind_factor,
+            adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed,
+            exhaust_air_heat_pump_air_change_rate_through_system,
+            effective_air_change_rate
+            )
