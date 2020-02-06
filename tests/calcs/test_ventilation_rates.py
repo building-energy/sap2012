@@ -4,11 +4,12 @@ import unittest
 from pprint import pprint
 
 from sap2012.calcs.ventilation_rates import ventilation_rates
+import sap2012.tables
 
 class TestVentilationRates(unittest.TestCase):
     
     def test_calc1(self):
-        
+                
         result=ventilation_rates(
             number_of_chimneys_main_heating=1,
             number_of_chimneys_secondary_heating=0,
@@ -27,7 +28,8 @@ class TestVentilationRates(unittest.TestCase):
             no_draft_lobby_infiltration=0.05,
             percentage_of_windows_and_doors_draught_proofed=80,
             number_of_sides_on_which_dwelling_is_sheltered=0,
-            monthly_average_wind_speed=[4]*12,
+            #monthly_average_wind_speed=[4]*12,
+            monthly_average_wind_speed=sap2012.tables.U2.get_windspeed_by_region('Thames'),
             applicable_case='natural ventilation or whole house positive input ventilation from loft',
             mechanical_ventilation_air_change_rate_through_system=0.5,
             exhaust_air_heat_pump_using_Appendix_N=False,
