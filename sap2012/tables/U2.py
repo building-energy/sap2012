@@ -41,3 +41,4 @@ if __name__=="__main__":
     print(U2)
     print(U2.df.head(1))
     print(U2.get_regions())
+    print(U2.get_windspeed_by_region('Thames'))
