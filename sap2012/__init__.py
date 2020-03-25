@@ -3,4 +3,4 @@
 """
 """
 
-from. import tables
+from . import tables
