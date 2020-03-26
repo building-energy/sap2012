@@ -12,7 +12,8 @@ def Heating_requirement (
         temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling,
         temperature_during_heating_living_room,
         temperature_during_heating_rest_of_dwelling,
-        living_area_fraction
+        living_area_fraction,
+        temperature_adjustment_table_4e
         ):
     
     T_weekday_living_room = [] 
@@ -52,8 +53,14 @@ def Heating_requirement (
         
     mean_temperature_rest_of_dwelling = []
     for i in range(12):
-        mean_temperature_rest_of_dwelling.append((5 * T_weekday_rest_of_dwelling + 
-                                             2 * T_weekend_rest_of_dwelling) / 7)
+        mean_temperature_rest_of_dwelling.append(((5 * T_weekday_rest_of_dwelling[i] + 
+                                             2 * T_weekend_rest_of_dwelling[i]) / 7) + temperature_adjustment_table_4e)
+        
+    
+    
+    utilisation_factor_whole_house = []
+    for i in range(12):
+        
         
         
     
