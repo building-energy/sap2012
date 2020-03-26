@@ -4,7 +4,7 @@ import math
 def CO2_emissions(
         space_heating_fuel_main_system_1,
         space_heating_fuel_main_system_2,
-        space_heating_fuel_secondary,
+        space_heating_fuel_secondary_system,
         space_heating_fuel_emission_factor_main_system_1,
         space_heating_fuel_emission_factor_main_system_2,
         space_heating_fuel_emission_factor_secondary,
@@ -14,7 +14,7 @@ def CO2_emissions(
         space_cooling_fuel_emission_factor,
         electricity_for_pumps_fans_electric_keep_hot,
         fuel_emission_factor_for_pumps_fans_electric_keep_hot,
-        energy_for_lighting,
+        electricity_for_lighting,
         fuel_emission_factor_for_lighting,
         energy_saving_generation_technologies,
         energy_saving_generation_technologies_fuel_emission_factor,
@@ -160,7 +160,7 @@ def CO2_emissions(
     
     
     
-    space_heating_secondary_emissions = (space_heating_fuel_secondary * 
+    space_heating_secondary_emissions = (space_heating_fuel_secondary_system * 
                                          space_heating_fuel_emission_factor_secondary)
     
     

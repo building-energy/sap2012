@@ -3,7 +3,7 @@
 def Fuel_Costs (
         space_heating_fuel_main_system_1,
         space_heating_fuel_main_system_2,
-        space_heating_fuel_secondary,
+        space_heating_fuel_secondary_system,
         space_heating_fuel_price_main_system_1,
         space_heating_fuel_price_main_system_2,
         space_heating_fuel_price_secondary,
@@ -17,7 +17,7 @@ def Fuel_Costs (
         space_cooling_fuel_price,
         electricity_for_pumps_fans_electric_keep_hot,
         fuel_price_for_pumps_fans_electric_keep_hot,
-        energy_for_lighting,
+        electricity_for_lighting,
         fuel_price_for_lighting,
         additional_standing_charges_table_12,
         energy_saving_generation_technologies,
@@ -160,7 +160,7 @@ def Fuel_Costs (
                                              space_heating_fuel_price_main_system_2 * 
                                              0.01)
     
-    space_heating_secondary_fuel_cost = (space_heating_fuel_secondary * 
+    space_heating_secondary_fuel_cost = (space_heating_fuel_secondary_system * 
                                          space_heating_fuel_price_secondary * 
                                          0.01)
     
@@ -186,7 +186,7 @@ def Fuel_Costs (
                                fuel_price_for_pumps_fans_electric_keep_hot * 
                                0.01)
     
-    lighting_cost = (energy_for_lighting * 
+    lighting_cost = (electricity_for_lighting * 
                      fuel_price_for_lighting * 
                      0.01)
     

@@ -3,7 +3,7 @@
 
 def SAP_Rating (
         energy_cost_deflator,
-        total_energy_cost,
+        total_fuel_cost,
         total_floor_area
         ):
     
