@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Internal_Gains (
+def internal_gains (
         metabolic_gains,
         lighting_gains,
         appliances_gains,

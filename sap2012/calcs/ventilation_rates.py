@@ -197,6 +197,7 @@ def ventilation_rates(
         additional_infiltration=None
         window_infiltration=None
         
+        infiltration_rate=None
         infiltration_rate2=((air_permeability_value_q50 / 20) + 
                             infiltration_due_to_chimneys_flues_fans_PSVs)
         

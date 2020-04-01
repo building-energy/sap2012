@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Space_Heating_Requirement (
+def space_heating_requirement (
         utilisation_factor_for_gains_table_9a,
         total_gains_internal_and_solar,
         monthly_external_temperature_table_U1,

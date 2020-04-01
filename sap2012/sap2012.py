@@ -1,8 +1,101 @@
 # -*- coding: utf-8 -*-
 
-class sap2012():
+import csv
+import ast
+import json
+from sap2012.calcs.calcs import calcs
+
+
+class Sap2012():
     """
     """
+    
+# read inputs functions
+    
+    def read_input_csv(self,fp):
+        """Reads an input csv file and places the values in self.input
+        
+        :param fp str: the filepath of the csv file
+        
+        """
+        with open(fp,'r') as csvfile:
+            
+            csvreader = csv.reader(csvfile, delimiter=',')
+            
+            keys=next(csvreader)
+            values=next(csvreader)
+            l=zip(keys,values)
+            
+            input_keys=self.inputs.keys()
+            
+            for i,(k,v) in enumerate(l):
+                if k in input_keys:
+                    try:
+                        v1=float(v)
+                    except ValueError:
+                        try:
+                            v1=ast.literal_eval(v)
+                        except SyntaxError:
+                            v1=v
+                    self.inputs[k]=v1
+                else:
+                    raise Exception('column %s key %s not in self.inputs dictionary ' % (i,k))
+    
+    
+    def read_input_json(self,fp):
+        """Reads the inputs from a json file
+        
+        :param fp str: the filepath of the json file
+        
+        """
+        with open(fp,'r') as f:
+            d=json.load(f)
+            
+        input_keys=self.inputs.keys()
+        
+        for k,v in d.items():
+               if k in input_keys:
+                   self.inputs[k]=v
+               else:
+                   raise Exception('key %s not in self.inputs dictionary ' % (k))
+    
+    
+# write inputs functions
+    
+    def write_input_csv(self,fp):
+        """Writes the inputs as a csv file
+        
+        :param fp str: the filepath of the csv file
+        
+        """
+        with open(fp,'w') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow(self.inputs.keys())
+            csvwriter.writerow(self.inputs.values())
+    
+    
+    def write_input_json(self,fp):
+        """Writes the inputs as a json file
+        
+        :param fp str: the filepath of the json file
+        
+        """
+        with open(fp,'w') as f:
+            json.dump(self.inputs,f,indent=4, sort_keys=True)
+    
+    
+# run model functions
+            
+    def run(self):
+        """Runs the SAP2012 model calculations and places the results in self.outputs
+        
+        """
+        output_values=calcs(**self.inputs)
+        output_keys=self.outputs.keys()
+        l=zip(output_keys,output_values)
+        for k,v in l:
+            self.outputs[k]=v
+    
     
     def __init__(self):
         """
@@ -229,6 +322,169 @@ class sap2012():
             'appendix_Q_energy_used_fuel_emission_factor':None,
             'appendix_Q_energy_saved_fuel_emission_factor':None,
         }
+        
+        self.outputs={
+            # overall_dwelling_dimensions results
+            'volume':None,
+            'total_floor_area':None,
+            'dwelling_volume':None,
+            
+            # ventilation_rates results
+            'number_of_chimneys_total':None,
+            'number_of_chimneys_m3_per_hour':None,
+            'number_of_open_flues_total':None,
+            'number_of_open_flues_m3_per_hour':None,
+            'number_of_intermittant_fans_m3_per_hour':None,
+            'number_of_passive_vents_m3_per_hour':None,
+            'number_of_flueless_gas_fires_m3_per_hour':None,
+            'infiltration_due_to_chimneys_flues_fans_PSVs':None,
+            'additional_infiltration':None,
+            'window_infiltration':None,
+            'infiltration_rate':None,
+            'infiltration_rate2':None,
+            'shelter_factor':None,
+            'infiltration_rate_incorporating_shelter_factor':None,
+            'wind_factor':None,
+            'adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed':None,
+            'exhaust_air_heat_pump_air_change_rate_through_system':None,
+            'effective_air_change_rate':None,
+            
+            # heat_losses_and_heat_loss_parameter results
+            'solid_floor_UA':None,
+            'semi_glazed_door_UA':None,
+            'window_UA':None,
+            'roof_window_UA':None,
+            'basement_floor_UA':None,
+            'basement_floor_Ak':None,
+            'ground_floor_UA':None,
+            'ground_floor_Ak':None,
+            'exposed_floor_UA':None,
+            'exposed_floor_Ak':None,
+            'basement_wall_net_area':None,
+            'basement_wall_UA':None,
+            'basement_wall_Ak':None,
+            'external_wall_net_area':None,
+            'external_wall_UA':None,
+            'external_wall_Ak':None,
+            'roof_net_area':None,
+            'roof_UA':None,
+            'roof_Ak':None,
+            'total_area_of_external_elements':None,
+            'party_wall_UA':None,
+            'party_wall_Ak':None,
+            'party_floor_Ak':None,
+            'party_ceiling_Ak':None,
+            'internal_wall_Ak':None,
+            'internal_floor_Ak':None,
+            'internal_ceiling_Ak':None,
+            'fabric_heat_loss':None,
+            'heat_capacity':None,
+            'thermal_mass_parameter':None,
+            'thermal_bridges':None,
+            'total_fabric_heat_loss':None,
+            'ventilation_heat_loss_calculated_monthly':None,
+            'heat_transfer_coefficient':None,
+            'average_heat_transfer_coefficient':None,
+            'heat_loss_parameter':None,
+            'average_heat_loss_parameter':None,
+           
+            #water heating requirements results
+            'annual_hot_water_usage_litres_per_day':None,
+            'hot_water_usage_in_litres_per_day_monthly':None,
+            'energy_content_of_water_used':None,
+            'distribution_loss':None,
+            'energy_lost_from_water_storage':None,
+            'water_storage_loss_monthly':None,
+            'total_heat_required_for_water_heating':None,
+            'output_from_water_heater_monthly':None,
+            'heat_gains_from_water_heating_monthly':None,
+            
+            #internal gains results
+            'total_internal_gains':None,
+            
+            #solar gains results
+            'gains_north':None,
+            'gains_north_east':None,
+            'gains_east':None,
+            'gains_south_east':None,
+            'gains_south':None,
+            'gains_south_west':None,
+            'gains_west':None,
+            'gains_north_west':None,
+            'gains_roof_windows':None,
+            'solar_gains_watts':None,
+            
+            #mean internal temperature results
+            'living_area_fraction':None,
+            'mean_internal_temp_whole_dwelling':None,
+            
+            #space heating requirements results
+            'useful_gains':None,
+            'heat_loss_rate_for_mean_internal_temperature':None,
+            'space_heating_requirement_monthly':None,
+            'space_heating_requirement_yearly':None,
+            'space_heating_requirement_yearly_per_m2':None,
+            
+            #energy requirements results
+            'fraction_of_space_heat_from_main_systems':None,
+            'fraction_of_total_space_heat_from_main_system_1':None,
+            'fraction_of_total_space_heat_from_main_system_2':None,
+            'space_heating_fuel_main_system_1':None,
+            'space_heating_fuel_main_system_2':None,
+            'space_heating_fuel_secondary_system':None,
+            'fuel_for_water_heating_monthly':None,
+            'space_cooling_fuel_monthly':None,
+            'space_heating_fuel_used_main_system_1':None,
+            'space_heating_fuel_used_main_system_2':None,
+            'space_heating_fuel_used_secondary':None,
+            'water_fuel_used':None,
+            'space_cooling_fuel_used':None,
+            'electricity_for_pumps_fans_electric_keep_hot':None,
+            'energy_saving_generation_technologies':None,
+            'appendix_Q_energy_total':None,
+            'total_energy_used':None,
+            
+            #fuel cost results
+            'space_heating_main_system_1_fuel_cost':None,
+            'space_heating_main_system_2_fuel_cost':None,
+            'space_heating_secondary_fuel_cost':None,
+            'water_heating_high_rate_fuel_cost':None,
+            'water_heating_low_rate_fuel_cost':None,
+            'water_heating_cost_other':None,
+            'space_cooling_cost':None,
+            'pumps_fan_keep_hot_cost':None,
+            'lighting_cost':None,
+            'appendix_Q_fuel_cost':None,
+            'energy_saving_total_fuel_cost':None,
+            'additional_standing_charges_table_12':None,
+            'total_fuel_cost':None,
+            
+            #SAP rating result
+            'SAP_rating':None,
+            
+            #CO2 emissions result
+            'space_heating_main_system_1_emissions':None,
+            'space_heating_main_system_2_emissions':None,
+            'space_heating_secondary_emissions':None,
+            'water_used_emissions':None,
+            'space_cooling_used_emissions':None,
+            'pumps_fans_electric_keep_hot_emissions':None,
+            'lighting_emissions':None,
+            'appendix_Q_used_emissions':None,
+            'appendix_Q_saved_emissions':None,
+            'energy_saving_generation_technologies_emissions':None,
+            'space_and_water_heating_emissions':None,
+            'appendix_Q_total_used_emissions':None,
+            'appendix_Q_total_saved_emissions':None,
+            'energy_saving_generation_technologies_total_emissions':None,
+            'total_CO2_emissions_yearly':None,
+            'dwelling_CO2_emission_rate':None,
+            'CF':None,
+            'EI_rating':None,
+        }
+        
+    
+    
         
         
         

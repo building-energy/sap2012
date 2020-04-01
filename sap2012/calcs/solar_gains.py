@@ -5,7 +5,7 @@ Created on Mon Mar  2 13:40:12 2020
 @author: benny
 """
 
-def Solar_gains (
+def solar_gains (
         access_factor_table_6d_north,
         access_factor_table_6d_north_east,
         access_factor_table_6d_east,

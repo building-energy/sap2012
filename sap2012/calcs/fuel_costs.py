@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-def Fuel_Costs (
+def fuel_costs (
         space_heating_fuel_main_system_1,
         space_heating_fuel_main_system_2,
         space_heating_fuel_secondary_system,

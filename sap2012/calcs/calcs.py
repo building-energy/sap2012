@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from . import overall_dwelling_dimensions
-from . import ventilation_rates
-from . import heat_losses_and_heat_loss_parameter
-from . import Water_Heating_Energy_Requirement
-from . import Internal_Gains
-from . import Solar_gains
-from . import Mean_Internal_Temperature
-from . import Space_Heating_Requirement
-from . import Energy_Requirements
-from . import Fuel_Costs
-from . import SAP_Rating
-from . import CO2_emissions
+from .overall_dwelling_dimensions import overall_dwelling_dimensions
+from .ventilation_rates import ventilation_rates
+from .heat_losses_and_heat_loss_parameter import heat_losses_and_heat_loss_parameter
+from .water_heating_requirement import water_heating_requirement
+from .internal_gains import internal_gains
+from .solar_gains import solar_gains
+from .mean_internal_temperature import mean_internal_temperature
+from .space_heating_requirement import space_heating_requirement
+from .energy_requirements import energy_requirements
+from .fuel_costs import fuel_costs
+from .SAP_rating import SAP_rating
+from .CO2_emissions import CO2_emissions
 
 
 
@@ -390,7 +390,7 @@ def calcs(
      
      
     # Water heating requirement calculations 
-    result = Water_Heating_Energy_Requirement(
+    result = water_heating_requirement(
         assumed_occupancy,
         V_dm_table_1c,
         days_in_month,
@@ -418,7 +418,7 @@ def calcs(
          heat_gains_from_water_heating_monthly) = result
      
     #Internal gains inputs
-    result = Internal_Gains(
+    result = internal_gains(
         metabolic_gains,
         lighting_gains,
         appliances_gains,
@@ -432,7 +432,7 @@ def calcs(
     
     # Solar gains calculations
     
-    result = Solar_gains(
+    result = solar_gains(
         access_factor_table_6d_north,
         access_factor_table_6d_north_east,
         access_factor_table_6d_east,
@@ -493,7 +493,7 @@ def calcs(
      
     # Mean internal temperature calculations
     
-    result = Mean_Internal_Temperature(
+    result = mean_internal_temperature(
         temperature_during_heating_periods_living_room,
         utilisation_factor_for_gains_living_room_table_9a,
         mean_internal_temperature_living_room_T1_Table_9c,
@@ -510,7 +510,7 @@ def calcs(
      
     # Space heating requirement calculations
     
-    result = Space_Heating_Requirement(
+    result = space_heating_requirement(
         utilisation_factor_for_gains_table_9a,
         total_gains_internal_and_solar,
         monthly_external_temperature_table_U1,
@@ -529,7 +529,7 @@ def calcs(
      
     # Energy requirements calculations 
     
-    result = Energy_Requirements(
+    result = energy_requirements(
         fraction_of_space_heat_secondary_system,
         fraction_of_space_heat_from_main_system_2,
         efficiency_of_main_space_heating_system_1,
@@ -578,7 +578,7 @@ def calcs(
      
      # Fuel cost calculations
      
-    result = Fuel_Costs(
+    result = fuel_costs(
         space_heating_fuel_main_system_1,
         space_heating_fuel_main_system_2,
         space_heating_fuel_secondary_system,
@@ -622,7 +622,7 @@ def calcs(
      
      # SAP rating calculations
      
-    result = SAP_Rating(
+    result = SAP_rating(
         energy_cost_deflator,
         total_fuel_cost,
         total_floor_area

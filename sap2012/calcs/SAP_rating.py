@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def SAP_Rating (
+def SAP_rating (
         energy_cost_deflator,
         total_fuel_cost,
         total_floor_area

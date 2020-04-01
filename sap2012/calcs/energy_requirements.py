@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Energy_Requirements(
+def energy_requirements(
         fraction_of_space_heat_secondary_system,
         fraction_of_space_heat_from_main_system_2,
         efficiency_of_main_space_heating_system_1,

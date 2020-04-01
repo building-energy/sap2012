@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Water_Heating_Energy_Requirement (
+def water_heating_requirement (
         assumed_occupancy,
         V_dm_table_1c,
         days_in_month,
@@ -30,7 +30,7 @@ def Water_Heating_Energy_Requirement (
     :type days_in_month: int
     
     :param T_table_1d:
-    :type T_table_1d: float
+    :type T_table_1d: float #  should be list (of floats) ???
     
     :param water_storage_loss_manufacturer:
     :type water_storage_loss_manufacturer: float or None
@@ -106,7 +106,7 @@ def Water_Heating_Energy_Requirement (
         
     energy_content_of_water_used =[]
     for i in range(12):
-        energy_content_of_water_used.append((4.18 * hot_water_usage_in_litres_per_day_monthly[i] * days_in_month[i] * T_table_1d) / 3600)
+        energy_content_of_water_used.append((4.18 * hot_water_usage_in_litres_per_day_monthly[i] * days_in_month[i] * T_table_1d) / 3600.0)
         
         
     distribution_loss = []

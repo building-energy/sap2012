@@ -4,4 +4,4 @@
 """
 
 from . import tables
-from sap2012 import sap2012
+from .sap2012 import Sap2012
