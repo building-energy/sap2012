@@ -202,7 +202,7 @@ def ventilation_rates(
                             infiltration_due_to_chimneys_flues_fans_PSVs)
         
     # shelter_factor
-    shelter_factor = 1 - (0.075 - number_of_sides_on_which_dwelling_is_sheltered)
+    shelter_factor = 1 - (0.075 * number_of_sides_on_which_dwelling_is_sheltered)
     
     # infiltration_rate_incorporating_shelter_factor
     infiltration_rate_incorporating_shelter_factor = (infiltration_rate2 * 
@@ -217,7 +217,7 @@ def ventilation_rates(
     adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed=[None]*12
     for i in range(12):
         adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i] = (
-            infiltration_rate_incorporating_shelter_factor / 
+            infiltration_rate_incorporating_shelter_factor * 
             wind_factor[i]
             )
     

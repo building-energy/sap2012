@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import math
 
 def SAP_rating (
         energy_cost_deflator,
@@ -24,16 +24,16 @@ def SAP_rating (
     """
     
     
-    energy_cost_factor = (total_energy_cost * energy_cost_deflator) / (total_floor_area + 45)
+    energy_cost_factor = (total_fuel_cost * energy_cost_deflator) / (total_floor_area + 45)
     
     if energy_cost_factor < 3.5:
-        SAP_rating = 100 - 13.95 * energy_cost_factor
+        SAP_rating_value = 100 - 13.95 * energy_cost_factor
         
     else:
-        SAP_rating = 171 - 121 * math.log10(energy_cost_factor)
+        SAP_rating_value = 171 - 121 * math.log10(energy_cost_factor)
         
     return(
-            SAP_rating
+            SAP_rating_value
             )    
         
         

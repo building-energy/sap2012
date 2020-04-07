@@ -4,14 +4,14 @@ import unittest
 from pprint import pprint
 import math
 
-from sap2012.calcs.energy_requirements import Energy_Requirements
+from sap2012.calcs.energy_requirements import energy_requirements
 import sap2012.tables
 
 class TestEnergyRequirements(unittest.TestCase):
     
     def test_calc1(self):
                 
-        result=Energy_Requirements(
+        result=energy_requirements(
             fraction_of_space_heat_secondary_system=0,
             fraction_of_space_heat_from_main_system_2=0,
             efficiency_of_main_space_heating_system_1=90,

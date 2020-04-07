@@ -106,7 +106,7 @@ def water_heating_requirement (
         
     energy_content_of_water_used =[]
     for i in range(12):
-        energy_content_of_water_used.append((4.18 * hot_water_usage_in_litres_per_day_monthly[i] * days_in_month[i] * T_table_1d) / 3600.0)
+        energy_content_of_water_used.append((4.18 * hot_water_usage_in_litres_per_day_monthly[i] * days_in_month[i] * T_table_1d[i]) / 3600)
         
         
     distribution_loss = []
@@ -114,7 +114,7 @@ def water_heating_requirement (
         distribution_loss.append(energy_content_of_water_used[i] * 0.15)
         
     
-    if water_storage_loss_manufacturer is None:
+    if water_storage_loss_manufacturer ==0:
        energy_lost_from_water_storage = (storage_volume_litres * hot_water_storage_loss_table_2 * 
                                          volume_factor_table_2a * temperature_factor_table_2b)
        
@@ -123,13 +123,16 @@ def water_heating_requirement (
        
        
     water_storage_loss_monthly =[]   
-    if solar_storage_WWHRS_factor is None:
+    if solar_storage_WWHRS_factor ==0:
         for i in range(12):
             water_storage_loss_monthly.append(days_in_month[i] *  energy_lost_from_water_storage)
             
     else:
         for i in range(12):
-            water_storage_loss_monthly.append(days_in_month[i] *  energy_lost_from_water_storage * 
+            if storage_volume_litres == 0:
+                water_storage_loss_monthly.append(days_in_month[i] * 0)
+            else:
+                water_storage_loss_monthly.append(days_in_month[i] *  energy_lost_from_water_storage * 
                                       (storage_volume_litres - Vs_appendix_G3) / storage_volume_litres)
         
         
@@ -137,20 +140,18 @@ def water_heating_requirement (
     for i in range(12):
         total_heat_required_for_water_heating.append((0.85 * energy_content_of_water_used[i]) + 
                                                 distribution_loss[i] + water_storage_loss_monthly[i] + 
-                                                primary_circuit_loss_table_3 + combi_loss_table_3)
+                                                primary_circuit_loss_table_3[i] + combi_loss_table_3[i])
         
         
     output_from_water_heater_monthly =[]   
     for i in range(12):
-        output_from_water_heater_monthly = total_heat_required_for_water_heating[i] + solar_DHW_input_appendix_G
+        output_from_water_heater_monthly.append(total_heat_required_for_water_heating[i] + solar_DHW_input_appendix_G[i])
         
-        if output_from_water_heater_monthly < 0:
-            output_from_water_heater_monthly = 0
         
     heat_gains_from_water_heating_monthly =[]
     for i in range(12):
-        heat_gains_from_water_heating_monthly.append(0.25 * (0.85 * energy_content_of_water_used[i] + combi_loss_table_3 ) + (0.8 * 
-                                                 (distribution_loss[i] + water_storage_loss_monthly[i] + primary_circuit_loss_table_3 )))
+        heat_gains_from_water_heating_monthly.append(0.25 * (0.85 * energy_content_of_water_used[i] + combi_loss_table_3[i] ) + (0.8 * 
+                                                 (distribution_loss[i] + water_storage_loss_monthly[i] + primary_circuit_loss_table_3[i] )))
      
     return (
             annual_hot_water_usage_litres_per_day,

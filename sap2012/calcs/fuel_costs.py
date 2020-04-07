@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 def fuel_costs (
-        space_heating_fuel_main_system_1,
-        space_heating_fuel_main_system_2,
-        space_heating_fuel_secondary_system,
+        space_heating_fuel_used_main_system_1,
+        space_heating_fuel_used_main_system_2,
+        space_heating_fuel_used_secondary,
         space_heating_fuel_price_main_system_1,
         space_heating_fuel_price_main_system_2,
         space_heating_fuel_price_secondary,
@@ -17,7 +17,7 @@ def fuel_costs (
         space_cooling_fuel_price,
         electricity_for_pumps_fans_electric_keep_hot,
         fuel_price_for_pumps_fans_electric_keep_hot,
-        electricity_for_lighting,
+        energy_for_lighting,
         fuel_price_for_lighting,
         additional_standing_charges_table_12,
         energy_saving_generation_technologies,
@@ -152,15 +152,15 @@ def fuel_costs (
     
     """
     
-    space_heating_main_system_1_fuel_cost = (space_heating_fuel_main_system_1 * 
+    space_heating_main_system_1_fuel_cost = (space_heating_fuel_used_main_system_1 * 
                                              space_heating_fuel_price_main_system_1 * 
                                              0.01)
     
-    space_heating_main_system_2_fuel_cost = (space_heating_fuel_main_system_2 * 
+    space_heating_main_system_2_fuel_cost = (space_heating_fuel_used_main_system_2 * 
                                              space_heating_fuel_price_main_system_2 * 
                                              0.01)
     
-    space_heating_secondary_fuel_cost = (space_heating_fuel_secondary_system * 
+    space_heating_secondary_fuel_cost = (space_heating_fuel_used_secondary * 
                                          space_heating_fuel_price_secondary * 
                                          0.01)
     
@@ -186,7 +186,7 @@ def fuel_costs (
                                fuel_price_for_pumps_fans_electric_keep_hot * 
                                0.01)
     
-    lighting_cost = (electricity_for_lighting * 
+    lighting_cost = (energy_for_lighting * 
                      fuel_price_for_lighting * 
                      0.01)
     
@@ -208,7 +208,7 @@ def fuel_costs (
         
         
     energy_saving_generation_technologies_fuel_cost =[]
-    for i in range(len(energy_saving_generation_technologies)):
+    for i in range(len(energy_saving_generation_technologies_fuel_price)):
         energy_saving_generation_technologies_fuel_cost.append(energy_saving_generation_technologies[i] * 
                                                                energy_saving_generation_technologies_fuel_price[i] * 
                                                                0.01)

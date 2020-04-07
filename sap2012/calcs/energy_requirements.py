@@ -183,7 +183,6 @@ def energy_requirements(
         if fraction_of_total_space_heat_from_main_system_2 ==0:
             space_heating_fuel_main_system_2.append(space_heating_requirement_monthly[i] * 0)
         else:
-            
             space_heating_fuel_main_system_2.append(space_heating_requirement_monthly[i] * 
                                              fraction_of_total_space_heat_from_main_system_2 * 100 /
                                              efficiency_of_main_space_heating_system_2)
@@ -200,15 +199,14 @@ def energy_requirements(
     
     fuel_for_water_heating_monthly =[]
     for i in range(12):
-        fuel_for_water_heating_monthly.append(output_from_water_heater_monthly[i] * 100 / 
-                                              efficiency_of_water_heater_table_4a)
+        fuel_for_water_heating_monthly.append(output_from_water_heater_monthly[i] * 100 / efficiency_of_water_heater_table_4a)
         
         
         
     space_cooling_fuel_monthly =[]    
     for i in range(12):
         if cooling_system_energy_efficiency_ratio_table_10c ==0:
-            space_cooling_fuel_monthly.append(space_cooling_requirement_monthly[i] * 0)
+            space_cooling_fuel_monthly.append(0)
         else:
              space_cooling_fuel_monthly.append(space_cooling_requirement_monthly[i] / 
                                       cooling_system_energy_efficiency_ratio_table_10c)
@@ -237,10 +235,10 @@ def energy_requirements(
     
     
     
-    energy_saving_generation_technologies = (electricity_generated_by_PV_Appendix_M +
-                                             electricity_generated_by_wind_turbine_appendix_M +
-                                             electricity_used_or_generated_by_micro_CHP_appendix_N +
-                                             electricity_generated_by_hydro_electric_generator_appendix_M)
+    energy_saving_generation_technologies_total = (sum(electricity_generated_by_PV_Appendix_M) +
+                                             sum(electricity_generated_by_wind_turbine_appendix_M) +
+                                             sum(electricity_used_or_generated_by_micro_CHP_appendix_N) +
+                                             sum(electricity_generated_by_hydro_electric_generator_appendix_M))
     
     """appendix_Q_energy_saved_total =[]
     for i in range(len(appendix_Q_energy_saved)):
@@ -248,7 +246,7 @@ def energy_requirements(
                                  
     appendix_Q_energy_total = sum(appendix_Q_energy_saved) + sum(appendix_Q_energy_used)   
         
-    
+    energy_for_lighting = sum(electricity_for_lighting)
     
     
     total_energy_used = (space_heating_fuel_used_main_system_1 + 
@@ -257,11 +255,11 @@ def energy_requirements(
                          water_fuel_used +
                          space_cooling_fuel_used + 
                          electricity_for_pumps_fans_electric_keep_hot +
-                         energy_saving_generation_technologies +
+                         energy_saving_generation_technologies_total +
                          appendix_Q_energy_total +
-                         electricity_for_lighting
-                         )
-    
+                         energy_for_lighting
+                         ) 
+
     
     return(fraction_of_space_heat_from_main_systems,
            fraction_of_total_space_heat_from_main_system_1,
@@ -277,8 +275,9 @@ def energy_requirements(
            water_fuel_used,
            space_cooling_fuel_used,
            electricity_for_pumps_fans_electric_keep_hot,
-           energy_saving_generation_technologies,
+           energy_saving_generation_technologies_total,
            appendix_Q_energy_total,
+           energy_for_lighting,
            total_energy_used
             )
     

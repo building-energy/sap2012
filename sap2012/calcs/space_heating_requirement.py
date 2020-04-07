@@ -66,7 +66,7 @@ def space_heating_requirement (
     
     space_heating_requirement_monthly =[]    
     for i in range(12):
-        if i == 6 or i == 7 or i == 8 or i == 9:
+        if i == 5 or i == 6 or i == 7 or i == 8:
             space_heating_requirement_monthly.append(0)
         else:
             space_heating_requirement_monthly.append(0.024 * (heat_loss_rate_for_mean_internal_temperature[i] - useful_gains[i]) *

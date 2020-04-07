@@ -383,7 +383,7 @@ def heat_losses_and_heat_loss_parameter(
     if internal_wall_net_area==0:
         internal_wall_Ak = 0
     else:
-        internal_wall_Ak = internal_wall_net_area * internal_wall_net_area
+        internal_wall_Ak = internal_wall_net_area * internal_wall_heat_capacity
         
     if internal_floor_net_area==0:
         internal_floor_Ak = 0

@@ -3,7 +3,7 @@
 from .overall_dwelling_dimensions import overall_dwelling_dimensions
 from .ventilation_rates import ventilation_rates
 from .heat_losses_and_heat_loss_parameter import heat_losses_and_heat_loss_parameter
-from .water_heating_requirement import water_heating_requirement
+from .Water_Heating_Requirement import water_heating_requirement
 from .internal_gains import internal_gains
 from .solar_gains import solar_gains
 from .mean_internal_temperature import mean_internal_temperature
@@ -554,7 +554,7 @@ def calcs(
         electricity_used_or_generated_by_micro_CHP_appendix_N,
         electricity_generated_by_hydro_electric_generator_appendix_M,
         appendix_Q_energy_saved,
-        appendix_Q_energy_used
+        appendix_Q_energy_used,
         )
     
     (fraction_of_space_heat_from_main_systems,
@@ -571,17 +571,18 @@ def calcs(
         water_fuel_used,
         space_cooling_fuel_used,
         electricity_for_pumps_fans_electric_keep_hot,
-        energy_saving_generation_technologies,
+        energy_saving_generation_technologies_total,
         appendix_Q_energy_total,
+        energy_for_lighting,
         total_energy_used) = result
      
      
      # Fuel cost calculations
      
     result = fuel_costs(
-        space_heating_fuel_main_system_1,
-        space_heating_fuel_main_system_2,
-        space_heating_fuel_secondary_system,
+        space_heating_fuel_used_main_system_1,
+        space_heating_fuel_used_main_system_2,
+        space_heating_fuel_used_secondary,
         space_heating_fuel_price_main_system_1,
         space_heating_fuel_price_main_system_2,
         space_heating_fuel_price_secondary,
@@ -595,7 +596,7 @@ def calcs(
         space_cooling_fuel_price,
         electricity_for_pumps_fans_electric_keep_hot,
         fuel_price_for_pumps_fans_electric_keep_hot,
-        electricity_for_lighting,
+        energy_for_lighting,
         fuel_price_for_lighting,
         additional_standing_charges_table_12,
         energy_saving_generation_technologies,
@@ -628,14 +629,14 @@ def calcs(
         total_floor_area
         )
      
-    (SAP_rating) = result
+    (SAP_rating_value) = result
     
     # CO2 emissions calculations
     
     result = CO2_emissions(
-        space_heating_fuel_main_system_1,
-        space_heating_fuel_main_system_2,
-        space_heating_fuel_secondary_system,
+        space_heating_fuel_used_main_system_1,
+        space_heating_fuel_used_main_system_2,
+        space_heating_fuel_used_secondary,
         space_heating_fuel_emission_factor_main_system_1,
         space_heating_fuel_emission_factor_main_system_2,
         space_heating_fuel_emission_factor_secondary,
@@ -645,7 +646,7 @@ def calcs(
         space_cooling_fuel_emission_factor,
         electricity_for_pumps_fans_electric_keep_hot,
         fuel_emission_factor_for_pumps_fans_electric_keep_hot,
-        electricity_for_lighting,
+        energy_for_lighting,
         fuel_emission_factor_for_lighting,
         energy_saving_generation_technologies,
         energy_saving_generation_technologies_fuel_emission_factor,
@@ -824,7 +825,7 @@ def calcs(
         total_fuel_cost,
         
         #SAP rating result
-        SAP_rating,
+        SAP_rating_value,
         
         #CO2 emissions result
         space_heating_main_system_1_emissions,

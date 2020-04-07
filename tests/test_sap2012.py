@@ -54,6 +54,15 @@ class TestSap2012(unittest.TestCase):
         s.read_input_csv(fp)
         s.run()
         
+    def test_output(self):
+        
+        s=Sap2012()
+        fp='input_csv_file.csv'
+        s.read_input_csv(fp)
+        s.run()
+        outputs=s.outputs
+        print(outputs)
+
         
 if __name__=='__main__':
     
