@@ -3,7 +3,7 @@
 import csv
 import ast
 import json
-from sap2012.calcs.calcs import calcs
+from .calcs.calcs import calcs
 
 
 class Sap2012():
