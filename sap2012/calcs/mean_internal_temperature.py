@@ -2,11 +2,7 @@
 
 
 def mean_internal_temperature (
-        temperature_during_heating_periods_living_room,
-        utilisation_factor_for_gains_living_room_table_9a,
         mean_internal_temperature_living_room_T1_Table_9c,
-        temperature_during_heating_periods_rest_of_dwelling,
-        utilisation_factor_for_gains_rest_of_dwelling_table_9a,
         mean_internal_temperature_rest_of_dwelling_T2_table_9c,
         living_room_area,
         total_floor_area,

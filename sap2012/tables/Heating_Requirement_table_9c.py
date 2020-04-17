@@ -12,7 +12,6 @@ def Heating_requirement (
         temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling,
         temperature_during_heating_living_room,
         temperature_during_heating_rest_of_dwelling,
-        living_area_fraction,
         temperature_adjustment_table_4e
         ):
     
@@ -30,10 +29,10 @@ def Heating_requirement (
         
         
         
-    mean_temperature_living_room = []
+    mean_internal_temperature_living_room_T1_Table_9c = []
     for i in range(12):
-        mean_temperature_living_room.append((5 * T_weekday_living_room + 
-                                             2 * T_weekend_living_room ) / 7)
+        mean_internal_temperature_living_room_T1_Table_9c.append((5 * T_weekday_living_room[i] + 
+                                             2 * T_weekend_living_room[i] ) / 7)
         
         
         
@@ -51,15 +50,22 @@ def Heating_requirement (
                                            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling[i]))
         
         
-    mean_temperature_rest_of_dwelling = []
+    mean_internal_temperature_rest_of_dwelling_T2_table_9c = []
     for i in range(12):
-        mean_temperature_rest_of_dwelling.append(((5 * T_weekday_rest_of_dwelling[i] + 
+        mean_internal_temperature_rest_of_dwelling_T2_table_9c.append(((5 * T_weekday_rest_of_dwelling[i] + 
                                              2 * T_weekend_rest_of_dwelling[i]) / 7) + temperature_adjustment_table_4e)
         
+
+        
     
-    
-    utilisation_factor_whole_house = []
-    for i in range(12):
+    return(
+            T_weekday_living_room,
+            T_weekend_living_room,
+            mean_internal_temperature_living_room_T1_Table_9c,
+            T_weekday_rest_of_dwelling,
+            T_weekend_rest_of_dwelling,
+            mean_internal_temperature_rest_of_dwelling_T2_table_9c
+            )
         
         
         

@@ -4,8 +4,9 @@
 def Utilisation_factor_for_heating(
         heat_transfer_coefficient,
         total_internal_and_solar_gains,
-        internal_temperature,
-        external_temperature,
+        temperature_during_heating_living_room,
+        temperature_during_heating_rest_of_dwelling,
+        monthly_external_temperature_table_U1,
         thermal_mass_parameter,
         heat_loss_parameter
         ):
@@ -19,40 +20,72 @@ def Utilisation_factor_for_heating(
     for i in range(12):
         a.append(1 + time_constant[i]/15)
         
-    heat_loss_rate = []
+    heat_loss_rate_living_room = []
     for i in range(12):
-        heat_loss_rate.append(heat_transfer_coefficient[i] * 
-                              (internal_temperature - external_temperature[i]))
+        heat_loss_rate_living_room.append(heat_transfer_coefficient[i] * 
+                              (temperature_during_heating_living_room - monthly_external_temperature_table_U1[i]))
         
-    y = []
+    y_living_room = []
     for i in range(12):
-        if heat_loss_rate[i] == 0:
-            y.append(10^6)
+        if heat_loss_rate_living_room[i] == 0:
+            y_living_room.append(10^6)
             
         else:
-            y.append(total_internal_and_solar_gains[i] / heat_loss_rate[i])
+            y_living_room.append(total_internal_and_solar_gains[i] / heat_loss_rate_living_room[i])
             
             
-    utilisation_factor_for_heating = []
+    utilisation_factor_for_heating_living_room = []
     for i in range(12):
-        if y[i] ==1:
-            utilisation_factor_for_heating.append(a[i] / 
+        if y_living_room[i] ==1:
+            utilisation_factor_for_heating_living_room.append(a[i] / 
                                                   (a[i] + 1))
             
-        if y[i] > 0:
-            utilisation_factor_for_heating.append((1-y[i]^a[i]) / (1 - y[i]^(a[i] + 1)))
+        if y_living_room[i] > 0:
+            utilisation_factor_for_heating_living_room.append((1-y_living_room[i]**a[i]) / (1 - y_living_room[i]**(a[i] + 1)))
                 
         else:
-            utilisation_factor_for_heating.append(1)
+            utilisation_factor_for_heating_living_room.append(1)
+            
+            
+    
+    
+    heat_loss_rate_rest_of_dwelling = []
+    for i in range(12):
+        heat_loss_rate_rest_of_dwelling.append(heat_transfer_coefficient[i] * 
+                              (temperature_during_heating_rest_of_dwelling - monthly_external_temperature_table_U1[i]))
+        
+    y_rest_of_dwelling = []
+    for i in range(12):
+        if heat_loss_rate_rest_of_dwelling[i] == 0:
+            y_rest_of_dwelling.append(10^6)
+            
+        else:
+            y_rest_of_dwelling.append(total_internal_and_solar_gains[i] / heat_loss_rate_rest_of_dwelling[i])
+            
+            
+    utilisation_factor_for_heating_rest_of_dwelling = []
+    for i in range(12):
+        if y_rest_of_dwelling[i] ==1:
+            utilisation_factor_for_heating_rest_of_dwelling.append(a[i] / 
+                                                  (a[i] + 1))
+            
+        if y_rest_of_dwelling[i] > 0:
+            utilisation_factor_for_heating_rest_of_dwelling.append((1-y_rest_of_dwelling[i]**a[i]) / (1 - y_rest_of_dwelling[i]**(a[i] + 1)))
+                
+        else:
+            utilisation_factor_for_heating_rest_of_dwelling.append(1)
             
     
     
     return(
             time_constant,
             a,
-            heat_loss_rate,
-            y,
-            utilisation_factor_for_heating
+            heat_loss_rate_living_room,
+            y_living_room,
+            utilisation_factor_for_heating_living_room,
+            heat_loss_rate_rest_of_dwelling,
+            y_rest_of_dwelling,
+            utilisation_factor_for_heating_rest_of_dwelling
             )
             
             

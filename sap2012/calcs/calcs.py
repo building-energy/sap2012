@@ -12,7 +12,11 @@ from .energy_requirements import energy_requirements
 from .fuel_costs import fuel_costs
 from .SAP_rating import SAP_rating
 from .CO2_emissions import CO2_emissions
-
+from sap2012.tables.internal_gains_appendix_L import Internal_gains_appendix_L
+from sap2012.tables.Utilisation_factor_for_heating_table_9a import Utilisation_factor_for_heating
+from sap2012.tables.temperature_reduction_when_heating_is_off import Temperature_reduction
+from sap2012.tables.Heating_Requirement_table_9c import Heating_requirement
+from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisation_factor_for_heating_whole_house 
 
 
 def calcs(
@@ -107,14 +111,18 @@ def calcs(
         combi_loss_table_3,
         solar_DHW_input_appendix_G,
         
+        #internal gains appendix L inputs
+        number_of_low_energy_light_bulbs,
+        total_number_of_light_bulbs,
+        frame_factor,
+        window_area,
+        light_access_factor_table_6d,
+        light_transmittance_factor_table_6d,
+        month_number,
+        
+        
         #internal gains inputs
-        metabolic_gains,
-        lighting_gains,
-        appliances_gains,
-        cooking_gains,
         pumps_and_fans_gains,
-        losses,
-        water_heating_gains,
         
         #solar gains inputs
         access_factor_table_6d_north,
@@ -163,21 +171,30 @@ def calcs(
         FF_table_6b_north_west,
         FF_table_6b_roof_windows,
         
+        #utilisation factor inputs
+        temperature_during_heating_living_room,
+        temperature_during_heating_rest_of_dwelling,
+        monthly_external_temperature_table_U1,
+        
+        
+        #temperature reduction inputs
+        hours_heating_is_off_1_weekday_living_room,
+        hours_heating_is_off_2_weekday_living_room,
+        hours_heating_is_off_1_weekend_living_room,
+        hours_heating_is_off_2_weekend_living_room,
+        hours_heating_is_off_1_weekday_rest_of_dwelling,
+        hours_heating_is_off_2_weekday_rest_of_dwelling,
+        hours_heating_is_off_1_weekend_rest_of_dwelling,
+        hours_heating_is_off_2_weekend_rest_of_dwelling,
+        responsiveness_of_heating_system,
+        
+        
         #mean internal temperature inputs
-        temperature_during_heating_periods_living_room,
-        utilisation_factor_for_gains_living_room_table_9a,
-        mean_internal_temperature_living_room_T1_Table_9c,
-        temperature_during_heating_periods_rest_of_dwelling,
-        utilisation_factor_for_gains_rest_of_dwelling_table_9a,
-        mean_internal_temperature_rest_of_dwelling_T2_table_9c,
         living_room_area,
         temperature_adjustment_table_4e,
         
         #space heating requirement inputs
-        utilisation_factor_for_gains_table_9a,
-        total_gains_internal_and_solar,
-        monthly_external_temperature_table_U1,
-        mean_internal_temperature_whole_dwelling,
+        
         
         #energy requirements inputs
         fraction_of_space_heat_secondary_system,
@@ -417,6 +434,38 @@ def calcs(
          output_from_water_heater_monthly,
          heat_gains_from_water_heating_monthly) = result
      
+     
+    #Appendix L calculations for internal gains
+    result= Internal_gains_appendix_L(
+        total_floor_area,
+        assumed_occupancy,
+        number_of_low_energy_light_bulbs,
+        total_number_of_light_bulbs,
+        frame_factor,
+        window_area,
+        light_access_factor_table_6d,
+        light_transmittance_factor_table_6d,
+        month_number,
+        days_in_month,
+        heat_gains_from_water_heating_monthly) 
+    
+    (G_L,
+     C_1,
+     C_2,
+     E_B,
+     initial_annual_lighting_demand,
+     monthly_lighting_demand,
+     annual_lighting_demand,
+     lighting_gains,
+     initial_annual_electrical_appliance_demand,
+     monthly_electrical_appliance_demand,
+     annual_electrical_appliance_demand,
+     appliances_gains,
+     cooking_gains,
+     losses,
+     water_heating_gains,
+     metabolic_gains) = result
+     
     #Internal gains inputs
     result = internal_gains(
         metabolic_gains,
@@ -477,7 +526,8 @@ def calcs(
         FF_table_6b_south_west,
         FF_table_6b_west,
         FF_table_6b_north_west,
-        FF_table_6b_roof_windows
+        FF_table_6b_roof_windows,
+        total_internal_gains
         )
     
     (gains_north,
@@ -489,16 +539,93 @@ def calcs(
          gains_west,
          gains_north_west,
          gains_roof_windows,
-         solar_gains_watts) = result
+         solar_gains_watts,
+         total_internal_and_solar_gains) = result
      
+     
+     
+     
+     
+    #Utilisation factor for heating table 9a
+    result = Utilisation_factor_for_heating(
+            heat_transfer_coefficient,
+            total_internal_and_solar_gains,
+            temperature_during_heating_living_room,
+            temperature_during_heating_rest_of_dwelling,
+            monthly_external_temperature_table_U1,
+            thermal_mass_parameter,
+            heat_loss_parameter)
+    
+    (
+            time_constant,
+            a,
+            heat_loss_rate_living_room,
+            y_living_room,
+            utilisation_factor_for_heating_living_room,
+            heat_loss_rate_rest_of_dwelling,
+            y_rest_of_dwelling,
+            utilisation_factor_for_heating_rest_of_dwelling
+            )=result
+     
+     
+    #Internal temperature reduction when heating is off
+    result = Temperature_reduction(
+            time_constant,
+            hours_heating_is_off_1_weekday_living_room,
+            hours_heating_is_off_2_weekday_living_room,
+            hours_heating_is_off_1_weekend_living_room,
+            hours_heating_is_off_2_weekend_living_room,
+            hours_heating_is_off_1_weekday_rest_of_dwelling,
+            hours_heating_is_off_2_weekday_rest_of_dwelling,
+            hours_heating_is_off_1_weekend_rest_of_dwelling,
+            hours_heating_is_off_2_weekend_rest_of_dwelling,
+            temperature_during_heating_living_room,
+            temperature_during_heating_rest_of_dwelling,
+            responsiveness_of_heating_system,
+            monthly_external_temperature_table_U1,
+            utilisation_factor_for_heating_living_room,
+            utilisation_factor_for_heating_rest_of_dwelling,
+            heat_transfer_coefficient,
+            total_internal_and_solar_gains)
+    
+    (t_c,
+            internal_temperature_without_heating_living_room,
+            internal_temperature_without_heating_rest_of_dwelling,
+            temperature_reduction_when_heating_is_off_1_weekday_living_room,
+            temperature_reduction_when_heating_is_off_2_weekday_living_room,
+            temperature_reduction_when_heating_is_off_1_weekend_living_room,
+            temperature_reduction_when_heating_is_off_2_weekend_living_room,
+            temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
+            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
+            temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
+            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling)=result
+     
+     
+     #Heating requirement table 9c
+    result = Heating_requirement(
+             temperature_reduction_when_heating_is_off_1_weekday_living_room,
+        temperature_reduction_when_heating_is_off_2_weekday_living_room,
+        temperature_reduction_when_heating_is_off_1_weekend_living_room,
+        temperature_reduction_when_heating_is_off_2_weekend_living_room,
+        temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling,
+        temperature_during_heating_living_room,
+        temperature_during_heating_rest_of_dwelling,
+        temperature_adjustment_table_4e)
+    
+    (T_weekday_living_room,
+            T_weekend_living_room,
+            mean_internal_temperature_living_room_T1_Table_9c,
+            T_weekday_rest_of_dwelling,
+            T_weekend_rest_of_dwelling,
+            mean_internal_temperature_rest_of_dwelling_T2_table_9c)=result
+    
     # Mean internal temperature calculations
     
     result = mean_internal_temperature(
-        temperature_during_heating_periods_living_room,
-        utilisation_factor_for_gains_living_room_table_9a,
         mean_internal_temperature_living_room_T1_Table_9c,
-        temperature_during_heating_periods_rest_of_dwelling,
-        utilisation_factor_for_gains_rest_of_dwelling_table_9a,
         mean_internal_temperature_rest_of_dwelling_T2_table_9c,
         living_room_area,
         total_floor_area,
@@ -508,13 +635,29 @@ def calcs(
     (living_area_fraction,
          mean_internal_temp_whole_dwelling) = result
      
+     
+    # Utilisation factor for heating whole house
+    result = Utilisation_factor_for_heating_whole_house(
+            heat_transfer_coefficient,
+        total_internal_and_solar_gains,
+        mean_internal_temp_whole_dwelling,
+        monthly_external_temperature_table_U1,
+        thermal_mass_parameter,
+        heat_loss_parameter)
+    
+    (time_constant_whole_house,
+            a_whole_house,
+            heat_loss_rate_whole_house,
+            y_whole_house,
+            utilisation_factor_for_heating_whole_house)=result
+     
     # Space heating requirement calculations
     
     result = space_heating_requirement(
-        utilisation_factor_for_gains_table_9a,
-        total_gains_internal_and_solar,
+        utilisation_factor_for_heating_whole_house,
+        total_internal_and_solar_gains,
         monthly_external_temperature_table_U1,
-        mean_internal_temperature_whole_dwelling,
+        mean_internal_temp_whole_dwelling,
         heat_transfer_coefficient,
         days_in_month,
         total_floor_area
@@ -764,7 +907,24 @@ def calcs(
         output_from_water_heater_monthly,
         heat_gains_from_water_heating_monthly,
         
+        
         #internal gains results
+        G_L,
+        C_1,
+        C_2,
+        E_B,
+        initial_annual_lighting_demand,
+        monthly_lighting_demand,
+        annual_lighting_demand,
+        lighting_gains,
+        initial_annual_electrical_appliance_demand,
+        monthly_electrical_appliance_demand,
+        annual_electrical_appliance_demand,
+        appliances_gains,
+        cooking_gains,
+        losses,
+        water_heating_gains,
+        metabolic_gains,
         total_internal_gains,
         
         #solar gains results
@@ -778,10 +938,51 @@ def calcs(
         gains_north_west,
         gains_roof_windows,
         solar_gains_watts,
+        total_internal_and_solar_gains,
+        
+        #utilisation factor for heating outputs
+        time_constant,
+        a,
+        heat_loss_rate_living_room,
+        y_living_room,
+        utilisation_factor_for_heating_living_room,
+        heat_loss_rate_rest_of_dwelling,
+        y_rest_of_dwelling,
+        utilisation_factor_for_heating_rest_of_dwelling,
+        
+        
+        #temperature reduction outputs
+        t_c,
+        internal_temperature_without_heating_living_room,
+        internal_temperature_without_heating_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_1_weekday_living_room,
+        temperature_reduction_when_heating_is_off_2_weekday_living_room,
+        temperature_reduction_when_heating_is_off_1_weekend_living_room,
+        temperature_reduction_when_heating_is_off_2_weekend_living_room,
+        temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
+        temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling,
+        
+        #heating requirement outputs
+        T_weekday_living_room,
+        T_weekend_living_room,
+        mean_internal_temperature_living_room_T1_Table_9c,
+        T_weekday_rest_of_dwelling,
+        T_weekend_rest_of_dwelling,
+        mean_internal_temperature_rest_of_dwelling_T2_table_9c,
+        
         
         #mean internal temperature results
         living_area_fraction,
         mean_internal_temp_whole_dwelling,
+        
+        #utilisation factor for heating whole house outputs
+        time_constant_whole_house,
+        a_whole_house,
+        heat_loss_rate_whole_house,
+        y_whole_house,
+        utilisation_factor_for_heating_whole_house,
         
         #space heating requirements results
         useful_gains,

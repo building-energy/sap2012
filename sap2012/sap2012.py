@@ -3,7 +3,7 @@
 import csv
 import ast
 import json
-from .calcs.calcs import calcs
+from sap2012.calcs.calcs import calcs
 
 
 class Sap2012():
@@ -191,13 +191,14 @@ class Sap2012():
             'solar_DHW_input_appendix_G':None,
             
             #internal gains inputs
-            'metabolic_gains':None,
-            'lighting_gains':None,
-            'appliances_gains':None,
-            'cooking_gains':None,
+            'number_of_low_energy_light_bulbs':None,
+            'total_number_of_light_bulbs':None,
+            'frame_factor':None,
+            'window_area':None,
             'pumps_and_fans_gains':None,
-            'losses':None,
-            'water_heating_gains':None,
+            'light_access_factor_table_6d':None,
+            'light_transmittance_factor_table_6d':None,
+            'month_number':None,
             
             #solar gains inputs
             'access_factor_table_6d_north':None,
@@ -246,21 +247,29 @@ class Sap2012():
             'FF_table_6b_north_west':None,
             'FF_table_6b_roof_windows':None,
             
+            
+            #utilisation factor for heating inputs
+            'temperature_during_heating_living_room':None,
+            'temperature_during_heating_rest_of_dwelling':None,
+            'monthly_external_temperature_table_U1':None,
+            
+            #temperature reduction inputs
+            'hours_heating_is_off_1_weekday_living_room':None,
+            'hours_heating_is_off_2_weekday_living_room':None,
+            'hours_heating_is_off_1_weekend_living_room':None,
+            'hours_heating_is_off_2_weekend_living_room':None,
+            'hours_heating_is_off_1_weekday_rest_of_dwelling':None,
+            'hours_heating_is_off_2_weekday_rest_of_dwelling':None,
+            'hours_heating_is_off_1_weekend_rest_of_dwelling':None,
+            'hours_heating_is_off_2_weekend_rest_of_dwelling':None,
+            'responsiveness_of_heating_system':None,
+            
+            
             #mean internal temperature inputs
-            'temperature_during_heating_periods_living_room':None,
-            'utilisation_factor_for_gains_living_room_table_9a':None,
-            'mean_internal_temperature_living_room_T1_Table_9c':None,
-            'temperature_during_heating_periods_rest_of_dwelling':None,
-            'utilisation_factor_for_gains_rest_of_dwelling_table_9a':None,
-            'mean_internal_temperature_rest_of_dwelling_T2_table_9c':None,
             'living_room_area':None,
             'temperature_adjustment_table_4e':None,
             
             #space heating requirement inputs
-            'utilisation_factor_for_gains_table_9a':None,
-            'total_gains_internal_and_solar':None,
-            'monthly_external_temperature_table_U1':None,
-            'mean_internal_temperature_whole_dwelling':None,
             
             #energy requirements inputs
             'fraction_of_space_heat_secondary_system':None,
@@ -400,6 +409,22 @@ class Sap2012():
             'heat_gains_from_water_heating_monthly':None,
             
             #internal gains results
+            'G_L':None,
+            'C_1':None,
+            'C_2':None,
+            'E_B':None,
+            'initial_annual_lighting_demand':None,
+            'monthly_lighting_demand':None,
+            'annual_lighting_demand':None,
+            'lighting_gains':None,
+            'initial_annual_electrical_appliance_demand':None,
+            'monthly_electrical_appliance_demand':None,
+            'annual_electrical_appliance_demand':None,
+            'appliances_gains':None,
+            'cooking_gains':None,
+            'losses':None,
+            'water_heating_gains':None,
+            'metabolic_gains':None,
             'total_internal_gains':None,
             
             #solar gains results
@@ -413,10 +438,50 @@ class Sap2012():
             'gains_north_west':None,
             'gains_roof_windows':None,
             'solar_gains_watts':None,
+            'total_internal_and_solar_gains':None,
+            
+            
+            #utilisation factor for heating outputs
+            'time_constant':None,
+            'a':None,
+            'heat_loss_rate_living_room':None,
+            'y_living_room':None,
+            'utilisation_factor_for_heating_living_room':None,
+            'heat_loss_rate_rest_of_dwelling':None,
+            'y_rest_of_dwelling':None,
+            'utilisation_factor_for_heating_rest_of_dwelling':None,
+            
+            #temperature reduction outputs
+            't_c':None,
+            'internal_temperature_without_heating_living_room':None,
+            'internal_temperature_without_heating_rest_of_dwelling':None,
+            'temperature_reduction_when_heating_is_off_1_weekday_living_room':None,
+            'temperature_reduction_when_heating_is_off_2_weekday_living_room':None,
+            'temperature_reduction_when_heating_is_off_1_weekend_living_room':None,
+            'temperature_reduction_when_heating_is_off_2_weekend_living_room':None,
+            'temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling':None,
+            'temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling':None,
+            'temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling':None,
+            'temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling':None,
+            
+            #heating requirement results
+            'T_weekday_living_room':None,
+            'T_weekend_living_room':None,
+            'mean_internal_temperature_living_room_T1_Table_9c':None,
+            'T_weekday_rest_of_dwelling':None,
+            'T_weekend_rest_of_dwelling':None,
+            'mean_internal_temperature_rest_of_dwelling_T2_table_9c':None,
             
             #mean internal temperature results
             'living_area_fraction':None,
             'mean_internal_temp_whole_dwelling':None,
+            
+            #utilisation factor whole house results
+            'time_constant_whole_house':None,
+            'a_whole_house':None,
+            'heat_loss_rate_whole_house':None,
+            'y_whole_house':None,
+            'utilisation_factor_for_heating_whole_house':None,
             
             #space heating requirements results
             'useful_gains':None,

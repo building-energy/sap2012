@@ -2,10 +2,10 @@
 
 
 def space_heating_requirement (
-        utilisation_factor_for_gains_table_9a,
-        total_gains_internal_and_solar,
+        utilisation_factor_for_heating_whole_house,
+        total_internal_and_solar_gains,
         monthly_external_temperature_table_U1,
-        mean_internal_temperature_whole_dwelling,
+        mean_internal_temp_whole_dwelling,
         heat_transfer_coefficient,
         days_in_month,
         total_floor_area
@@ -53,14 +53,14 @@ def space_heating_requirement (
     
     useful_gains =[]
     for i in range(12):
-        useful_gains.append(utilisation_factor_for_gains_table_9a[i] * 
-                            total_gains_internal_and_solar[i])
+        useful_gains.append(utilisation_factor_for_heating_whole_house[i] * 
+                            total_internal_and_solar_gains[i])
         
         
     heat_loss_rate_for_mean_internal_temperature =[]
     for i in range(12):
         heat_loss_rate_for_mean_internal_temperature.append(heat_transfer_coefficient[i] * 
-                                                        (mean_internal_temperature_whole_dwelling[i] -
+                                                        (mean_internal_temp_whole_dwelling[i] -
                                                          monthly_external_temperature_table_U1[i]))
         
     
