@@ -5,7 +5,7 @@ def Utilisation_factor_for_heating(
         heat_transfer_coefficient,
         total_internal_and_solar_gains,
         temperature_during_heating_living_room,
-        temperature_during_heating_rest_of_dwelling,
+        heating_controls,
         monthly_external_temperature_table_U1,
         thermal_mass_parameter,
         heat_loss_parameter
@@ -47,12 +47,22 @@ def Utilisation_factor_for_heating(
             utilisation_factor_for_heating_living_room.append(1)
             
             
-    
+            
+            
+            
+            
+    temperature_during_heating_rest_of_dwelling = []
+    for i in range(12):
+        if heating_controls == 1:
+            temperature_during_heating_rest_of_dwelling.append(temperature_during_heating_living_room - 0.5 * heat_loss_parameter[i])
+            
+        else:
+            temperature_during_heating_rest_of_dwelling.append(temperature_during_heating_living_room - (heat_loss_parameter[i] + heat_loss_parameter[i]**2 / 12))
     
     heat_loss_rate_rest_of_dwelling = []
     for i in range(12):
         heat_loss_rate_rest_of_dwelling.append(heat_transfer_coefficient[i] * 
-                              (temperature_during_heating_rest_of_dwelling - monthly_external_temperature_table_U1[i]))
+                              (temperature_during_heating_rest_of_dwelling[i] - monthly_external_temperature_table_U1[i]))
         
     y_rest_of_dwelling = []
     for i in range(12):
@@ -83,9 +93,11 @@ def Utilisation_factor_for_heating(
             heat_loss_rate_living_room,
             y_living_room,
             utilisation_factor_for_heating_living_room,
+            temperature_during_heating_rest_of_dwelling,
             heat_loss_rate_rest_of_dwelling,
             y_rest_of_dwelling,
-            utilisation_factor_for_heating_rest_of_dwelling
+            utilisation_factor_for_heating_rest_of_dwelling,
+            
             )
             
             

@@ -10,7 +10,9 @@ def energy_requirements(
         cooling_system_energy_efficiency_ratio_table_10c,
         space_heating_requirement_monthly,
         output_from_water_heater_monthly,
-        efficiency_of_water_heater_table_4a,
+        water_heater_type,
+        efficiency_of_water_heater,
+        efficiency_of_water_heater_adjustment_table_4c,
         space_cooling_requirement_monthly,
         electricity_demand_mechanical_ventilation_fans_table_4f,
         electricity_demand_warm_air_heating_systems_fans_table_4f,
@@ -20,7 +22,7 @@ def energy_requirements(
         electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f,
         electricity_demand_pump_for_solar_water_heating_table_4f,
         electricity_demand_pump_for_storage_WWHRS_Table_G3,
-        electricity_for_lighting,
+        annual_lighting_demand,
         electricity_generated_by_PV_Appendix_M,
         electricity_generated_by_wind_turbine_appendix_M,
         electricity_used_or_generated_by_micro_CHP_appendix_N,
@@ -172,10 +174,13 @@ def energy_requirements(
     
     space_heating_fuel_main_system_1 =[]
     for i in range(12):
-        space_heating_fuel_main_system_1.append(space_heating_requirement_monthly[i] * 
+        if i == 5 or i == 6 or i == 7 or i == 8:
+            space_heating_fuel_main_system_1.append(0)
+        else:
+            space_heating_fuel_main_system_1.append(space_heating_requirement_monthly[i] * 
                                              fraction_of_total_space_heat_from_main_system_1 * 100 /
                                              efficiency_of_main_space_heating_system_1)
-        
+
     
         
     space_heating_fuel_main_system_2 =[]    
@@ -197,9 +202,27 @@ def energy_requirements(
                                              fraction_of_space_heat_secondary_system * 100 /
                                              efficiency_of_secondary_space_heating_system)
     
+    
+    efficiency_of_water_heater_table_4a = []
+    if water_heater_type in ['hot water only boiler'
+                             'seperate hot water only heater']:
+        for i in range(12):
+            efficiency_of_water_heater_table_4a.append(efficiency_of_water_heater + efficiency_of_water_heater_adjustment_table_4c)
+            
+    elif water_heater_type == 'gas/oil boiler main system':
+        for i in range(12):
+            efficiency_of_water_heater_table_4a.append((space_heating_requirement_monthly[i] + output_from_water_heater_monthly[i]) / 
+                                                       (space_heating_requirement_monthly[i] / efficiency_of_main_space_heating_system_1 + 
+                                                        output_from_water_heater_monthly[i] / efficiency_of_water_heater))
+    
+    elif water_heater_type == 'other':
+        for i in range(12):
+            efficiency_of_water_heater_table_4a.append(efficiency_of_water_heater)
+            
+    
     fuel_for_water_heating_monthly =[]
     for i in range(12):
-        fuel_for_water_heating_monthly.append(output_from_water_heater_monthly[i] * 100 / efficiency_of_water_heater_table_4a)
+        fuel_for_water_heating_monthly.append(output_from_water_heater_monthly[i] * 100 / efficiency_of_water_heater_table_4a[i])
         
         
         
@@ -246,7 +269,7 @@ def energy_requirements(
                                  
     appendix_Q_energy_total = sum(appendix_Q_energy_saved) + sum(appendix_Q_energy_used)   
         
-    energy_for_lighting = sum(electricity_for_lighting)
+    energy_for_lighting = annual_lighting_demand
     
     
     total_energy_used = (space_heating_fuel_used_main_system_1 + 
@@ -267,6 +290,7 @@ def energy_requirements(
            space_heating_fuel_main_system_1,
            space_heating_fuel_main_system_2,
            space_heating_fuel_secondary_system,
+           efficiency_of_water_heater_table_4a,
            fuel_for_water_heating_monthly,
            space_cooling_fuel_monthly,
            space_heating_fuel_used_main_system_1,

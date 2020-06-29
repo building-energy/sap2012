@@ -110,14 +110,14 @@ def Temperature_reduction(
     temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling = []
     for i in range(12):
         if hours_heating_is_off_1_weekday_rest_of_dwelling > t_c[i]:
-            temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling - 
+            temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) * 
                                                                 (hours_heating_is_off_1_weekday_rest_of_dwelling - 0.5 * t_c[i]) / 24)
             
             
         else:
             temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling.append(0.5 * hours_heating_is_off_1_weekday_rest_of_dwelling**2 * 
-                                                               (temperature_during_heating_rest_of_dwelling - 
+                                                               (temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) / 
                                                                 (24 * t_c[i]))
                                                                
@@ -126,14 +126,14 @@ def Temperature_reduction(
     temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling = []
     for i in range(12):
         if hours_heating_is_off_2_weekday_rest_of_dwelling > t_c[i]:
-            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling - 
+            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) * 
                                                                 (hours_heating_is_off_2_weekday_rest_of_dwelling - 0.5 * t_c[i]) / 24)
             
             
         else:
             temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling.append(0.5 * hours_heating_is_off_2_weekday_rest_of_dwelling**2 * 
-                                                               (temperature_during_heating_rest_of_dwelling - 
+                                                               (temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) / 
                                                                 (24 * t_c[i]))
                                                                
@@ -141,14 +141,14 @@ def Temperature_reduction(
     temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling = []
     for i in range(12):
         if hours_heating_is_off_1_weekend_rest_of_dwelling > t_c[i]:
-            temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling - 
+            temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) * 
                                                                 (hours_heating_is_off_1_weekend_rest_of_dwelling - 0.5 * t_c[i]) / 24)
             
             
         else:
             temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling.append(0.5 * hours_heating_is_off_1_weekend_rest_of_dwelling**2 * 
-                                                               (temperature_during_heating_rest_of_dwelling - 
+                                                               (temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) / 
                                                                 (24 * t_c[i]))
                                                                
@@ -157,14 +157,14 @@ def Temperature_reduction(
     temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling = []
     for i in range(12):
         if hours_heating_is_off_2_weekend_rest_of_dwelling > t_c[i]:
-            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling - 
+            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling.append((temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) * 
                                                                 (hours_heating_is_off_2_weekend_rest_of_dwelling - 0.5 * t_c[i]) / 24)
             
             
         else:
             temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling.append(0.5 * hours_heating_is_off_2_weekend_rest_of_dwelling**2 * 
-                                                               (temperature_during_heating_rest_of_dwelling - 
+                                                               (temperature_during_heating_rest_of_dwelling[i] - 
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) / 
                                                                 (24 * t_c[i]))                                                           
                                                                

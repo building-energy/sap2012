@@ -60,7 +60,7 @@ def Internal_gains_appendix_L (
     
     monthly_electrical_appliance_demand = []
     for i in range(12):
-        monthly_electrical_appliance_demand.append(initial_annual_lighting_demand * (1 + 0.157 * math.cos(2*math.pi * (month_number[i] - 1.78) / 12)) * days_in_month[i] / 365)
+        monthly_electrical_appliance_demand.append(initial_annual_electrical_appliance_demand * (1 + 0.157 * math.cos(2*math.pi * (month_number[i] - 1.78) / 12)) * days_in_month[i] / 365)
         
         
     annual_electrical_appliance_demand = sum(monthly_electrical_appliance_demand)

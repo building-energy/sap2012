@@ -15,6 +15,8 @@ def Heating_requirement (
         temperature_adjustment_table_4e
         ):
     
+    
+    
     T_weekday_living_room = [] 
     for i in range(12):
         T_weekday_living_room.append(temperature_during_heating_living_room - 
@@ -39,13 +41,13 @@ def Heating_requirement (
         
     T_weekday_rest_of_dwelling = []
     for i in range(12):
-        T_weekday_rest_of_dwelling.append(temperature_during_heating_rest_of_dwelling - 
+        T_weekday_rest_of_dwelling.append(temperature_during_heating_rest_of_dwelling[i] - 
                                           (temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling[i] + 
                                            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling[i]))
     
     T_weekend_rest_of_dwelling = [] 
     for i in range(12):
-        T_weekend_rest_of_dwelling.append(temperature_during_heating_rest_of_dwelling - 
+        T_weekend_rest_of_dwelling.append(temperature_during_heating_rest_of_dwelling[i] - 
                                           (temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling[i] + 
                                            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling[i]))
         

@@ -250,7 +250,7 @@ class Sap2012():
             
             #utilisation factor for heating inputs
             'temperature_during_heating_living_room':None,
-            'temperature_during_heating_rest_of_dwelling':None,
+            'heating_controls':None,
             'monthly_external_temperature_table_U1':None,
             
             #temperature reduction inputs
@@ -278,7 +278,9 @@ class Sap2012():
             'efficiency_of_main_space_heating_system_2':None,
             'efficiency_of_secondary_space_heating_system':None,
             'cooling_system_energy_efficiency_ratio_table_10c':None,
-            'efficiency_of_water_heater_table_4a':None,
+            'water_heater_type':None,
+            'efficiency_of_water_heater':None,
+            'efficiency_of_water_heater_adjustment_table_4c':None,
             'space_cooling_requirement_monthly':None,
             'electricity_demand_mechanical_ventilation_fans_table_4f':None,
             'electricity_demand_warm_air_heating_systems_fans_table_4f':None,
@@ -288,7 +290,6 @@ class Sap2012():
             'electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f':None,
             'electricity_demand_pump_for_solar_water_heating_table_4f':None,
             'electricity_demand_pump_for_storage_WWHRS_Table_G3':None,
-            'electricity_for_lighting':None,
             'electricity_generated_by_PV_Appendix_M':None,
             'electricity_generated_by_wind_turbine_appendix_M':None,
             'electricity_used_or_generated_by_micro_CHP_appendix_N':None,
@@ -447,9 +448,11 @@ class Sap2012():
             'heat_loss_rate_living_room':None,
             'y_living_room':None,
             'utilisation_factor_for_heating_living_room':None,
+            'temperature_during_heating_rest_of_dwelling':None,
             'heat_loss_rate_rest_of_dwelling':None,
             'y_rest_of_dwelling':None,
             'utilisation_factor_for_heating_rest_of_dwelling':None,
+            
             
             #temperature reduction outputs
             't_c':None,
@@ -497,6 +500,7 @@ class Sap2012():
             'space_heating_fuel_main_system_1':None,
             'space_heating_fuel_main_system_2':None,
             'space_heating_fuel_secondary_system':None,
+            'efficiency_of_water_heater_table_4a':None,
             'fuel_for_water_heating_monthly':None,
             'space_cooling_fuel_monthly':None,
             'space_heating_fuel_used_main_system_1':None,
@@ -507,6 +511,7 @@ class Sap2012():
             'electricity_for_pumps_fans_electric_keep_hot':None,
             'energy_saving_generation_technologies':None,
             'appendix_Q_energy_total':None,
+            'energy_for_lighting':None,
             'total_energy_used':None,
             
             #fuel cost results

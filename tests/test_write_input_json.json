@@ -66,7 +66,7 @@
     "appendix_Q_energy_used_fuel_price": [
         0
     ],
-    "applicable_case": "balanced mechanical ventilation without heat recovery",
+    "applicable_case": "natural ventilation or whole house positive input ventilation from loft",
     "area": [
         0,
         63,
@@ -81,7 +81,7 @@
     "area_south_east": 0.0,
     "area_south_west": 0.0,
     "area_west": 0.0,
-    "assumed_occupancy": 2.88,
+    "assumed_occupancy": 2.0,
     "average_storey_height": [
         0,
         2.5,
@@ -124,10 +124,11 @@
         31
     ],
     "efficiency_allowing_for_in_use_factor": 0.0,
-    "efficiency_of_main_space_heating_system_1": 90.0,
+    "efficiency_of_main_space_heating_system_1": 88.8,
     "efficiency_of_main_space_heating_system_2": 0.0,
     "efficiency_of_secondary_space_heating_system": 0.0,
-    "efficiency_of_water_heater_table_4a": 80.0,
+    "efficiency_of_water_heater": 80.0,
+    "efficiency_of_water_heater_adjustment_table_4c": 0.0,
     "electricity_demand_boiler_flue_fan_table_4f": 0.0,
     "electricity_demand_central_heating_pump_or_water_pump_table_4f": 0.0,
     "electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f": 0.0,
@@ -136,9 +137,6 @@
     "electricity_demand_pump_for_solar_water_heating_table_4f": 0.0,
     "electricity_demand_pump_for_storage_WWHRS_Table_G3": 0.0,
     "electricity_demand_warm_air_heating_systems_fans_table_4f": 0.0,
-    "electricity_for_lighting": [
-        2008
-    ],
     "electricity_for_pumps_fans_electric_keep_hot": 0.0,
     "electricity_generated_by_PV_Appendix_M": [
         0
@@ -173,7 +171,7 @@
     "fraction_of_space_heat_from_main_system_2": 0.0,
     "fraction_of_space_heat_secondary_system": 0.0,
     "frame_factor": 0.7,
-    "fuel_emission_factor_for_lighting": 0.52,
+    "fuel_emission_factor_for_lighting": 0.519,
     "fuel_emission_factor_for_pumps_fans_electric_keep_hot": 0.0,
     "fuel_price_for_lighting": 13.19,
     "fuel_price_for_pumps_fans_electric_keep_hot": 0.0,
@@ -189,6 +187,7 @@
     "ground_floor_heat_capacity": 20.0,
     "ground_floor_net_area": 63.0,
     "ground_floor_u_value": 0.63,
+    "heating_controls": 2.0,
     "high_rate_fuel_price": 0.0,
     "hot_water_storage_loss_table_2": 0.0,
     "hours_heating_is_off_1_weekday_living_room": 8.0,
@@ -207,7 +206,7 @@
     "internal_wall_net_area": 131.0,
     "light_access_factor_table_6d": 0.0,
     "light_transmittance_factor_table_6d": 0.0,
-    "living_room_area": 30.0,
+    "living_room_area": 16.0,
     "low_rate_fuel_price": 3.48,
     "mechanical_ventilation_air_change_rate_through_system": 0.5,
     "mechanical_ventilation_throughput_factor": 0.0,
@@ -471,7 +470,7 @@
         0,
         0
     ],
-    "space_heating_fuel_emission_factor_main_system_1": 0.22,
+    "space_heating_fuel_emission_factor_main_system_1": 0.216,
     "space_heating_fuel_emission_factor_main_system_2": 0.0,
     "space_heating_fuel_emission_factor_secondary": 0.0,
     "space_heating_fuel_price_main_system_1": 3.48,
@@ -482,12 +481,12 @@
     "suspended_wooden_ground_floor_infiltration": 0.0,
     "temperature_adjustment_table_4e": 0.0,
     "temperature_during_heating_living_room": 21.0,
-    "temperature_during_heating_rest_of_dwelling": 21.0,
     "temperature_factor_table_2b": 0.0,
     "thermal_bridges_appendix_k": 36.9,
     "total_number_of_light_bulbs": 10.0,
     "volume_factor_table_2a": 0.0,
-    "water_heating_fuel_emission_factor": 0.22,
+    "water_heater_type": "gas/oil boiler main system",
+    "water_heating_fuel_emission_factor": 0.216,
     "water_heating_fuel_price_other": 0.0,
     "water_heating_high_rate_fraction_table_13": 0.0,
     "water_heating_low_rate_fraction_table_13": 1.0,
