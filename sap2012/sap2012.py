@@ -200,6 +200,11 @@ class Sap2012():
             'light_transmittance_factor_table_6d':None,
             'month_number':None,
             
+            #solar gains appendix U inputs
+            'solar_radiation_horizontal_plane_monthly_table_U3':None,
+            'solar_declination_monthly_table_U3':None,
+            'location_latitude_table_U4':None,
+            'p_tilt':None,
             #solar gains inputs
             'access_factor_table_6d_north':None,
             'access_factor_table_6d_north_east':None,
@@ -219,14 +224,7 @@ class Sap2012():
             'area_west':None,
             'area_north_west':None,
             'area_roof_windows':None,
-            'solar_flux_north':None,
-            'solar_flux_north_east':None,
-            'solar_flux_east':None,
-            'solar_flux_south_east':None,
-            'solar_flux_south':None,
-            'solar_flux_south_west':None,
-            'solar_flux_west':None,
-            'solar_flux_north_west':None,
+            
             'solar_flux_roof_windows':None,
             'g_table_6b_north':None,
             'g_table_6b_north_east':None,
@@ -427,6 +425,16 @@ class Sap2012():
             'water_heating_gains':None,
             'metabolic_gains':None,
             'total_internal_gains':None,
+            
+            #solar gains appendix U results
+            'solar_flux_north':None,
+            'solar_flux_north_east':None,
+            'solar_flux_east':None,
+            'solar_flux_south_east':None,
+            'solar_flux_south':None,
+            'solar_flux_south_west':None,
+            'solar_flux_west':None,
+            'solar_flux_north_west':None,
             
             #solar gains results
             'gains_north':None,

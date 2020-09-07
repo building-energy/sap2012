@@ -17,6 +17,7 @@ from sap2012.tables.Utilisation_factor_for_heating_table_9a import Utilisation_f
 from sap2012.tables.temperature_reduction_when_heating_is_off import Temperature_reduction
 from sap2012.tables.Heating_Requirement_table_9c import Heating_requirement
 from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisation_factor_for_heating_whole_house 
+from sap2012.tables.solar_gains_appendix_U import Solar_gains_appendix_U3
 
 
 def calcs(
@@ -124,6 +125,12 @@ def calcs(
         #internal gains inputs
         pumps_and_fans_gains,
         
+        #solar gains appendix U inputs
+        solar_radiation_horizontal_plane_monthly_table_U3,
+        solar_declination_monthly_table_U3,
+        location_latitude_table_U4,
+        p_tilt,
+        
         #solar gains inputs
         access_factor_table_6d_north,
         access_factor_table_6d_north_east,
@@ -143,14 +150,6 @@ def calcs(
         area_west,
         area_north_west,
         area_roof_windows,
-        solar_flux_north,
-        solar_flux_north_east,
-        solar_flux_east,
-        solar_flux_south_east,
-        solar_flux_south,
-        solar_flux_south_west,
-        solar_flux_west,
-        solar_flux_north_west,
         solar_flux_roof_windows,
         g_table_6b_north,
         g_table_6b_north_east,
@@ -480,6 +479,21 @@ def calcs(
     
     (total_internal_gains) = result
     
+    #solar gains appendix U calculations
+    result = Solar_gains_appendix_U3(
+        solar_radiation_horizontal_plane_monthly_table_U3,
+        solar_declination_monthly_table_U3,
+        location_latitude_table_U4,
+        p_tilt,
+        )
+    (solar_flux_north,
+            solar_flux_north_east,
+            solar_flux_east,
+            solar_flux_south_east,
+            solar_flux_south,
+            solar_flux_south_west,
+            solar_flux_west,
+            solar_flux_north_west,) = result
     # Solar gains calculations
     
     result = solar_gains(
@@ -931,6 +945,16 @@ def calcs(
         water_heating_gains,
         metabolic_gains,
         total_internal_gains,
+        
+        #solar gains appendix U results
+        solar_flux_north,
+        solar_flux_north_east,
+        solar_flux_east,
+        solar_flux_south_east,
+        solar_flux_south,
+        solar_flux_south_west,
+        solar_flux_west,
+        solar_flux_north_west,
         
         #solar gains results
         gains_north,
