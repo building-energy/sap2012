@@ -42,28 +42,32 @@ See [here](./demo/input_csv_file.csv) for an example of an input csv file. The i
 
 ```python
 >>> s.run()
+>>> print(len(s.outputs))
+192
 ```
+
+The complete set of calculation outputs is stored in the *outputs* dictionary.
 
 ### View calculation results
 
 ```python
 >>> print(s.outputs['total_energy_used'])
-16499.45199251753
->>> print(len(s.outputs))
-192
+16499.45199251753	
 ```
 
 This is the total energy used by the house in kWh. 
-
-The complete set of calculation outputs is stored in the *outputs* dictionary.
 
 ## Issues & feature requests?
 
 Please raise them on the [GitHub Issues page](https://github.com/building-energy/sap2012/issues).
 
-### Contributions
+## Contributions
 
 All contributions welcome. Please send your [pull requests](https://github.com/building-energy/sap2012/pulls).
+
+## Contacts
+
+https://www.lboro.ac.uk/departments/abce/staff/steven-firth/
 
 
 
