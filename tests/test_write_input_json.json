@@ -398,7 +398,7 @@
     "structural_infiltration": 0.0,
     "suspended_wooden_ground_floor_infiltration": 0.0,
     "temperature_adjustment_table_4e": 0.0,
-    "temperature_during_heating_living_room": 21.0,
+    "temperature_during_heating_living_room": 20.0,
     "temperature_factor_table_2b": 0.0,
     "thermal_bridges_appendix_k": 36.9,
     "total_number_of_light_bulbs": 10.0,
