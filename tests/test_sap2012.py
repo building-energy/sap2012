@@ -7,6 +7,8 @@ from sap2012 import Sap2012
 
 class TestSap2012(unittest.TestCase):
     
+    
+    
     def test_read_input_csv(self):
         
         s=Sap2012()
@@ -61,7 +63,11 @@ class TestSap2012(unittest.TestCase):
         s.read_input_csv(fp)
         s.run()
         outputs=s.outputs
-        print(outputs)
+        #print(outputs)
+        print(len(s.inputs))
+        print(len(s.outputs))
+        print(s.inputs['external_wall_u_value'])
+        print(s.outputs['total_energy_used'])
 
         
 if __name__=='__main__':
