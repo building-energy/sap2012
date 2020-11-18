@@ -13,40 +13,47 @@ def space_heating_requirement (
     
     """ Calculates Space Heating Requirement, section 8
     
-    :param utilisation_factor_for_gains_table_9a:
+    :param utilisation_factor_for_gains_table_9a: see (94)
     :type utilisation_factor_for_gains_table_9a: float
     
-    :param total_gains_internal_and_solar:
+    :param total_gains_internal_and_solar: see (84) in W
     :type total_gains_internal_and_solar: float
     
-    :param monthly_external_temperature_table_U1:
+    :param monthly_external_temperature_table_U1: see (96) in oC
     :type monthly_external_temperature_table_U1: float
     
-    :param mean_internal_temperature_whole_dwelling:
+    :param mean_internal_temperature_whole_dwelling: see (92) in oC
     :type mean_internal_temperature_whole_dwelling: float
     
-    :param heat_transfer_coefficient:
+    :param heat_transfer_coefficient: see (39)
     :type heat_transfer_coefficient: float
     
-    :param days_in_month:
+    :param days_in_month: 
     :type days_in_month: float
     
-    :param total_floor_area:
+    :param total_floor_area: in m
     :type total_floor_area: float
     
-    :param useful_gains:
+     return(
+            useful_gains,
+            heat_loss_rate_for_mean_internal_temperature,
+            space_heating_requirement_monthly,
+            space_heating_requirement_yearly,
+            space_heating_requirement_yearly_per_m2)
+    
+    :param useful_gains: see (95) in W
     :type useful_gains: float
     
-    :param heat_loss_rate_for_mean_internal_temperature:
+    :param heat_loss_rate_for_mean_internal_temperature: see (97) in W
     :type heat_loss_rate_for_mean_internal_temperature: float
     
-    :param space_heating_requirement_monthly:
+    :param space_heating_requirement_monthly: see (98) in kWh/month
     :type space_heating_requirement_monthly: float
     
-    :param space_heating_requirement_yearly:
+    :param space_heating_requirement_yearly: see (98) in kWh
     :type space_heating_requirement_yearly: float
     
-    :param space_heating_requirement_yearly_per_m2:
+    :param space_heating_requirement_yearly_per_m2: see (99) in kWh/m2/yr
     :type space_heating_requirement_yearly_per_m2: float
     
     """

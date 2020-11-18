@@ -2,7 +2,7 @@
 """
 Created on Mon Mar  2 13:40:12 2020
 
-@author: benny
+
 """
 
 def solar_gains (
@@ -56,7 +56,9 @@ def solar_gains (
     
     """Calculates Solar Gains, section 6
     
-    :param access_factor_table_6d_north:
+    Also includes U3 from appendix U to calculate solar gains. This calculation is found in tables/solar_gains_appendix_U
+    
+    :param access_factor_table_6d_north: see (74)
     :type access_factor_table_6d_north: float
     
     :param access_factor_table_6d_north_east:
@@ -83,31 +85,31 @@ def solar_gains (
     :param access_factor_table_6d_roof_windows:
     :type access_factor_table_6d_roof_windows: float
     
-    :param area_north:
+    :param area_north: see (74) in m
     :type area_north: float
     
-    :param area_north_east:
+    :param area_north_east: see (75) in m
     :type area_north_east: float
     
-    :param area_east:
+    :param area_east: see (76) in m
     :type area_east: float
     
-    :param area_south_east:
+    :param area_south_east: see (77) in m
     :type area_south_east: float
     
-    :param area_south:
+    :param area_south: see (78) in m
     :type area_south: float
     
-    :param area_south_west:
+    :param area_south_west: see (79) in m
     :type area_south_west: float
     
-    :param area_west:
+    :param area_west: see (80) in m
     :type area_west: float
     
-    :param area_north_west:
+    :param area_north_west: see (81) in m
     :type area_north_west: float
     
-    :param area_roof_windows:
+    :param area_roof_windows: see (82) in m
     :type area_roof_windows: float
     
     :param solar_flux_north:
@@ -137,91 +139,105 @@ def solar_gains (
     :param solar_flux_roof_windows:
     :type solar_flux_roof_windows: float
     
-    :param g_table_6b_north:
+    :param g_table_6b_north: see (74)
     :type g_table_6b_north: float
     
-    :param g_table_6b_north_east:
+    :param g_table_6b_north_east: see (75)
     :type g_table_6b_north_east: float
     
-    :param g_table_6b_east:
+    :param g_table_6b_east: see (76)
     :type g_table_6b_east: float
     
-    :param g_table_6b_south_east:
+    :param g_table_6b_south_east: see (77)
     :type g_table_6b_south_east: float
     
-    :param g_table_6b_south:
+    :param g_table_6b_south: see (78)
     :type g_table_6b_south: float
     
-    :param g_table_6b_south_west:
+    :param g_table_6b_south_west: see (79)
     :type g_table_6b_south_west: float
     
-    :param g_table_6b_west:
+    :param g_table_6b_west: see (80)
     :type g_table_6b_west: float
     
-    :param g_table_6b_north_west:
+    :param g_table_6b_north_west: see (81)
     :type g_table_6b_north_west: float
     
-    :param g_table_6b_roof_windows:
+    :param g_table_6b_roof_windows: see (82)
     :type g_table_6b_roof_windows: float
     
-    :param FF_table_6b_north:
+    :param FF_table_6b_north: see (74)
     :type FF_table_6b_north: float
     
-    :param FF_table_6b_north_east:
+    :param FF_table_6b_north_east: see (75)
     :type FF_table_6b_north_east: float
     
-    :param FF_table_6b_east:
+    :param FF_table_6b_east: see (76)
     :type FF_table_6b_east: float
     
-    :param FF_table_6b_south_east:
+    :param FF_table_6b_south_east: see (77)
     :type FF_table_6b_south_east: float
     
-    :param FF_table_6b_south:
+    :param FF_table_6b_south: see (78)
     :type FF_table_6b_south: float
     
-    :param FF_table_6b_south_west:
+    :param FF_table_6b_south_west: see (79)
     :type FF_table_6b_south_west: float
     
-    :param FF_table_6b_west:
+    :param FF_table_6b_west: see (80)
     :type FF_table_6b_west: float
     
-    :param FF_table_6b_north_west:
+    :param FF_table_6b_north_west: see (81)
     :type FF_table_6b_north_west: float
     
-    :param FF_table_6b_roof_windows:
+    :param FF_table_6b_roof_windows: see (82)
     :type FF_table_6b_roof_windows: float
     
-    :param gains_north:
-    :type gains_north: float
+    return(
+            gains_north,
+            gains_north_east,
+            gains_east,
+            gains_south_east,
+            gains_south,
+            gains_south_west,
+            gains_west,
+            gains_north_west,
+            gains_roof_windows,
+            solar_gains_watts,
+            total_internal_and_solar_gains)
     
-    :param gains_north_east:
-    :type gains_north_east: float
+    :param gains_north: see (74)
+    :type gains_north: list of floats
     
-    :param gains_east:
-    :type gains_east: float
+    :param gains_north_east: see (75)
+    :type gains_north_east: list of floats
     
-    :param gains_south_east:
-    :type gains_south_east: float
+    :param gains_east: see (76)
+    :type gains_east: list of floats
     
-    :param gains_south:
-    :type gains_south: float
+    :param gains_south_east: see (77)
+    :type gains_south_east: list of floats
     
-    :param gains_south_west:
-    :type gains_south_west: float
+    :param gains_south: see (78)
+    :type gains_south: list of floats
     
-    :param gains_west:
-    :type gains_west: float
+    :param gains_south_west: see (79)
+    :type gains_south_west: list of floats
     
-    :param gains_north_west:
-    :type gains_north_west: float
+    :param gains_west: see (80)
+    :type gains_west: list of floats
     
-    :param gains_roof_windows:
+    :param gains_north_west: see (81)
+    :type gains_north_west: list of floats
+    
+    :param gains_roof_windows: see (82)
     :type gains_roof_windows: float
     
-    :param solar_gains_watts:
-    :type solar_gains_watts: float
+    :param solar_gains_watts: see (83) in W
+    :type solar_gains_watts: list of floats
     
-    
+    :param total_internal_and_solar_gains: see (84) in W
+    :type total_internal_and_solar_gains: list of floats
 
     """
 

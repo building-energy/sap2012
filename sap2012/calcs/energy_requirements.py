@@ -33,82 +33,103 @@ def energy_requirements(
     
     """ Calculates Energy Requirements, section 9
     
-    :param fraction_of_space_heat_secondary_system:
+    :param fraction_of_space_heat_secondary_system: see (201)
     :type fraction_of_space_heat_secondary_system: float
     
-    :param fraction_of_space_heat_from_main_system_2:
+    :param fraction_of_space_heat_from_main_system_2: see (202)
     :type fraction_of_space_heat_from_main_system_2: float
     
-    :param efficiency_of_main_space_heating_system_1:
+    :param efficiency_of_main_space_heating_system_1: see (206)
     :type efficiency_of_main_space_heating_system_1: float
     
-    :param efficiency_of_main_space_heating_system_2:
+    :param efficiency_of_main_space_heating_system_2: see (207)
     :type efficiency_of_main_space_heating_system_2: float
     
-    :param efficiency_of_secondary_space_heating_system:
+    :param efficiency_of_secondary_space_heating_system: see (208)
     :type efficiency_of_secondary_space_heating_system: float
     
-    :param cooling_system_energy_efficiency_ratio_table_10c:
-    :type cooling_system_energy_efficiency_ratio_table_10c: float
+    :param cooling_system_energy_efficiency_ratio_table_10c: see (209)
+    :type cooling_system_energy_efficiency_ratio_table_10c: list of floats
     
-    :param space_heating_requirement_monthly:
-    :type space_heating_requirement_monthly: float
+    :param space_heating_requirement_monthly: see (211)
+    :type space_heating_requirement_monthly: list of floats
     
-    :param output_from_water_heater_monthly:
-    :type output_from_water_heater_monthly: float
+    :param output_from_water_heater_monthly: see (216)
+    :type output_from_water_heater_monthly: list of floats
     
-    :param efficiency_of_water_heater_table_4a:
+    :param efficiency_of_water_heater_table_4a: see (216)
     :type efficiency_of_water_heater_table_4a: float
     
-    :param space_cooling_requirement_monthly:
-    :type space_cooling_requirement_monthly: float
+    :param space_cooling_requirement_monthly: see (219)
+    :type space_cooling_requirement_monthly: list of floats
     
-    :param electricity_demand_mechanical_ventilation_fans_table_4f:
+    :param electricity_demand_mechanical_ventilation_fans_table_4f: see (230) in kWh/yr
     :type electricity_demand_mechanical_ventilation_fans_table_4f: float
     
-    :param electricity_demand_warm_air_heating_systems_fans_table_4f:
+    :param electricity_demand_warm_air_heating_systems_fans_table_4f: see (230) in kWh/yr
     :type electricity_demand_warm_air_heating_systems_fans_table_4f: float
     
-    :param electricity_demand_central_heating_pump_or_water_pump_table_4f:
+    :param electricity_demand_central_heating_pump_or_water_pump_table_4f: see (230) in kWh/yr
     :type electricity_demand_central_heating_pump_or_water_pump_table_4f: float
     
-    :param electricity_demand_oil_boiler_pump_table_4f:
+    :param electricity_demand_oil_boiler_pump_table_4f: see (230) in kWh/yr
     :type electricity_demand_oil_boiler_pump_table_4f: float
     
-    :param electricity_demand_boiler_flue_fan_table_4f:
+    :param electricity_demand_boiler_flue_fan_table_4f: see (230) in kWh/yr
     :type electricity_demand_boiler_flue_fan_table_4f: float
     
-    :param electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f:
+    :param electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f: see (230) in kWh/yr
     :type electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f: float
     
-    :param electricity_demand_pump_for_solar_water_heating_table_4f:
+    :param electricity_demand_pump_for_solar_water_heating_table_4f: see (230) in kWh/yr
     :type electricity_demand_pump_for_solar_water_heating_table_4f: float
     
-    :param electricity_demand_pump_for_storage_WWHRS_Table_G3:
+    :param electricity_demand_pump_for_storage_WWHRS_Table_G3: see (230) in kWh/yr
     :type electricity_demand_pump_for_storage_WWHRS_Table_G3: float
     
-    :param electricity_for_lighting:
+    :param electricity_for_lighting: see (232) in kWh/yr
     :type electricity_for_lighting: float
     
-    :param electricity_generated_by_PV_Appendix_M:
+    :param electricity_generated_by_PV_Appendix_M: see (233) in kWh/yr
     :type electricity_generated_by_PV_Appendix_M: float
     
-    :param electricity_generated_by_wind_turbine_appendix_M:
+    :param electricity_generated_by_wind_turbine_appendix_M: see (234) in kWh/yr
     :type electricity_generated_by_wind_turbine_appendix_M: float
     
-    :param electricity_used_or_generated_by_micro_CHP_appendix_N:
+    :param electricity_used_or_generated_by_micro_CHP_appendix_N: see (235) in kWh/yr
     :type electricity_used_or_generated_by_micro_CHP_appendix_N: float
     
-    :param electricity_generated_by_hydro_electric_generator,appendix_M:
+    :param electricity_generated_by_hydro_electric_generator,appendix_M: see (235) in kWh/yr
     :type electricity_generated_by_hydro_electric_generator,appendix_M: float
     
-    :param appendix_Q_energy_saved:
+    :param appendix_Q_energy_saved: see (236) in kWh/yr
     :type appendix_Q_energy_saved: float
     
-    :param appendix_Q_energy_used:
+    :param appendix_Q_energy_used: see (237) in kWh/yr
     :type appendix_Q_energy_used: float
     
-    :param fraction_of_space_heat_from_main_systems:
+    return(fraction_of_space_heat_from_main_systems,
+           fraction_of_total_space_heat_from_main_system_1,
+           fraction_of_total_space_heat_from_main_system_2,
+           space_heating_fuel_main_system_1,
+           space_heating_fuel_main_system_2,
+           space_heating_fuel_secondary_system,
+           efficiency_of_water_heater_table_4a,
+           fuel_for_water_heating_monthly,
+           space_cooling_fuel_monthly,
+           space_heating_fuel_used_main_system_1,
+           space_heating_fuel_used_main_system_2,
+           space_heating_fuel_used_secondary,
+           water_fuel_used,
+           space_cooling_fuel_used,
+           electricity_for_pumps_fans_electric_keep_hot,
+           energy_saving_generation_technologies_total,
+           appendix_Q_energy_total,
+           energy_for_lighting,
+           total_energy_used
+            )
+    
+    :param fraction_of_space_heat_from_main_systems: 
     :type fraction_of_space_heat_from_main_systems: float
     
     :param fraction_of_total_space_heat_from_main_system_1:
@@ -117,46 +138,46 @@ def energy_requirements(
     :param fraction_of_total_space_heat_from_main_system_2:
     :type fraction_of_total_space_heat_from_main_system_2: float
     
-    :param space_heating_fuel_main_system_1:
-    :type space_heating_fuel_main_system_1: float
+    :param space_heating_fuel_main_system_1: see (211) in kWh/month
+    :type space_heating_fuel_main_system_1: list of floats
     
-    :param space_heating_fuel_main_system_2:
-    :type space_heating_fuel_main_system_2: float
+    :param space_heating_fuel_main_system_2: see (213) in kWh/month
+    :type space_heating_fuel_main_system_2: list of floats
     
-    :param space_heating_fuel_main_system_secondary_system:
-    :type space_heating_fuel_main_system_secondary_system: float
+    :param space_heating_fuel_main_system_secondary_system: see (214) in kWh/month
+    :type space_heating_fuel_main_system_secondary_system: list of floats
     
-    :param fuel_for_water_heating_monthly:
-    :type fuel_for_water_heating_monthly: float
+    :param fuel_for_water_heating_monthly: see (219) in kWh/month
+    :type fuel_for_water_heating_monthly: list of floats
     
-    :param space_cooling_fuel_monthly:
-    :type space_cooling_fuel_monthly: float
+    :param space_cooling_fuel_monthly: see (221) in kWh/month
+    :type space_cooling_fuel_monthly: list of floats
     
-    :param space_heating_fuel_used_main_system_1:
+    :param space_heating_fuel_used_main_system_1: see (211) in kWh/yr
     :type space_heating_fuel_used_main_system_1: float
     
-    :param space_heating_fuel_used_main_system_2:
+    :param space_heating_fuel_used_main_system_2: see (213) in kWh/yr
     :type space_heating_fuel_used_main_system_2: float
     
-    :param space_heating_fuel_used_secondary:
+    :param space_heating_fuel_used_secondary: see (215) in kWh/yr
     :type space_heating_fuel_used_secondary: float
     
-    :param water_fuel_used:
+    :param water_fuel_used: see (219) in kWh/yr
     :type water_fuel_used: float
     
-    :param space_cooling_fuel_used:
+    :param space_cooling_fuel_used: see (221) in kWh/yr
     :type space_cooling_fuel_used: float
     
-    :param electricity_for_pumps_fans_electric_keep_hot:
+    :param electricity_for_pumps_fans_electric_keep_hot: see (230) in kWh/yr
     :type electricity_for_pumps_fans_electric_keep_hot: float
     
-    :param energy_saving_generation_technologies:
+    :param energy_saving_generation_technologies: see (230) in kWh/yr
     :type energy_saving_generation_technologies: float
     
-    :param appendix_Q_energy:
+    :param appendix_Q_energy: see (237) in kWh/yr
     :type appendix_Q_energy: float
     
-    :param total_energy_used:
+    :param total_energy_used: see (237) in kWh/yr
     :type total_energy_used: float
     
     

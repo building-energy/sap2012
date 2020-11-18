@@ -36,7 +36,6 @@ def calcs(
         number_of_intermittant_fans_total,
         number_of_passive_vents_total,
         number_of_flueless_gas_fires_total,
-        #### note that 'dwelling_volume' isn't needed as an input here because it is calculated in 'overall_dwelling_dimenstions' #### Please delete this line once read
         air_permeability_value_q50,
         number_of_storeys_in_the_dwelling,
         structural_infiltration,

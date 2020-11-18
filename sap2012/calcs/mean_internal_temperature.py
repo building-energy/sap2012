@@ -11,34 +11,35 @@ def mean_internal_temperature (
     
     """Calculates Mean Internal Temperature, section 7
     
-    :param temperature_during_heating_periods_living_room:
-    :type temperature_during_heating_periods_living_room: float
+    :param utilisation_factor_for_gains_living_room_table_9a: see (86)
+    :type utilisation_factor_for_gains_living_room_table_9a: list of floats
     
-    :param utilisation_factor_for_gains_living_room_table_9a:
-    :type utilisation_factor_for_gains_living_room_table_9a: float
+    :param mean_internal_temperature_living_room_T1_Table_9c: see (87) in oC
+    :type mean_internal_temperature_living_room_T1_Table_9c: list of floats
     
-    :param mean_internal_temperature_living_room_T1_Table_9c:
-    :type mean_internal_temperature_living_room_T1_Table_9c: float
     
-    :param temperature_during_heating_periods_rest_of_dwelling:
-    :type temperature_during_heating_periods_rest_of_dwelling: float
+    :param utilisation_factor_for_gains_rest_of_dwelling_table_9a: see (89)
+    :type utilisation_factor_for_gains_rest_of_dwelling_table_9a: list of floats
     
-    :param utilisation_factor_for_gains_rest_of_dwelling_table_9a:
-    :type utilisation_factor_for_gains_rest_of_dwelling_table_9a: float
+    :param mean_internal_temperature_rest_of_dwelling_T2_table_9c: see (90) in oC
+    :type mean_internal_temperature_rest_of_dwelling_T2_table_9c: list of floats
     
-    :param mean_internal_temperature_rest_of_dwelling_T2_table_9c:
-    :type mean_internal_temperature_rest_of_dwelling_T2_table_9c: float
+     return (
+            living_area_fraction,
+            mean_internal_temp_whole_dwelling
+            )
     
-    :param living_room_area:
+    :param living_room_area: see (91) in m
     :type living_room_area: float
     
-    :param total_floor_area:
+    :param total_floor_area: in m
     :type total_floor_area: float
     
-    :param temperature_adjustment_table_4e:
+    :param temperature_adjustment_table_4e: see (93) in oC
+        adjustments founf in table 4a
     :type temperature_adjustment_table_4e: float
     
-    :param mean_internal_temp_whole_dwelling:
+    :param mean_internal_temp_whole_dwelling: see (92) in oC
     :type mean_internal_temp_whole_dwelling: float
     
     """

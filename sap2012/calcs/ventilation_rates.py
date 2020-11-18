@@ -176,7 +176,7 @@ def ventilation_rates(
                                                    number_of_flueless_gas_fires_m3_per_hour) /
                                                   dwelling_volume)
     
-    if air_permeability_value_q50 is None:
+    if air_permeability_value_q50 == 0:
         
         additional_infiltration=(number_of_storeys_in_the_dwelling-1)*0.1
         

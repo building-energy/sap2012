@@ -13,29 +13,31 @@ def internal_gains (
     
     """ Calculates Internal Gains, section 5
     
-    :param metabolic_gains:
-    :type metabolic_gains: float
+    :param metabolic_gains: Calculated using table 5 see (66), in W
+    :type metabolic_gains: list of floats
     
-    :param lighting_gains:
-    :type lighting_gains: float
+    :param lighting_gains: Calculated using table 5 see (67), in W
+    :type lighting_gains: list of floats
     
-    :param appliances_gains:
-    :type appliances_gains: float
+    :param appliances_gains: Calculated using table 5 see (68), in W
+    :type appliances_gains: list of floats
     
-    :param cooking_gains:
-    :type cooking_gains: float
+    :param cooking_gains:Calculated using table 5 see (69), in W
+    :type cooking_gains: list of floats
     
-    :param pumps_and_fans_gains:
-    :type pumps_and_fans_gains: float
+    :param pumps_and_fans_gains: Calculated using table 5a see (70), in W
+    :type pumps_and_fans_gains: list of floats
     
-    :param losses:
-    :type losses: float
+    :param losses: Calculated using table 5 see (71), in W
+    :type losses: list of floats
     
-    :param water_heating_gains:
-    :type water_heating_gains: float
+    :param water_heating_gains: Calculated using table 5 see (72), in W
+    :type water_heating_gains: list of floats
     
-    :param total_internal_gains:
-    :type total_internal_gains: float
+    return (total_internal_gains) 
+    
+    :param total_internal_gains: Sum of all internal gains see (73), in W
+    :type total_internal_gains: list of floats
     
     """
     
@@ -50,5 +52,4 @@ def internal_gains (
                                 water_heating_gains[i])
         
         
-    return (
-            total_internal_gains)        
+    return (total_internal_gains)        
