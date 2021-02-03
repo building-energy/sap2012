@@ -18,62 +18,66 @@ def water_heating_requirement (
         solar_DHW_input_appendix_G
         ):
     
-    """Calculates water heating requirement, section 4
+    """Calculates water heating requirement, Section 4.
     
-    :param assumed_occupancy: see (42)
-        calculate using equation from (42) if TFA > 13.9, N = 1 + 1.76 * [1 - exp(-0.000349 * (TFA -13.9)2)] + 0.0013 * (TFA -13.9), if TFA =< 13.9, N = 1
-        TFA = Total Floor Area
+    :param assumed_occupancy: See (42).
+        Calculated using equation from (42).  
+        If TFA > 13.9, N = 1 + 1.76 * [1 - exp(-0.000349 * (TFA -13.9)2)] + 0.0013 * (TFA -13.9).
+        if TFA =< 13.9, N = 1. 
+        Where TFA is the Total Floor Area.
     :type assumed_occupancy: float
     
-    :param V_dm_table_1c: see table 1c
-    :type V_dm_table_1c: list of floats
+    :param V_dm_table_1c: See Table 1c.
+    :type V_dm_table_1c: list (float)
     
-    :param days_in_month: list of the number of days in each month of the calendar year
-    :type days_in_month: list of int
+    :param days_in_month: List of the number of days in each month of the calendar year.
+    :type days_in_month: list (int)
     
-    :param T_table_1d: see table 1d
-    :type T_table_1d: list (of floats)
+    :param T_table_1d: See Table 1d.
+    :type T_table_1d: list (float)
     
-    :param storage_volume_litres: see (47)
-        value is 0 if no tank in dwelling
-    :type storage_volume_litres: int (if no tank or combi boiler enter '0'. If community heating enter '110')
+    :param storage_volume_litres: See (47).
+        Value is 0 if no tank in dwelling.
+        If no tank or combi boiler enter '0'. 
+        If community heating enter '110'.
+    :type storage_volume_litres: int 
     
-    :param water_storage_loss_manufacturer: see (48)
-        value is None if unknown or no tank in dwelling
+    :param water_storage_loss_manufacturer: See (48).
+        Value is None if unknown or no tank in dwelling.
     :type water_storage_loss_manufacturer: float or None
     
-    :param temperature_factor_table_2b: see (49/53)
-        value is 0 if no tank in dwelling
+    :param temperature_factor_table_2b: See (49/53).
+        Value is 0 if no tank in dwelling.
     :type temperature_factor_table_2b: float
     
-    :param hot_water_storage_loss_table_2: see (51)
-        value is 0 if no tank in dwelling
+    :param hot_water_storage_loss_table_2: See (51).
+        Value is 0 if no tank in dwelling.
     :type hot_water_storage_loss_table_2: float
     
-    :param volume_factor_table_2a: see (52)
-        value is 0 if no tank in dwelling
+    :param volume_factor_table_2a: See (52).
+        Value is 0 if no tank in dwelling.
     :type volume_factor_table_2a: float
     
-    :param Vs_appendix_G3: see appendix G3
-        only applies where solar storage is within dwelling
+    :param Vs_appendix_G3: See appendix G3.
+        Only applies where solar storage is within dwelling.
     :type Vs_appendix_G3: float or None
     
     :param solar_storage_WWHRS_factor:
-        Applies to dwellings with solar storage
+        Applies to dwellings with solar storage.
     :type solar_storage_WWHRS_factor: int or None
     
-    :param primary_circuit_loss_table_3: see (59)
-        values found in table 3
+    :param primary_circuit_loss_table_3: See (59).
+        Values found in Table 3.
     :type primary_circuit_loss_table_3: float
     
-    :param combi_loss_table_3: see (61)
-        values found in table 3
+    :param combi_loss_table_3: See (61).
+        Values found in Table 3.
     :type combi_loss_table_3: float
     
-    :param solar_DHW_input_appendix_G: see appendix G
+    :param solar_DHW_input_appendix_G: See Appendix G.
     :type solar_DHW_input_appendix_G: float or None
     
-    return (
+    :returns: A tuple of (
             annual_hot_water_usage_litres_per_day,
             hot_water_usage_in_litres_per_day_monthly,
             energy_content_of_water_used,
@@ -85,34 +89,23 @@ def water_heating_requirement (
             heat_gains_from_water_heating_monthly
             )
     
-    :param annual_hot_water_usage_litres_per_day: (43) in L
-    :type annual_hot_water_usage_litres_per_day: float
+    - **annual_hot_water_usage_litres_per_day** (`float`): (43) in L.
     
-    :param hot_water_usage_in_litres_per_day_monthly: (44) in L
-    :type hot_water_usage_in_litres_per_day_monthly: list of floats
+    - **hot_water_usage_in_litres_per_day_monthly** (`list` (`float`)): (44) in L.
     
-    :param energy_content_of_water_used: (45) in kWh/month
-    :type energy_content_of_water_used: list of floats
+    - **energy_content_of_water_used** (`list` (`float`)): (45) in kWh/month.
     
-    :param distribution_loss: (46) in kWh/month
-    :type distribution_loss: list of floats
+    - **distribution_loss** (`list` (`float`)): (46) in kWh/month.
     
-    :param energy_lost_from_water_storage: (50/55) in kWh/month
-    :type energy_lost_from_water_storage: list of floats
+    - **energy_lost_from_water_storage** (`list` (`float`)): (50/55) in kWh/month.
     
-    :param water_storage_loss_monthly: (56) in kWh/month
-    :type water_storage_loss_monthly: list of floats
+    - **water_storage_loss_monthly** (`list` (`float`)): (56) in kWh/month.
     
-    :param total_heat_required_for_water_heating: (62) in kWh/month
-    :type total_heat_required_for_water_heating: list of floats
+    - **total_heat_required_for_water_heating** (`list` (`float`)): (62) in kWh/month.
     
-    :param output_from_water_heater_monthly: (64) in kWh/month
-    :type output_from_water_heater_monthly: list of floats
+    - **output_from_water_heater_monthly** (`list` (`float`)): (64) in kWh/month.
     
-    :param heat_gains_from_water_heating_monthly: (65) in kWh/month
-    :type heat_gains_from_water_heating_monthly: list of floats
-    
-    
+    - **heat_gains_from_water_heating_monthly** (`list` (`float`)): (65) in kWh/month.
     
    """
     

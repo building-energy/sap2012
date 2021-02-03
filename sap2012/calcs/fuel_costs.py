@@ -28,83 +28,83 @@ def fuel_costs (
         appendix_Q_energy_saved_fuel_price
         ):
     
-    """ Calculates Fuel Costs, section 10
+    """ Calculates Fuel Costs, Section 10.
     
     Table 12 is used for fuel price factors
     
-    :param space_heating_fuel_main_system_1: see (211) in kWh/year
+    :param space_heating_fuel_main_system_1: See (211) in kWh/year
     :type space_heating_fuel_main_system_1: float
     
-    :param space_heating_fuel_main_system_2: see (212) in kWh/year
+    :param space_heating_fuel_main_system_2: See (212) in kWh/year
     :type space_heating_fuel_main_system_2: float
     
-    :param space_heating_fuel_secondary: see (213) in kWh/year
+    :param space_heating_fuel_secondary: See (213) in kWh/year
     :type space_heating_fuel_secondary: float
     
-    :param space_heating_fuel_price_main_system_1: see (240) in £/kWh
+    :param space_heating_fuel_price_main_system_1: See (240) in £/kWh
     :type space_heating_fuel_price_main_system_1: float
     
-    :param space_heating_fuel_price_main_system_2: see (241) in £/kWh
+    :param space_heating_fuel_price_main_system_2: See (241) in £/kWh
     :type space_heating_fuel_price_main_system_2: float
     
-    :param space_heating_fuel_price_secondary: see (242) in £/kWh
+    :param space_heating_fuel_price_secondary: See (242) in £/kWh
     :type space_heating_fuel_price_secondary: float
     
-    :param water_heating_high_rate_fraction_table_13: see (243) in £/kWh
+    :param water_heating_high_rate_fraction_table_13: See (243) in £/kWh
     :type water_heating_high_rate_fraction_table_13: float
     
-    :param water_heating_low_rate_fraction_table_13: see (244) in £/kWh
+    :param water_heating_low_rate_fraction_table_13: See (244) in £/kWh
     :type water_heating_low_rate_fraction_table_13: float
     
-    :param high_rate_fuel_price: see (245) in £/kWh
+    :param high_rate_fuel_price: See (245) in £/kWh
     :type high_rate_fuel_price: float
     
-    :param low_rate_fuel_price: see (246) in £/kWh
+    :param low_rate_fuel_price: See (246) in £/kWh
     :type low_rate_fuel_price: float
     
-    :param water_fuel_used: see (219) in kWh/year
+    :param water_fuel_used: See (219) in kWh/year
     :type water_fuel_used: float
     
-    :param water_heating_fuel_price_other: see (247) in £/kWh
+    :param water_heating_fuel_price_other: See (247) in £/kWh
     :type water_heating_fuel_price_other: float
     
-    :param space_cooling_fuel_used: see (248) in kWh/year
+    :param space_cooling_fuel_used: See (248) in kWh/year
     :type space_cooling_fuel_used: float
     
-    :param space_cooling_fuel_price: see (248) in £/kWh
+    :param space_cooling_fuel_price: See (248) in £/kWh
     :type space_cooling_fuel_price: float
     
-    :param electricity_for_pumps_fans_electric_keep_hot: see (249) in kWh/year
+    :param electricity_for_pumps_fans_electric_keep_hot: See (249) in kWh/year
     :type electricity_for_pumps_fans_electric_keep_hot: float
     
-    :param fuel_price_for_pumps_fans_electric_keep_hot: see (249) in £/kWh
+    :param fuel_price_for_pumps_fans_electric_keep_hot: See (249) in £/kWh
     :type fuel_price_for_pumps_fans_electric_keep_hot: float
     
-    :param energy_for_lighting: see (231) in kWh/year
+    :param energy_for_lighting: See (231) in kWh/year
     :type energy_for_lighting: float
     
-    :param fuel_price_for_lighting: see (250) in £/kWh
+    :param fuel_price_for_lighting: See (250) in £/kWh
     :type fuel_price_for_lighting: float
     
-    :param additional_standing_charges_table_12: see (251) in £/kWh
+    :param additional_standing_charges_table_12: See (251) in £/kWh
     :type additional_standing_charges_table_12: float
     
-    :param energy_saving_generation_technologies: see (252) in kWh/year
+    :param energy_saving_generation_technologies: See (252) in kWh/year
     :type energy_saving_generation_technologies: float
     
-    :param energy_saving_generation_technologies_fuel_price: see (252) in £/kWh
+    :param energy_saving_generation_technologies_fuel_price: See (252) in £/kWh
     :type energy_saving_generation_technologies_fuel_price: float
     
-    :param appendix_Q_energy_used: see (253) in kWh/year
+    :param appendix_Q_energy_used: See (253) in kWh/year
     :type appendix_Q_energy_used: float
     
-    :param appendix_Q_energy_used_fuel_price: see (253) in £/kWh
+    :param appendix_Q_energy_used_fuel_price: See (253) in £/kWh
     :type appendix_Q_energy_used_fuel_price: float
     
-    :param appendix_Q_energy_saved: see (254) in kWh/year
+    :param appendix_Q_energy_saved: See (254) in kWh/year
     :type appendix_Q_energy_saved: float
     
-    :param appendix_Q_energy_saved_fuel_price: see (254) in £/kWh
+    :param appendix_Q_energy_saved_fuel_price: See (254) in £/kWh
     :type appendix_Q_energy_saved_fuel_price: float
     
     return(space_heating_main_system_1_fuel_cost,

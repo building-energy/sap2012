@@ -9,38 +9,41 @@ def mean_internal_temperature (
         temperature_adjustment_table_4e
         ):
     
-    """Calculates Mean Internal Temperature, section 7
+    """Calculates Mean Internal Temperature, Section 7.
     
-    :param utilisation_factor_for_gains_living_room_table_9a: see (86)
-    :type utilisation_factor_for_gains_living_room_table_9a: list of floats
+    .. UNUSED??
     
-    :param mean_internal_temperature_living_room_T1_Table_9c: see (87) in oC
-    :type mean_internal_temperature_living_room_T1_Table_9c: list of floats
+       :param utilisation_factor_for_gains_living_room_table_9a: See (86).
+       :type utilisation_factor_for_gains_living_room_table_9a: list (float)
+    
+       :param utilisation_factor_for_gains_rest_of_dwelling_table_9a: See (89).
+       :type utilisation_factor_for_gains_rest_of_dwelling_table_9a: list (float)
     
     
-    :param utilisation_factor_for_gains_rest_of_dwelling_table_9a: see (89)
-    :type utilisation_factor_for_gains_rest_of_dwelling_table_9a: list of floats
+    :param mean_internal_temperature_living_room_T1_Table_9c: See (87) in degC.
+    :type mean_internal_temperature_living_room_T1_Table_9c: list (float)
     
-    :param mean_internal_temperature_rest_of_dwelling_T2_table_9c: see (90) in oC
-    :type mean_internal_temperature_rest_of_dwelling_T2_table_9c: list of floats
+    :param mean_internal_temperature_rest_of_dwelling_T2_table_9c: See (90) in degC.
+    :type mean_internal_temperature_rest_of_dwelling_T2_table_9c: list (float)
     
-     return (
+    :param living_room_area: See (91) in m.
+    :type living_room_area: float
+    
+    :param total_floor_area: in m.
+    :type total_floor_area: float
+    
+    :param temperature_adjustment_table_4e: See (93) in degC.
+        Adjustments found in table 4a.
+    :type temperature_adjustment_table_4e: float
+    
+    :returns: A tuple of (
             living_area_fraction,
             mean_internal_temp_whole_dwelling
             )
     
-    :param living_room_area: see (91) in m
-    :type living_room_area: float
-    
-    :param total_floor_area: in m
-    :type total_floor_area: float
-    
-    :param temperature_adjustment_table_4e: see (93) in oC
-        adjustments founf in table 4a
-    :type temperature_adjustment_table_4e: float
-    
-    :param mean_internal_temp_whole_dwelling: see (92) in oC
-    :type mean_internal_temp_whole_dwelling: float
+    - **living_area_fraction** (float): 
+     
+    - **mean_internal_temp_whole_dwelling** (float): See (92) in degC.
     
     """
     

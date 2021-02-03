@@ -50,155 +50,155 @@ def heat_losses_and_heat_loss_parameter(
         dwelling_volume
         ):
     
-    """Calculates the heat losses and the heat loss parameter, Section 3
+    """Calculates the heat losses and the heat loss parameter, Section 3.
     
-    :param solid_door_net_area: see (26), in m2
+    :param solid_door_net_area: See (26), in m2.
     :type solid_door_net_area: float
     
-    :param solid_door_u_value: see (26), in W/m2K
+    :param solid_door_u_value: See (26), in W/m2K.
     :type solid_door_u_value: float or None
     
-    :param semi_glazed_door_net_area: see (26a), in m2
+    :param semi_glazed_door_net_area: See (26a), in m2.
     :type semi_glazed_door_net_area: float
     
-    :param semi_glazed_door_u_value: see (26a), in W/m2K
+    :param semi_glazed_door_u_value: See (26a), in W/m2K.
     :type semi_glazed_door_u_value: float or None
     
-    :param window_net_area: see (27), in m2
+    :param window_net_area: See (27), in m2.
     :type window_net_area: float
     
-    :param window_u_value: see (27), in W/m2K
-        for windows and roof windows, use effective window U-value 
-        calculated using formula 1/[(1/U-value)+0.04] as given in paragraph 3.2
-    :type window_u_value:float or None
+    :param window_u_value: See (27), in W/m2K.
+        For windows and roof windows, use effective window U-value. 
+        Calculated using formula 1/[(1/U-value)+0.04] as given in paragraph 3.2.
+    :type window_u_value: float or None
     
-    :param roof_window_net_area: see (27a), in m2
-        for windows and roof windows, use effective window U-value 
-        calculated using formula 1/[(1/U-value)+0.04] as given in paragraph 3.2
+    :param roof_window_net_area: See (27a), in m2.
+        For windows and roof windows, use effective window U-value. 
+        Calculated using formula 1/[(1/U-value)+0.04] as given in paragraph 3.2.
     :type roof_window_net_area: float
     
-    :param roof_window_u_value: see (27a), in W/m2K
+    :param roof_window_u_value: See (27a), in W/m2K.
     :type roof_window_u_value: float or None
     
-    :param basement_floor_net_area:  see (28), in m2
+    :param basement_floor_net_area:  See (28), in m2.
     :type basement_floor_net_area: float
     
-    :param basement_floor_u_value: see (28), in W/m2K
+    :param basement_floor_u_value: See (28), in W/m2K.
     :type basement_floor_u_value: float or None
     
-    :param basement_floor_heat_capacity: see (28), in kJ/m2K
+    :param basement_floor_heat_capacity: See (28), in kJ/m2K.
     :type basement_floor_heat_capacity: float or None
     
-    :param ground_floor_net_area: see (28a), in m2
+    :param ground_floor_net_area: See (28a), in m2.
     :type ground_floor_net_area: float
     
-    :param ground_floor_u_value: see (28a), in W/m2K
+    :param ground_floor_u_value: See (28a), in W/m2K.
     :type ground_floor_u_value: float or None
     
-    :param ground_floor_heat_capacity: see (28a), in kJ/m2K
+    :param ground_floor_heat_capacity: See (28a), in kJ/m2K.
     :type ground_floor_heat_capacity: float or None
     
-    :param exposed_floor_net_area: see (28b), in m2
+    :param exposed_floor_net_area: See (28b), in m2.
     :type exposed_floor_net_area: float
     
-    :param exposed_floor_u_value: see (28b), in W/m2K
+    :param exposed_floor_u_value: See (28b), in W/m2K.
     :type exposed_floor_u_value: float or None
     
-    :param exposed_floor_heat_capacity: see (28b), in kJ/m2K
+    :param exposed_floor_heat_capacity: See (28b), in kJ/m2K.
     :type exposed_floor_heat_capacity: float or None
     
-    :param basement_wall_gross_area: see (29), in m2
+    :param basement_wall_gross_area: See (29), in m2.
     :type basement_wall_gross_area: float
     
-    :param basement_wall_opening: see (29), in m2
+    :param basement_wall_opening: See (29), in m2.
     :type basement_wall_opening: float
     
-    :param basement_wall_u_value: see (29), in W/m2K
+    :param basement_wall_u_value: See (29), in W/m2K.
     :type basement_wall_u_value: float or None
     
-    :param basement_wall_heat_capacity: see (29), in kJ/m2K
+    :param basement_wall_heat_capacity: See (29), in kJ/m2K.
     :type basement_wall_heat_capacity: float or None
     
-    :param external_wall_gross_area: see (29a), in m2
+    :param external_wall_gross_area: See (29a), in m2.
     :type external_wall_gross_area: float
     
-    :param external_wall_opening: see (29a), in m2
+    :param external_wall_opening: See (29a), in m2.
     :type external_wall_opening: float
     
-    :param external_wall_u_value: see (29a), in W/m2K
+    :param external_wall_u_value: See (29a), in W/m2K.
     :type external_wall_u_value: float or None
     
-    :param external_wall_heat_capacity: see (29a), in kJ/m2K
+    :param external_wall_heat_capacity: See (29a), in kJ/m2K.
     :type external_wall_heat_capacity: float or None
     
-    :param roof_gross_area: see (30), in m2
+    :param roof_gross_area: See (30), in m2.
     :type roof_gross_area: float
     
-    :param roof_opening: see (30), in m2
+    :param roof_opening: See (30), in m2.
     :type roof_opening: float
     
-    :param roof_u_value: see (30), in W/m2K
+    :param roof_u_value: See (30), in W/m2K.
     :type roof_u_value: float or None
     
-    :param roof_heat_capacity: see (30), in kJ/m2K
+    :param roof_heat_capacity: See (30), in kJ/m2K.
     :type roof_heat_capacity: float or None
     
-    :param party_wall_net_area: see (32), in m2
+    :param party_wall_net_area: See (32), in m2.
     :type party_wall_net_area: float
     
-    :param party_wall_u_value: see (32), in W/m2K
+    :param party_wall_u_value: See (32), in W/m2K.
     :type party_wall_u_value: float or None
     
-    :param party_wall_heat_capacity: see (32), in kJ/m2K
+    :param party_wall_heat_capacity: See (32), in kJ/m2K.
     :type party_wall_heat_capacity: float or None
     
-    :param party_floor_net_area: see (32a), in m2
+    :param party_floor_net_area: See (32a), in m2.
     :type party_floor_net_area: float
     
-    :param party_floor_heat_capacity: see (32a), in kJ/m2K
+    :param party_floor_heat_capacity: See (32a), in kJ/m2K.
     :type party_floor_heat_capacity: float or None
     
-    :param party_ceiling_net_area: see (32b), in m2
+    :param party_ceiling_net_area: See (32b), in m2.
     :type party_ceiling_net_area: float
     
-    :param party_ceiling_heat_capacity: see (32b), in kJ/m2K
+    :param party_ceiling_heat_capacity: See (32b), in kJ/m2K.
     :type party_ceiling_heat_capacity: float or None
     
-    :param internal_wall_net_area: see (32c), in m2
+    :param internal_wall_net_area: See (32c), in m2.
     :type internal_wall_net_area: float
     
-    :param internal_wall_heat_capacity: see (32c), in kJ/m2K
+    :param internal_wall_heat_capacity: See (32c), in kJ/m2K.
     :type internal_wall_heat_capacity: float or None
     
-    :param internal_floor_net_area: see (32d), in m2
+    :param internal_floor_net_area: See (32d), in m2.
     :type internal_floor_net_area: float
     
-    :param internal_floor_heat_capacity: see (32d), in kJ/m2K
+    :param internal_floor_heat_capacity: See (32d), in kJ/m2K.
     :type internal_floor_heat_capacity: float or None
     
-    :param internal_ceiling_net_area: see (32e), in m2
+    :param internal_ceiling_net_area: See (32e), in m2.
     :type internal_ceiling_net_area: float
     
-    :param internal_ceiling_heat_capacity: see (32e), in kJ/m2K
+    :param internal_ceiling_heat_capacity: See (32e), in kJ/m2K.
     :type internal_ceiling_heat_capacity: float or None
     
-    :param total_floor_area: see (4)
+    :param total_floor_area: See (4).
     :type total_floor_area: float
     
-    :param thermal_bridges_appendix_k: in W/K
-        the transmission heat loss coefficient due to non-repeating
-        thermal bridges as calculated using Appendix K
-        if None, then a simplified calculation is done in this module
+    :param thermal_bridges_appendix_k: in W/K.
+        The transmission heat loss coefficient due to non-repeating
+        thermal bridges as calculated using Appendix K.
+        If None, then a simplified calculation is done in this module.
     :type thermal_bridges_appendix_k: float or None
     
-    :param effective_air_change_rate: see (25)
+    :param effective_air_change_rate: See (25).
     :type effective_air_change_rate: list (of floats)
     
-    :param dwelling_volume: see (5), in m3
+    :param dwelling_volume: See (5), in m3.
     :type dwelling_volume: float
     
 
-    :return:(
+    :return: A tuple of (
             solid_floor_UA,
             semi_glazed_door_UA,
             window_UA,
@@ -238,43 +238,79 @@ def heat_losses_and_heat_loss_parameter(
             average_heat_loss_parameter
             )
 
-    solid_floor_UA: (float), see (26), in W/K
-    semi_glazed_door_UA: (float), see (26a), in W/K
-    window_UA: (float), see (27), in W/K
-    roof_window_UA: (float), see (27a), in W/K
-    basement_floor_UA: (float), see (28), in W/K
-    basement_floor_Ak: (float), see (28), in kJ/K
-    ground_floor_UA: (float), see (28a), in W/K
-    ground_floor_Ak: (float), see (28a), in kJ/K
-    exposed_floor_UA: (float), see (28b), in W/K
-    exposed_floor_Ak: (float), see (28b), in kJ/K
-    basement_wall_net_area: (float), see (29), in m2
-    basement_wall_UA: (float), see (29), in W/K
-    basement_wall_Ak: (float), see (29), in kJ/K
-    external_wall_net_area: (float), see (29a), in m2
-    external_wall_UA: (float), see (29a), in W/K
-    external_wall_Ak: (float), see (29a), in kJ/K
-    roof_net_area: (float), see (30), in m2
-    roof_UA: (float), see (30), in W/K
-    roof_Ak: (float), see (30), in kJ/K
-    total_area_of_external_elements: (float), see (31), in m2
-    party_wall_UA: (float), see (32), in W/K
-    party_wall_Ak: (float), see (32), in kJ/K
-    party_floor_Ak: (float), see (32a), in kJ/K
-    party_ceiling_Ak: (float), see (32b), in kJ/K
-    internal_wall_Ak: (float), see (32c), in kJ/K
-    internal_floor_Ak: (float), see (32d), in kJ/K
-    internal_ceiling_Ak: (float), see (32e), in kJ/K
-    fabric_heat_loss: (float), see (33), in W/K
-    heat_capacity: (float), see (34), in kJ/K
-    thermal_mass_parameter: (float), see (35), in kJ/m2K
-    thermal_bridges: (float), see (36), in W/K
-    total_fabric_heat_loss: (float), see (37), in W/K
-    ventilation_heat_loss_calculated_monthly:  (list of floats), see (82), in W/K
-    heat_transfer_coefficient:  (list of floats), see (39), in W/K
-    average_heat_transfer_coefficient  (float), see (39), in W/K
-    heat_loss_parameter: (list of floats), see (40), in W/m2K
-    average_heat_loss_parameter: (float), see (40), in W/m2K
+    - **solid_floor_UA** (`float`): See (26), in W/K.
+    
+    - **semi_glazed_door_UA** (`float`): See (26a), in W/K.
+    
+    - **window_UA** (`float`): See (27), in W/K.
+    
+    - **roof_window_UA** (`float`): See (27a), in W/K.
+    
+    - **basement_floor_UA** (`float`): See (28), in W/K.
+    
+    - **basement_floor_Ak** (`float`): See (28), in kJ/K.
+    
+    - **ground_floor_UA** (`float`): See (28a), in W/K.
+    
+    - **ground_floor_Ak** (`float`): See (28a), in kJ/K.
+    
+    - **exposed_floor_UA** (`float`): See (28b), in W/K.
+    
+    - **exposed_floor_Ak** (`float`): See (28b), in kJ/K.
+    
+    - **basement_wall_net_area** (`float`): See (29), in m2.
+    
+    - **basement_wall_UA** (`float`): See (29), in W/K.
+    
+    - **basement_wall_Ak** (`float`): See (29), in kJ/K.
+    
+    - **external_wall_net_area** (`float`): See (29a), in m2.
+    
+    - **external_wall_UA** (`float`): See (29a), in W/K.
+    
+    - **external_wall_Ak** (`float`): See (29a), in kJ/K.
+    
+    - **roof_net_area** (`float`): See (30), in m2.
+    
+    - **roof_UA** (`float`): See (30), in W/K.
+    
+    - **roof_Ak** (`float`): See (30), in kJ/K.
+    
+    - **total_area_of_external_elements** (`float`): See (31), in m2.
+    
+    - **party_wall_UA** (`float`): See (32), in W/K.
+    
+    - **party_wall_Ak** (`float`): See (32), in kJ/K.
+    
+    - **party_floor_Ak** (`float`): See (32a), in kJ/K.
+    
+    - **party_ceiling_Ak** (`float`): See (32b), in kJ/K.
+    
+    - **internal_wall_Ak** (`float`): See (32c), in kJ/K.
+    
+    - **internal_floor_Ak** (`float`): See (32d), in kJ/K.
+    
+    - **internal_ceiling_Ak** (`float`): See (32e), in kJ/K.
+    
+    - **fabric_heat_loss** (`float`): See (33), in W/K.
+    
+    - **heat_capacity** (`float`): See (34), in kJ/K.
+    
+    - **thermal_mass_parameter** (`float`): See (35), in kJ/m2K.
+    
+    - **thermal_bridges** (`float`): See (36), in W/K.
+    
+    - **total_fabric_heat_loss** (`float`): See (37), in W/K.
+    
+    - **ventilation_heat_loss_calculated_monthly** (`list` (`float`): See (82), in W/K.
+    
+    - **heat_transfer_coefficient** (`list` (`float`): See (39), in W/K.
+    
+    - **average_heat_transfer_coefficient**  (float`): See (39), in W/K.
+    
+    - **heat_loss_parameter** (`list` (`float`): See (40), in W/m2K.
+    
+    - **average_heat_loss_parameter** (`float`): See (40), in W/m2K.
 
 
     rtype: tuple

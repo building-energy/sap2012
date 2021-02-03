@@ -3,7 +3,7 @@
 from .overall_dwelling_dimensions import overall_dwelling_dimensions
 from .ventilation_rates import ventilation_rates
 from .heat_losses_and_heat_loss_parameter import heat_losses_and_heat_loss_parameter
-from .Water_Heating_Requirement import water_heating_requirement
+from .water_heating_requirement import water_heating_requirement
 from .internal_gains import internal_gains
 from .solar_gains import solar_gains
 from .mean_internal_temperature import mean_internal_temperature
@@ -21,11 +21,10 @@ from sap2012.tables.solar_gains_appendix_U import Solar_gains_appendix_U3
 
 
 def calcs(
-        
         # overall_dwelling_dimensions inputs
         area,
-        average_storey_height,
-        
+        average_storey_height,    
+    
         # ventilation_rates inputs
         number_of_chimneys_main_heating,
         number_of_chimneys_secondary_heating,
@@ -120,7 +119,6 @@ def calcs(
         light_transmittance_factor_table_6d,
         month_number,
         
-        
         #internal gains inputs
         pumps_and_fans_gains,
         
@@ -174,7 +172,6 @@ def calcs(
         heating_controls,
         monthly_external_temperature_table_U1,
         
-        
         #temperature reduction inputs
         hours_heating_is_off_1_weekday_living_room,
         hours_heating_is_off_2_weekday_living_room,
@@ -186,13 +183,11 @@ def calcs(
         hours_heating_is_off_2_weekend_rest_of_dwelling,
         responsiveness_of_heating_system,
         
-        
         #mean internal temperature inputs
         living_room_area,
         temperature_adjustment_table_4e,
         
         #space heating requirement inputs
-        
         
         #energy requirements inputs
         fraction_of_space_heat_secondary_system,
@@ -263,6 +258,27 @@ def calcs(
     
     In some cases, an output from one section is used as an input to a later section.
     
+    The SAP sections run are as the following functions:
+        
+    - `overall_dwelling_dimensions` (Section 1)
+    - `ventilation_rates` (Section 2)
+    - `heat_losses_and_heat_loss_parameter` (Section 3)
+    - `water_heating_requirement` (Section 4)
+    - `Internal_gains_appendix_L` 
+    - `internal_gains` (Section 5)
+    - `Solar_gains_appendix_U3`
+    - `solar_gains` (Section 6)
+    - `Utilisation_factor_for_heating`
+    - `Temperature_reduction`
+    - `Heating_requirement`
+    - `mean_internal_temperature` (Section 7)
+    - `Utilisation_factor_for_heating_whole_house`
+    - `space_heating_requirement` (Section 8)
+    - `energy_requirements` (Section 9)
+    - `fuel_costs` (Section 10)
+    - `SAP_rating` (Section 11)
+    - `CO2_emissions` (Section 12)
+    
     :returns: A tuple with the results of all the calculation sections.
     :rtype: tuple
     
@@ -271,7 +287,8 @@ def calcs(
     # overall_dwelling_dimensions calculations
     result=overall_dwelling_dimensions(
         area,
-        average_storey_height)
+        average_storey_height
+        )
     
     volume,total_floor_area,dwelling_volume=result
     
@@ -304,23 +321,23 @@ def calcs(
         )
     
     (number_of_chimneys_total,
-        number_of_chimneys_m3_per_hour,
-        number_of_open_flues_total,
-        number_of_open_flues_m3_per_hour,
-        number_of_intermittant_fans_m3_per_hour,
-        number_of_passive_vents_m3_per_hour,
-        number_of_flueless_gas_fires_m3_per_hour,
-        infiltration_due_to_chimneys_flues_fans_PSVs,
-        additional_infiltration,
-        window_infiltration,
-        infiltration_rate,
-        infiltration_rate2,
-        shelter_factor,
-        infiltration_rate_incorporating_shelter_factor,
-        wind_factor,
-        adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed,
-        exhaust_air_heat_pump_air_change_rate_through_system,
-        effective_air_change_rate) = result
+     number_of_chimneys_m3_per_hour,
+     number_of_open_flues_total,
+     number_of_open_flues_m3_per_hour,
+     number_of_intermittant_fans_m3_per_hour,
+     number_of_passive_vents_m3_per_hour,
+     number_of_flueless_gas_fires_m3_per_hour,
+     infiltration_due_to_chimneys_flues_fans_PSVs,
+     additional_infiltration,
+     window_infiltration,
+     infiltration_rate,
+     infiltration_rate2,
+     shelter_factor,
+     infiltration_rate_incorporating_shelter_factor,
+     wind_factor,
+     adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed,
+     exhaust_air_heat_pump_air_change_rate_through_system,
+     effective_air_change_rate) = result
     
      
     # heat_losses_and_heat_loss_parameter calculations
@@ -374,42 +391,42 @@ def calcs(
         )     
     
     (solid_floor_UA,
-        semi_glazed_door_UA,
-        window_UA,
-        roof_window_UA,
-        basement_floor_UA,
-        basement_floor_Ak,
-        ground_floor_UA,
-        ground_floor_Ak,
-        exposed_floor_UA,
-        exposed_floor_Ak,
-        basement_wall_net_area,
-        basement_wall_UA,
-        basement_wall_Ak,
-        external_wall_net_area,
-        external_wall_UA,
-        external_wall_Ak,
-        roof_net_area,
-        roof_UA,
-        roof_Ak,
-        total_area_of_external_elements,
-        party_wall_UA,
-        party_wall_Ak,
-        party_floor_Ak,
-        party_ceiling_Ak,
-        internal_wall_Ak,
-        internal_floor_Ak,
-        internal_ceiling_Ak,
-        fabric_heat_loss,
-        heat_capacity,
-        thermal_mass_parameter,
-        thermal_bridges,
-        total_fabric_heat_loss,
-        ventilation_heat_loss_calculated_monthly,
-        heat_transfer_coefficient,
-        average_heat_transfer_coefficient,
-        heat_loss_parameter,
-        average_heat_loss_parameter) = result
+     semi_glazed_door_UA,
+     window_UA,
+     roof_window_UA,
+     basement_floor_UA,
+     basement_floor_Ak,
+     ground_floor_UA,
+     ground_floor_Ak,
+     exposed_floor_UA,
+     exposed_floor_Ak,
+     basement_wall_net_area,
+     basement_wall_UA,
+     basement_wall_Ak,
+     external_wall_net_area,
+     external_wall_UA,
+     external_wall_Ak,
+     roof_net_area,
+     roof_UA,
+     roof_Ak,
+     total_area_of_external_elements,
+     party_wall_UA,
+     party_wall_Ak,
+     party_floor_Ak,
+     party_ceiling_Ak,
+     internal_wall_Ak,
+     internal_floor_Ak,
+     internal_ceiling_Ak,
+     fabric_heat_loss,
+     heat_capacity,
+     thermal_mass_parameter,
+     thermal_bridges,
+     total_fabric_heat_loss,
+     ventilation_heat_loss_calculated_monthly,
+     heat_transfer_coefficient,
+     average_heat_transfer_coefficient,
+     heat_loss_parameter,
+     average_heat_loss_parameter) = result
      
      
      
@@ -432,14 +449,14 @@ def calcs(
         )
     
     (annual_hot_water_usage_litres_per_day,
-         hot_water_usage_in_litres_per_day_monthly,
-         energy_content_of_water_used,
-         distribution_loss,
-         energy_lost_from_water_storage,
-         water_storage_loss_monthly,
-         total_heat_required_for_water_heating,
-         output_from_water_heater_monthly,
-         heat_gains_from_water_heating_monthly) = result
+     hot_water_usage_in_litres_per_day_monthly,
+     energy_content_of_water_used,
+     distribution_loss,
+     energy_lost_from_water_storage,
+     water_storage_loss_monthly,
+     total_heat_required_for_water_heating,
+     output_from_water_heater_monthly,
+     heat_gains_from_water_heating_monthly) = result
      
      
     #Appendix L calculations for internal gains
@@ -494,15 +511,15 @@ def calcs(
         p_tilt,
         )
     (solar_flux_north,
-            solar_flux_north_east,
-            solar_flux_east,
-            solar_flux_south_east,
-            solar_flux_south,
-            solar_flux_south_west,
-            solar_flux_west,
-            solar_flux_north_west,) = result
-    # Solar gains calculations
+     solar_flux_north_east,
+     solar_flux_east,
+     solar_flux_south_east,
+     solar_flux_south,
+     solar_flux_south_west,
+     solar_flux_west,
+     solar_flux_north_west,) = result
     
+    # Solar gains calculations
     result = solar_gains(
         access_factor_table_6d_north,
         access_factor_table_6d_north_east,
@@ -553,80 +570,75 @@ def calcs(
         )
     
     (gains_north,
-         gains_north_east,
-         gains_east,
-         gains_south_east,
-         gains_south,
-         gains_south_west,
-         gains_west,
-         gains_north_west,
-         gains_roof_windows,
-         solar_gains_watts,
-         total_internal_and_solar_gains) = result
-     
-     
-     
-     
+     gains_north_east,
+     gains_east,
+     gains_south_east,
+     gains_south,
+     gains_south_west,
+     gains_west,
+     gains_north_west,
+     gains_roof_windows,
+     solar_gains_watts,
+     total_internal_and_solar_gains) = result
      
     #Utilisation factor for heating table 9a
     result = Utilisation_factor_for_heating(
-            heat_transfer_coefficient,
-            total_internal_and_solar_gains,
-            temperature_during_heating_living_room,
-            heating_controls,
-            monthly_external_temperature_table_U1,
-            thermal_mass_parameter,
-            heat_loss_parameter)
+        heat_transfer_coefficient,
+        total_internal_and_solar_gains,
+        temperature_during_heating_living_room,
+        heating_controls,
+        monthly_external_temperature_table_U1,
+        thermal_mass_parameter,
+        heat_loss_parameter
+        )
     
-    (
-            time_constant,
-            a,
-            heat_loss_rate_living_room,
-            y_living_room,
-            utilisation_factor_for_heating_living_room,
-            temperature_during_heating_rest_of_dwelling,
-            heat_loss_rate_rest_of_dwelling,
-            y_rest_of_dwelling,
-            utilisation_factor_for_heating_rest_of_dwelling
-            )=result
-     
+    (time_constant,
+     a,
+     heat_loss_rate_living_room,
+     y_living_room,
+     utilisation_factor_for_heating_living_room,
+     temperature_during_heating_rest_of_dwelling,
+     heat_loss_rate_rest_of_dwelling,
+     y_rest_of_dwelling,
+     utilisation_factor_for_heating_rest_of_dwelling
+     )=result
      
     #Internal temperature reduction when heating is off
     result = Temperature_reduction(
-            time_constant,
-            hours_heating_is_off_1_weekday_living_room,
-            hours_heating_is_off_2_weekday_living_room,
-            hours_heating_is_off_1_weekend_living_room,
-            hours_heating_is_off_2_weekend_living_room,
-            hours_heating_is_off_1_weekday_rest_of_dwelling,
-            hours_heating_is_off_2_weekday_rest_of_dwelling,
-            hours_heating_is_off_1_weekend_rest_of_dwelling,
-            hours_heating_is_off_2_weekend_rest_of_dwelling,
-            temperature_during_heating_living_room,
-            temperature_during_heating_rest_of_dwelling,
-            responsiveness_of_heating_system,
-            monthly_external_temperature_table_U1,
-            utilisation_factor_for_heating_living_room,
-            utilisation_factor_for_heating_rest_of_dwelling,
-            heat_transfer_coefficient,
-            total_internal_and_solar_gains)
-    
+        time_constant,
+        hours_heating_is_off_1_weekday_living_room,
+        hours_heating_is_off_2_weekday_living_room,
+        hours_heating_is_off_1_weekend_living_room,
+        hours_heating_is_off_2_weekend_living_room,
+        hours_heating_is_off_1_weekday_rest_of_dwelling,
+        hours_heating_is_off_2_weekday_rest_of_dwelling,
+        hours_heating_is_off_1_weekend_rest_of_dwelling,
+        hours_heating_is_off_2_weekend_rest_of_dwelling,
+        temperature_during_heating_living_room,
+        temperature_during_heating_rest_of_dwelling,
+        responsiveness_of_heating_system,
+        monthly_external_temperature_table_U1,
+        utilisation_factor_for_heating_living_room,
+        utilisation_factor_for_heating_rest_of_dwelling,
+        heat_transfer_coefficient,
+        total_internal_and_solar_gains
+        )
+
     (t_c,
-            internal_temperature_without_heating_living_room,
-            internal_temperature_without_heating_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_1_weekday_living_room,
-            temperature_reduction_when_heating_is_off_2_weekday_living_room,
-            temperature_reduction_when_heating_is_off_1_weekend_living_room,
-            temperature_reduction_when_heating_is_off_2_weekend_living_room,
-            temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling)=result
+     internal_temperature_without_heating_living_room,
+     internal_temperature_without_heating_rest_of_dwelling,
+     temperature_reduction_when_heating_is_off_1_weekday_living_room,
+     temperature_reduction_when_heating_is_off_2_weekday_living_room,
+     temperature_reduction_when_heating_is_off_1_weekend_living_room,
+     temperature_reduction_when_heating_is_off_2_weekend_living_room,
+     temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
+     temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
+     temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
+     temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling)=result
      
-     
-     #Heating requirement table 9c
+    #Heating requirement table 9c
     result = Heating_requirement(
-             temperature_reduction_when_heating_is_off_1_weekday_living_room,
+        temperature_reduction_when_heating_is_off_1_weekday_living_room,
         temperature_reduction_when_heating_is_off_2_weekday_living_room,
         temperature_reduction_when_heating_is_off_1_weekend_living_room,
         temperature_reduction_when_heating_is_off_2_weekend_living_room,
@@ -636,17 +648,17 @@ def calcs(
         temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling,
         temperature_during_heating_living_room,
         temperature_during_heating_rest_of_dwelling,
-        temperature_adjustment_table_4e)
-    
+        temperature_adjustment_table_4e
+        )
+
     (T_weekday_living_room,
-            T_weekend_living_room,
-            mean_internal_temperature_living_room_T1_Table_9c,
-            T_weekday_rest_of_dwelling,
-            T_weekend_rest_of_dwelling,
-            mean_internal_temperature_rest_of_dwelling_T2_table_9c)=result
+     T_weekend_living_room,
+     mean_internal_temperature_living_room_T1_Table_9c,
+     T_weekday_rest_of_dwelling,
+     T_weekend_rest_of_dwelling,
+     mean_internal_temperature_rest_of_dwelling_T2_table_9c)=result
     
     # Mean internal temperature calculations
-    
     result = mean_internal_temperature(
         mean_internal_temperature_living_room_T1_Table_9c,
         mean_internal_temperature_rest_of_dwelling_T2_table_9c,
@@ -656,26 +668,26 @@ def calcs(
         )
     
     (living_area_fraction,
-         mean_internal_temp_whole_dwelling) = result
+     mean_internal_temp_whole_dwelling) = result
      
      
     # Utilisation factor for heating whole house
     result = Utilisation_factor_for_heating_whole_house(
-            heat_transfer_coefficient,
+        heat_transfer_coefficient,
         total_internal_and_solar_gains,
         mean_internal_temp_whole_dwelling,
         monthly_external_temperature_table_U1,
         thermal_mass_parameter,
-        heat_loss_parameter)
+        heat_loss_parameter
+        )
     
     (time_constant_whole_house,
-            a_whole_house,
-            heat_loss_rate_whole_house,
-            y_whole_house,
-            utilisation_factor_for_heating_whole_house)=result
+     a_whole_house,
+     heat_loss_rate_whole_house,
+     y_whole_house,
+     utilisation_factor_for_heating_whole_house)=result
      
     # Space heating requirement calculations
-    
     result = space_heating_requirement(
         utilisation_factor_for_heating_whole_house,
         total_internal_and_solar_gains,
@@ -687,14 +699,12 @@ def calcs(
         )
     
     (useful_gains,
-        heat_loss_rate_for_mean_internal_temperature,
-        space_heating_requirement_monthly,
-        space_heating_requirement_yearly,
-        space_heating_requirement_yearly_per_m2) = result
-     
+     heat_loss_rate_for_mean_internal_temperature,
+     space_heating_requirement_monthly,
+     space_heating_requirement_yearly,
+     space_heating_requirement_yearly_per_m2) = result
      
     # Energy requirements calculations 
-    
     result = energy_requirements(
         fraction_of_space_heat_secondary_system,
         fraction_of_space_heat_from_main_system_2,
@@ -726,28 +736,26 @@ def calcs(
         )
     
     (fraction_of_space_heat_from_main_systems,
-           fraction_of_total_space_heat_from_main_system_1,
-           fraction_of_total_space_heat_from_main_system_2,
-           space_heating_fuel_main_system_1,
-           space_heating_fuel_main_system_2,
-           space_heating_fuel_secondary_system,
-           efficiency_of_water_heater_table_4a,
-           fuel_for_water_heating_monthly,
-           space_cooling_fuel_monthly,
-           space_heating_fuel_used_main_system_1,
-           space_heating_fuel_used_main_system_2,
-           space_heating_fuel_used_secondary,
-           water_fuel_used,
-           space_cooling_fuel_used,
-           electricity_for_pumps_fans_electric_keep_hot,
-           energy_saving_generation_technologies_total,
-           appendix_Q_energy_total,
-           energy_for_lighting,
-           total_energy_used) = result
-     
+     fraction_of_total_space_heat_from_main_system_1,
+     fraction_of_total_space_heat_from_main_system_2,
+     space_heating_fuel_main_system_1,
+     space_heating_fuel_main_system_2,
+     space_heating_fuel_secondary_system,
+     efficiency_of_water_heater_table_4a,
+     fuel_for_water_heating_monthly,
+     space_cooling_fuel_monthly,
+     space_heating_fuel_used_main_system_1,
+     space_heating_fuel_used_main_system_2,
+     space_heating_fuel_used_secondary,
+     water_fuel_used,
+     space_cooling_fuel_used,
+     electricity_for_pumps_fans_electric_keep_hot,
+     energy_saving_generation_technologies_total,
+     appendix_Q_energy_total,
+     energy_for_lighting,
+     total_energy_used) = result
      
      # Fuel cost calculations
-     
     result = fuel_costs(
         space_heating_fuel_used_main_system_1,
         space_heating_fuel_used_main_system_2,
@@ -777,21 +785,20 @@ def calcs(
         )
     
     (space_heating_main_system_1_fuel_cost,
-        space_heating_main_system_2_fuel_cost,
-        space_heating_secondary_fuel_cost,
-        water_heating_high_rate_fuel_cost,
-        water_heating_low_rate_fuel_cost,
-        water_heating_cost_other,
-        space_cooling_cost,
-        pumps_fan_keep_hot_cost,
-        lighting_cost,
-        appendix_Q_fuel_cost,
-        energy_saving_total_fuel_cost,
-        additional_standing_charges_table_12,
-        total_fuel_cost) = result
+     space_heating_main_system_2_fuel_cost,
+     space_heating_secondary_fuel_cost,
+     water_heating_high_rate_fuel_cost,
+     water_heating_low_rate_fuel_cost,
+     water_heating_cost_other,
+     space_cooling_cost,
+     pumps_fan_keep_hot_cost,
+     lighting_cost,
+     appendix_Q_fuel_cost,
+     energy_saving_total_fuel_cost,
+     additional_standing_charges_table_12,
+     total_fuel_cost) = result
      
-     # SAP rating calculations
-     
+    # SAP rating calculations
     result = SAP_rating(
         energy_cost_deflator,
         total_fuel_cost,
@@ -801,7 +808,6 @@ def calcs(
     (SAP_rating_value) = result
     
     # CO2 emissions calculations
-    
     result = CO2_emissions(
         space_heating_fuel_used_main_system_1,
         space_heating_fuel_used_main_system_2,
@@ -825,39 +831,27 @@ def calcs(
         appendix_Q_energy_saved_fuel_emission_factor,
         total_floor_area
         )
+    
     (space_heating_main_system_1_emissions,
-        space_heating_main_system_2_emissions,
-        space_heating_secondary_emissions,
-        water_used_emissions,
-        space_cooling_used_emissions,
-        pumps_fans_electric_keep_hot_emissions,
-        lighting_emissions,
-        appendix_Q_used_emissions,
-        appendix_Q_saved_emissions,
-        energy_saving_generation_technologies_emissions,
-        space_and_water_heating_emissions,
-        appendix_Q_total_used_emissions,
-        appendix_Q_total_saved_emissions,
-        energy_saving_generation_technologies_total_emissions,
-        total_CO2_emissions_yearly,
-        dwelling_CO2_emission_rate,
-        CF,
-        EI_rating) = result
+     space_heating_main_system_2_emissions,
+     space_heating_secondary_emissions,
+     water_used_emissions,
+     space_cooling_used_emissions,
+     pumps_fans_electric_keep_hot_emissions,
+     lighting_emissions,
+     appendix_Q_used_emissions,
+     appendix_Q_saved_emissions,
+     energy_saving_generation_technologies_emissions,
+     space_and_water_heating_emissions,
+     appendix_Q_total_used_emissions,
+     appendix_Q_total_saved_emissions,
+     energy_saving_generation_technologies_total_emissions,
+     total_CO2_emissions_yearly,
+     dwelling_CO2_emission_rate,
+     CF,
+     EI_rating) = result
     
-    
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
     return (
-            
         # overall_dwelling_dimensions results
         volume,
         total_floor_area,
@@ -933,7 +927,6 @@ def calcs(
         output_from_water_heater_monthly,
         heat_gains_from_water_heating_monthly,
         
-        
         #internal gains results
         G_L,
         C_1,
@@ -987,7 +980,6 @@ def calcs(
             y_rest_of_dwelling,
             utilisation_factor_for_heating_rest_of_dwelling,
         
-        
         #temperature reduction outputs
         t_c,
         internal_temperature_without_heating_living_room,
@@ -1008,7 +1000,6 @@ def calcs(
         T_weekday_rest_of_dwelling,
         T_weekend_rest_of_dwelling,
         mean_internal_temperature_rest_of_dwelling_T2_table_9c,
-        
         
         #mean internal temperature results
         living_area_fraction,
@@ -1087,15 +1078,5 @@ def calcs(
         CF,
         EI_rating
         )
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     

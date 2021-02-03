@@ -104,7 +104,7 @@ def ventilation_rates(
     :type efficiency_allowing_for_in_use_factor: float
     
     
-    :return: A tuple of (
+    :returns: A tuple of (
             number_of_chimneys_total,
             number_of_chimneys_m3_per_hour,
             number_of_open_flues_total,

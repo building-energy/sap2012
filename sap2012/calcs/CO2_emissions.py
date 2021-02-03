@@ -25,51 +25,51 @@ def CO2_emissions(
         total_floor_area
         ):
     
-    """ Calculates CO2 emissions, section 12
+    """ Calculates CO2 emissions, Section 12.
     
     Table 12 is used for fuel emission factors
     
-    :param space_heating_fuel_main_system_1: see (211) in kWh/year
+    :param space_heating_fuel_main_system_1: See (211) in kWh/year
     :type space_heating_fuel_main_system_1: float
     
-    :param space_heating_fuel_main_system_2: see (212) in kWh/year
+    :param space_heating_fuel_main_system_2: See (212) in kWh/year
     :type space_heating_fuel_main_system_2: float
     
-    :param space_heating_fuel_secondary: see (213) in kWh/year
+    :param space_heating_fuel_secondary: See (213) in kWh/year
     :type space_heating_fuel_secondary: float
     
     
-    :param space_heating_fuel_emission_factor_main_system_1: see (261) in kg CO2/kWh
+    :param space_heating_fuel_emission_factor_main_system_1: See (261) in kg CO2/kWh
     :type space_heating_fuel_emission_factor_main_system_1: float
     
-    :param space_heating_fuel_emission_factor_main_system_2: see (262) in kg CO2/kWh
+    :param space_heating_fuel_emission_factor_main_system_2: See (262) in kg CO2/kWh
     :type space_heating_fuel_emission_factor_main_system_2: float
     
-    :param space_heating_fuel_emission_factor_secondary: see (263) in kg CO2/kWh
+    :param space_heating_fuel_emission_factor_secondary: See (263) in kg CO2/kWh
     :type space_heating_fuel_emission_factor_secondary: float
     
     :param water_fuel_used: in kWh/year
     :type water_fuel_used: float
     
-    :param water_heating_fuel_emission_factor: see (264) in kg CO2/kWh
+    :param water_heating_fuel_emission_factor: See (264) in kg CO2/kWh
     :type water_heating_fuel_emission_factor: float
     
     :param space_cooling_fuel_used: in kWh/year
     :type space_cooling_fuel_used: float
     
-    :param space_cooling_fuel_emission_factor: see (266) in kg CO2/kWh
+    :param space_cooling_fuel_emission_factor: See (266) in kg CO2/kWh
     :type space_cooling_fuel_emission_factor: float
     
     :param electricity_for_pumps_fans_electric_keep_hot:  in kWh/year   
     :type electricity_for_pumps_fans_electric_keep_hot: float
     
-    :param fuel_emission_factor_for_pumps_fans_electric_keep_hot: see (267) in kg CO2/kWh
+    :param fuel_emission_factor_for_pumps_fans_electric_keep_hot: See (267) in kg CO2/kWh
     :type fuel_emission_factor_for_pumps_fans_electric_keep_hot: float
     
     :param energy_for_lighting: in kWh/year
     :type energy_for_lighting: float
     
-    :param fuel_emission_factor_for_lighting: see (268) in kg CO2/kWh
+    :param fuel_emission_factor_for_lighting: See (268) in kg CO2/kWh
     :type fuel_emission_factor_for_lighting: float
     
     :param space_cooling_fuel_used: in kWh/year
@@ -78,19 +78,19 @@ def CO2_emissions(
     :param energy_saving_generation_technologies: in kWh/year
     :type energy_saving_generation_technologies: float
     
-    :param energy_saving_generation_technologies_fuel_emission_factor: see (269) in kg CO2/kWh
+    :param energy_saving_generation_technologies_fuel_emission_factor: See (269) in kg CO2/kWh
     :type energy_saving_generation_technologies_fuel_emission_factor: float
  
     :param appendix_Q_energy_used:  in kWh/year   
     :type appendix_Q_energy_used: float
     
-    :param appendix_Q_energy_used_fuel_emission_factor: see (270) in kg CO2/kWh
+    :param appendix_Q_energy_used_fuel_emission_factor: See (270) in kg CO2/kWh
     :type appendix_Q_energy_used_fuel_emission_factor: float
     
     :param appendix_Q_energy_saved:  in kWh/year   
     :type appendix_Q_energy_saved: float
     
-    :param appendix_Q_energy_saved_fuel_emission_factor: see (271) in kg CO2/kWh
+    :param appendix_Q_energy_saved_fuel_emission_factor: See (271) in kg CO2/kWh
     :type appendix_Q_energy_saved_fuel_emission_factor: float
     
     :param total_floor_area: in m2
