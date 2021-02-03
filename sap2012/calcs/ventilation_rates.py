@@ -26,7 +26,7 @@ def ventilation_rates(
         efficiency_allowing_for_in_use_factor,
         ):
     
-    """Calculates the ventilation rates, Section 2
+    """Calculates the ventilation rates, Section 2.
     
     :param number_of_chimneys_main_heating:
     :type number_of_chimneys_main_heating: int
@@ -55,56 +55,56 @@ def ventilation_rates(
     :param number_of_flueless_gas_fires_total:
     :type number_of_flueless_gas_fires_total: int
     
-    :param dwelling_volume: see (5)
+    :param dwelling_volume: See (5).
     :type dwelling_volume: float
     
-    :param air_permeability_value_q50: see (17). Use None if not carried out.
+    :param air_permeability_value_q50: See (17). Use None if not carried out.
     :type air_permeability_value_q50: float or None
     
-    :param number_of_storeys_in_the_dwelling: see (9)
+    :param number_of_storeys_in_the_dwelling: See (9).
     :type number_of_storeys_in_the_dwelling: int
     
-    :param structural_infiltration: see (11)
+    :param structural_infiltration: See (11).
     :type structural_infiltration: float
     
-    :param suspended_wooden_ground_floor_infiltration: see (12)
+    :param suspended_wooden_ground_floor_infiltration: See (12).
     :type suspended_wooden_ground_floor_infiltration: float
     
-    :param no_draft_lobby_infiltration: see (13)
+    :param no_draft_lobby_infiltration: See (13).
     :type no_draft_lobby_infiltration: float
     
-    :param percentage_of_windows_and_doors_draught_proofed: see (14)
+    :param percentage_of_windows_and_doors_draught_proofed: See (14).
     :type percentage_of_windows_and_doors_draught_proofed: float
     
-    :param number_of_sides_on_which_dwelling_is_sheltered: see (19)
+    :param number_of_sides_on_which_dwelling_is_sheltered: See (19).
     :type number_of_sides_on_which_dwelling_is_sheltered: int
     
-    :param monthly_average_wind_speed: a list of the monthly wind speeds.
-        12 items, from Jan to Dec, see (22)
-    :type monthly_average_wind_speed: list (of floats)
+    :param monthly_average_wind_speed: A list of the monthly wind speeds.
+        12 items, from Jan to Dec, see (22).
+    :type monthly_average_wind_speed: list (float)
     
-    :param applicable_case: one of the following options:
-        'balanced mechanical ventilation with heat recovery'
-        'balanced mechanical ventilation without heat recovery'
-        'whole house extract ventilation or positive input ventilation from outside'
-        'natural ventilation or whole house positive input ventilation from loft'
+    :param applicable_case: One of the following options:  
+        'balanced mechanical ventilation with heat recovery';
+        'balanced mechanical ventilation without heat recovery';
+        'whole house extract ventilation or positive input ventilation from outside';
+        or 'natural ventilation or whole house positive input ventilation from loft'.
     :type applicable_case: str
     
-    :param mechanical_ventilation_air_change_rate_through_system: see (23a)
+    :param mechanical_ventilation_air_change_rate_through_system: See (23a).
     :type mechanical_ventilation_air_change_rate_through_system: float
     
     :param exhaust_air_heat_pump_using_Appendix_N: 
-        True if exhaust air heat pump using Appendix N, otherwise False
+        True if exhaust air heat pump using Appendix N, otherwise False.
     :type exhaust_air_heat_pump_using_Appendix_N: bool
     
-    :param mechanical ventilation throughput factor: F_mv, see Equation N4
-    :type mechanical ventilation throughput factor: float
+    :param mechanical_ventilation_throughput_factor: F_mv, see Equation N4.
+    :type mechanical_ventilation_throughput_factor: float
     
-    :param efficiency_allowing_for_in_use_factor: in %, see (23c)
+    :param efficiency_allowing_for_in_use_factor: In %, see (23c).
     :type efficiency_allowing_for_in_use_factor: float
     
     
-    :return:(
+    :return: A tuple of (
             number_of_chimneys_total,
             number_of_chimneys_m3_per_hour,
             number_of_open_flues_total,
@@ -125,21 +125,35 @@ def ventilation_rates(
             effective_air_change_rate
             )
     
-        number_of_chimneys_total: (int)
-        number_of_chimneys_m3_per_hour: (float), see (6a)
-        number_of_open_flues_total: (int)
-        number_of_open_flues_m3_per_hour: (float), see (6b)
-        infiltration_due_to_chimenys_flues_fans_PSVs: (float), see (8)
-        additional_infiltration: (float), see (10)
-        window_infiltration: (float), see (15)
-        infiltration_rate: (float), see (16)
-        infiltration_rate2: (float), see (18)
-        shelter_factor: (float), see (20)
-        infiltration_rate_incorporating_shelter_factor: (float), see (21)
-        wind_factor: list (of floats), see (22a)
-        adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed: list (of floats), see (22b)
-        exhaust_air_heat_pump_air_change_rate_through_system, see (23b)
-        effective_air_change_rate: list (of floats), see (25)
+    - **number_of_chimneys_total** (`int`) -
+    
+    - **number_of_chimneys_m3_per_hour** (`float`) - See (6a).
+    
+    - **number_of_open_flues_total** (`int`) -
+    
+    - **number_of_open_flues_m3_per_hour** (`float`) - See (6b).
+    
+    - **infiltration_due_to_chimenys_flues_fans_PSVs** (`float`) - See (8).
+    
+    - **additional_infiltration** (`float`) - See (10).
+    
+    - **window_infiltration** (`float`) - See (15).
+    
+    - **infiltration_rate** (`float`) - See (16).
+    
+    - **infiltration_rate2** (`float`) - See (18).
+    
+    - **shelter_factor** (`float`) - See (20).
+    
+    - **infiltration_rate_incorporating_shelter_factor** (`float`) - See (21).
+    
+    - **wind_factor** list (`float`) - See (22a).
+    
+    - **adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed**: list (`float`) - See (22b).
+    
+    - **exhaust_air_heat_pump_air_change_rate_through_system** (`float`) - See (23b).
+    
+    - **effective_air_change_rate** list (`float`) - See (25).
 
     :rtype: tuple
 

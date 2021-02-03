@@ -5,27 +5,27 @@ def overall_dwelling_dimensions(
         average_storey_height
         ):
     
-    """Calculates the overall dwelling dimensions, Section 1
+    """Calculates the overall dwelling dimensions, Section 1.
     
-    :param area: a list of the areas of each floor. 
+    :param area: A list of the areas of each floor. 
         The first item is the basement, the second the ground floor etc. 
-        See (1a) to (1n)
-    :type area: list of floats
+        See (1a) to (1n).
+    :type area: list (float)
     
-    :param average_storey_height: a list of the average storey height of each floor. 
+    :param average_storey_height: A list of the average storey height of each floor. 
         The first item is the basement, the second the ground floor etc. 
-        See (2a) to (2n)
-    :type average_storey_height: list of floats
+        See (2a) to (2n).
+    :type average_storey_height: list (float)
     
-    :return: (volume,total_floor_area,dwelling_volume).
+    :return: A tuple of (volume,total_floor_area,dwelling_volume).
     
-        volume: a list of the volumes of each floor (list of floats). 
-            The first item is the basement, the second the ground floor etc. 
-            See (3a) to (3n)
-            
-        total_floor_area: (float), see (4) 
+    - **volume** (`list` (`float`)) - A list of the volumes of each floor. 
+      The first item is the basement, the second the ground floor etc. 
+      See (3a) to (3n).
         
-        dwelling_floor_area: (float), see (5) 
+    - **total_floor_area** (`float`) - See (4).
+    
+    - **dwelling_volume** (`float`) - See (5). 
         
     :rtype: tuple
     

@@ -256,7 +256,15 @@ def calcs(
         appendix_Q_energy_saved_fuel_emission_factor
         ):
     
-    """This method runs the complete set of calculations for SAP2012
+    """This method runs the complete set of calculations for SAP2012.
+    
+    Using the supplied parameters, each of the individual SAP calculation
+    sections are run in turn. 
+    
+    In some cases, an output from one section is used as an input to a later section.
+    
+    :returns: A tuple with the results of all the calculation sections.
+    :rtype: tuple
     
     """
     
