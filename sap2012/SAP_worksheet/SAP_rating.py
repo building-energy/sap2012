@@ -7,27 +7,23 @@ def SAP_rating (
         total_floor_area
         ):
     
-    """ Calculates SAP rating, Section 11.
+    """Calculates SAP rating, Section 11.
     
-    :param energy_cost_deflator: See (256)
-        Found in Table 12
+    :param energy_cost_deflator: See (256).
+        Found in Table 12.
     :type energy_cost_deflator: float
     
-    :param total_energy_cost: See (255) in £
+    :param total_energy_cost: See (255) in £.
     :type total_energy_cost: float
     
-    :param total_floor_area: in m2
+    :param total_floor_area: in m2.
     :type total_floor_area: float
     
-    return(
-            SAP_rating_value
-            )    
+    :returns: A tuple of ( SAP_rating_value )    
     
-    :param energy_cost_factor: see (257)
-    :type energy_cost_factor: float
+    - **energy_cost_factor** (`float`): See (257)
     
-    :param SAP_rating_value: see (258)
-    :type SAP_rating_value: float
+    - **SAP_rating_value** (`float`): See (258)
     
     """
     

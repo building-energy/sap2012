@@ -1,6 +1,6 @@
-mean_internal_temperature function
-==================================
+7. Mean internal temperature
+============================
 
-.. autofunction:: sap2012.calcs.mean_internal_temperature.mean_internal_temperature
+.. autofunction:: sap2012.SAP_worksheet.mean_internal_temperature.mean_internal_temperature
  
 

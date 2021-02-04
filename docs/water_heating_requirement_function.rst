@@ -1,6 +1,6 @@
-water_heating_requirement function
-==================================
+4. Water heating requirement
+============================
 
-.. autofunction:: sap2012.calcs.water_heating_requirement.water_heating_requirement
+.. autofunction:: sap2012.SAP_worksheet.water_heating_requirement.water_heating_requirement
  
 

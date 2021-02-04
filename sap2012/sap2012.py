@@ -3,7 +3,7 @@
 import csv
 import ast
 import json
-from .calcs.calcs import calcs
+from .SAP_worksheet.calculate_worksheet import calculate_worksheet
 
 
 class Sap2012():
@@ -130,6 +130,7 @@ class Sap2012():
             'solar_declination_monthly_table_U3':None,
             'location_latitude_table_U4':None,
             'p_tilt':None,
+            
             #solar gains inputs
             'access_factor_table_6d_north':None,
             'access_factor_table_6d_north_east':None,
@@ -149,7 +150,6 @@ class Sap2012():
             'area_west':None,
             'area_north_west':None,
             'area_roof_windows':None,
-            
             'solar_flux_roof_windows':None,
             'g_table_6b_north':None,
             'g_table_6b_north_east':None,
@@ -170,7 +170,6 @@ class Sap2012():
             'FF_table_6b_north_west':None,
             'FF_table_6b_roof_windows':None,
             
-            
             #utilisation factor for heating inputs
             'temperature_during_heating_living_room':None,
             'heating_controls':None,
@@ -186,7 +185,6 @@ class Sap2012():
             'hours_heating_is_off_1_weekend_rest_of_dwelling':None,
             'hours_heating_is_off_2_weekend_rest_of_dwelling':None,
             'responsiveness_of_heating_system':None,
-            
             
             #mean internal temperature inputs
             'living_room_area':None,
@@ -577,7 +575,7 @@ class Sap2012():
         The function runs each of the individual SAP calculation sections in turn.
         
         """
-        output_values=calcs(**self.inputs)
+        output_values=calculate_worksheet(**self.inputs)
         output_keys=self.outputs.keys()
         l=zip(output_keys,output_values)
         for k,v in l:

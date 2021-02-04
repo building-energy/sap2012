@@ -1,6 +1,6 @@
-overall_dwelling_dimensions function
-====================================
+1. Overall dwelling dimensions
+==============================
 
-.. autofunction:: sap2012.calcs.overall_dwelling_dimensions.overall_dwelling_dimensions
+.. autofunction:: sap2012.SAP_worksheet.overall_dwelling_dimensions.overall_dwelling_dimensions
  
 

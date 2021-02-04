@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from pprint import pprint
 
-from sap2012.calcs.overall_dwelling_dimensions import overall_dwelling_dimensions
+from sap2012.SAP_worksheet.overall_dwelling_dimensions import overall_dwelling_dimensions
 
 class TestOverallDwellingDimensions(unittest.TestCase):
     

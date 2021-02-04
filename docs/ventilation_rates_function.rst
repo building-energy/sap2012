@@ -1,6 +1,6 @@
-ventilation_rates function
-==========================
+2. Ventilation rates
+====================
 
-.. autofunction:: sap2012.calcs.ventilation_rates.ventilation_rates
+.. autofunction:: sap2012.SAP_worksheet.ventilation_rates.ventilation_rates
  
 

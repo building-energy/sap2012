@@ -20,7 +20,7 @@ from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisatio
 from sap2012.tables.solar_gains_appendix_U import Solar_gains_appendix_U3
 
 
-def calcs(
+def calculate_worksheet(
         # overall_dwelling_dimensions inputs
         area,
         average_storey_height,    
@@ -251,7 +251,7 @@ def calcs(
         appendix_Q_energy_saved_fuel_emission_factor
         ):
     
-    """This method runs the complete set of calculations for SAP2012.
+    """This method runs the complete set of calculations for the SAP2012 worksheet.
     
     Using the supplied parameters, each of the individual SAP calculation
     sections are run in turn. 

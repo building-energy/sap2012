@@ -1,6 +1,6 @@
-internal_gains function
-=======================
+5. Internal gains
+=================
 
-.. autofunction:: sap2012.calcs.internal_gains.internal_gains
+.. autofunction:: sap2012.SAP_worksheet.internal_gains.internal_gains
  
 
