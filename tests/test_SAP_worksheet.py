@@ -2,7 +2,7 @@
 
 import unittest
 
-from sap2012 import SAP_worksheet
+from sap2012 import SAP_worksheet, SAP_appendices
 import sap2012
 
 class Test_SAP_worksheet(unittest.TestCase):
@@ -196,8 +196,44 @@ class Test_SAP_worksheet(unittest.TestCase):
                          )
     
     
+    def test_internal_gains_appendix_L(self):
+        ""
+        result=SAP_appendices.internal_gains_appendix_L(total_floor_area=100, 
+                                                        assumed_occupancy=3, 
+                                                        number_of_low_energy_light_bulbs=5, 
+                                                        total_number_of_light_bulbs=5, 
+                                                        frame_factor=0.8, 
+                                                        window_area=20, 
+                                                        light_access_factor_table_6d=0.5, 
+                                                        light_transmittance_factor_table_6d=0.5, 
+                                                        month_number=[1,2,3,4,5,6,7,8,9,10,11,12], 
+                                                        days_in_month=[31,28,31,30,31,30,31,31,30,31,30,31], 
+                                                        heat_gains_from_water_heating_monthly=[58.61952161129167, 51.02133142003335, 54.356283675925, 50.53999810475, 50.09304574055834, 46.414283973749995, 47.961426772875, 50.09304574055834, 50.53999810475, 54.356283675925, 54.66571223575001, 58.61952161129167]
+                                                        )
+        self.assertEqual(result,
+                         {'G_L': 0.036000000000000004, 
+                          'C_1': 0.5, 
+                          'C_2': 1.1428112000000001, 
+                          'E_B': 878.8352623699882, 
+                          'initial_annual_lighting_demand': 502.1713903956806, 
+                          'monthly_lighting_demand': [62.131608735352785, 49.84428508122761, 44.87925139769654, 32.880463364922534, 25.397815545264574, 20.750233060903884, 23.16873703048885, 30.11560156876821, 39.11718809820493, 51.32386695542169, 57.97019053604232, 63.85843826957429], 
+                          'annual_lighting_demand': 501.43767964386825, 
+                          'lighting_gains': [70.98369277560465, 63.04708678429088, 51.273338290379115, 38.817213694700214, 29.01632152348775, 24.496802919122636, 26.46965924182194, 34.40626523313572, 46.18001372704748, 58.636138322726396, 68.43703049393885, 72.95654909830395], 
+                          'initial_annual_electrical_appliance_demand': 3057.4580197636624, 
+                          'monthly_electrical_appliance_demand': [297.0903625069975, 271.12420848763344, 292.4045014123461, 266.9669022965315, 254.98865565239944, 227.77459834955408, 222.25867098710407, 219.17580266850737, 219.6237407242794, 243.48323445435238, 255.83262371777624, 283.9819485328957], 
+                          'annual_electrical_appliance_demand': 3054.7052497903774, 
+                          'appliances_gains': [399.3150033696203, 403.4586435827879, 393.01680297358354, 370.78736430073815, 342.72668770483796, 316.35360881882514, 298.7347728321291, 294.5911326189615, 305.0329732281658, 327.26241190101126, 355.32308849691145, 381.6961673829243], 
+                          'cooking_gains': [56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56], 
+                          'losses': [-120, -120, -120, -120, -120, -120, -120, -120, -120, -120, -120, -120], 
+                          'water_heating_gains': [78.78967958506945, 75.92460032743058, 73.05952106979167, 70.19444181215277, 67.32936255451389, 64.464283296875, 64.464283296875, 67.32936255451389, 70.19444181215277, 73.05952106979167, 75.92460032743057, 78.78967958506945], 
+                          'metabolic_gains': [180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180]
+                          }
+                         )
+        
+    
+    
     def test_internal_gains(self):
-                
+        ""        
         result=SAP_worksheet.internal_gains(
                 metabolic_gains=[173,173,173,173,173,173,173,173,173,173,173,173],
                 lighting_gains=[195,195,195,195,195,195,195,195,195,195,195,195],
@@ -281,6 +317,129 @@ class Test_SAP_worksheet(unittest.TestCase):
                           }
                          )
     
+    def _test_mean_internal_temperature(self):
+                
+        result=SAP_worksheet.mean_internal_temperature(
+            temperature_during_heating_periods_living_room =21,
+            utilisation_factor_for_gains_living_room_table_9a=[0.99,0.98,0.97,0.92,0.77,0.11,-1.45,-0.9,0.64,0.93,0.98,0.99],
+            mean_internal_temperature_living_room_T1_Table_9c=[17.8,18,18.5,19.2,19.7,19.8,18.6,19.2,20,19.4,18.50,17.8],
+            temperature_during_heating_periods_rest_of_dwelling=21,
+            utilisation_factor_for_gains_rest_of_dwelling_table_9a=[0.99,0.98,0.97,0.92,0.77,0.11,-1.45,-0.9,0.64,0.93,0.98,0.99],
+            mean_internal_temperature_rest_of_dwelling_T2_table_9c=[17.7,17.9,18.5,19.2,19.7,19.7,18.5,19.1,20,19.3,18.5,17.7],
+            living_room_area=30,
+            total_floor_area=126,
+            temperature_adjustment_table_4e=0
+            )
+        
+        print(result)
+        
+        
+    def test_calculate_worksheet(self):
+        ""
+        inputs={
+            'overall_dwelling_dimensions':{'area':[0,63,63],
+                                           "average_storey_height": [0,2.3,2.3]
+                                           },
+            'ventilation_rates':dict(number_of_chimneys_main_heating=0,
+                                     number_of_chimneys_secondary_heating=0,
+                                     number_of_chimneys_other=0,
+                                     number_of_open_flues_main_heating=0,
+                                     number_of_open_flues_secondary_heating=0,
+                                     number_of_open_flues_other=0,
+                                     number_of_intermittant_fans_total=0,
+                                     number_of_passive_vents_total=0,
+                                     number_of_flueless_gas_fires_total=0,
+                                     air_permeability_value_q50=11.87,
+                                     number_of_storeys_in_the_dwelling=2,
+                                     structural_infiltration=0,
+                                     suspended_wooden_ground_floor_infiltration=0,
+                                     no_draft_lobby_infiltration=0,
+                                     percentage_of_windows_and_doors_draught_proofed=0,
+                                     number_of_sides_on_which_dwelling_is_sheltered=2,
+                                     monthly_average_wind_speed=[4.5,4.5,4.4,3.9,3.8,3.4,3.3,3.3,3.5,3.8,3.9,4.1],
+                                     applicable_case='natural ventilation or whole house positive input ventilation from loft',
+                                     mechanical_ventilation_air_change_rate_through_system=0.5,
+                                     exhaust_air_heat_pump_using_Appendix_N=0,
+                                     mechanical_ventilation_throughput_factor=0,
+                                     efficiency_allowing_for_in_use_factor=0
+                                     ),
+            'heat_losses_and_heat_loss_parameter':dict(solid_door_net_area=1.5,
+                                                       solid_door_u_value=3,
+                                                       semi_glazed_door_net_area=10.6,
+                                                       semi_glazed_door_u_value=1.4,
+                                                       window_net_area=23,
+                                                       window_u_value=2,
+                                                       roof_window_net_area=0,
+                                                       roof_window_u_value=0,
+                                                       basement_floor_net_area=0,
+                                                       basement_floor_u_value=0,
+                                                       basement_floor_heat_capacity=0,
+                                                       ground_floor_net_area=63,
+                                                       ground_floor_u_value=0.63,
+                                                       ground_floor_heat_capacity=20,
+                                                       exposed_floor_net_area=0,
+                                                       exposed_floor_u_value=0,
+                                                       exposed_floor_heat_capacity=0,
+                                                       basement_wall_gross_area=0,
+                                                       basement_wall_opening=0,
+                                                       basement_wall_u_value=0,
+                                                       basement_wall_heat_capacity=0,
+                                                       external_wall_gross_area=120,
+                                                       external_wall_opening=35.1,
+                                                       external_wall_u_value=1.5,
+                                                       external_wall_heat_capacity=190,
+                                                       roof_gross_area=63,
+                                                       roof_opening=0,
+                                                       roof_u_value=0.14,
+                                                       roof_heat_capacity=9,
+                                                       party_wall_net_area=47,
+                                                       party_wall_u_value=0.5,
+                                                       party_wall_heat_capacity=180,
+                                                       party_floor_net_area=0,
+                                                       party_floor_heat_capacity=0,
+                                                       party_ceiling_net_area=39,
+                                                       party_ceiling_heat_capacity=100,
+                                                       internal_wall_net_area=131,
+                                                       internal_wall_heat_capacity=9,
+                                                       internal_floor_net_area=63,
+                                                       internal_floor_heat_capacity=18,
+                                                       internal_ceiling_net_area=63,
+                                                       internal_ceiling_heat_capacity=9,
+                                                       thermal_bridges_appendix_k=36.9
+                                                       ),
+            'water_heating_requirements':dict(assumed_occupancy=2.883,
+                                              V_dm_table_1c=[1.1,1.06,1.02,0.98,0.94,0.9,0.9,0.94,0.98,1.02,1.06,1.1],
+                                              days_in_month=[31,28,31,30,31,30,31,31,30,31,30,31],
+                                              T_table_1d=[41.2,41.2,41.2,41.2,41.2,41.2,41.2,41.2,41.2,41.2,41.2,41.2],
+                                              water_storage_loss_manufacturer=0,
+                                              temperature_factor_table_2b=0,
+                                              storage_volume_litres=0,
+                                              hot_water_storage_loss_table_2=0,
+                                              volume_factor_table_2a=0,
+                                              Vs_appendix_G3=0,
+                                              solar_storage_WWHRS_factor=0,
+                                              primary_circuit_loss_table_3=[0,0,0,0,0,0,0,0,0,0,0,0],
+                                              combi_loss_table_3=[0,0,0,0,0,0,0,0,0,0,0,0],
+                                              solar_DHW_input_appendix_G=[0,0,0,0,0,0,0,0,0,0,0,0]
+                                              ),
+            'internal_gains_appendix_L':dict(number_of_low_energy_light_bulbs=0, 
+                                             total_number_of_light_bulbs=10, 
+                                             frame_factor=0.7,
+                                             window_area=23, 
+                                             light_access_factor_table_6d=0, 
+                                             light_transmittance_factor_table_6d=0, 
+                                             month_number=[1,2,3,4,5,6,7,8,9,10,11,12]
+                                             ),
+            'internal_gains':dict(pumps_and_fans_gains=[3,3,3,3,3,3,3,3,3,3,3,3]
+                                  ),
+            
+            }
+        
+        
+        result=SAP_worksheet.calculate_worksheet(inputs)
+        print(result)
+        
+        
         
 if __name__=='__main__':
     

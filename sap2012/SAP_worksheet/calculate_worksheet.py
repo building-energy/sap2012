@@ -12,7 +12,7 @@ from .energy_requirements import energy_requirements
 from .fuel_costs import fuel_costs
 from .SAP_rating import SAP_rating
 from .CO2_emissions import CO2_emissions
-from sap2012.tables.internal_gains_appendix_L import Internal_gains_appendix_L
+from ..SAP_appendices import internal_gains_appendix_L
 from sap2012.tables.Utilisation_factor_for_heating_table_9a import Utilisation_factor_for_heating
 from sap2012.tables.temperature_reduction_when_heating_is_off import Temperature_reduction
 from sap2012.tables.Heating_Requirement_table_9c import Heating_requirement
@@ -20,7 +20,104 @@ from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisatio
 from sap2012.tables.solar_gains_appendix_U import Solar_gains_appendix_U3
 
 
-def calculate_worksheet(
+def calculate_worksheet(inputs):
+    """This function runs the complete set of calculations for the SAP2012 worksheet.
+    
+    Using the supplied parameters, each of the individual SAP calculation
+    sections are run in turn. 
+    
+    In some cases, an output from one section is used as an input to a later section.
+    
+    The SAP sections run are as the following functions:
+        
+    - `overall_dwelling_dimensions` (Section 1)
+    - `ventilation_rates` (Section 2)
+    - `heat_losses_and_heat_loss_parameter` (Section 3)
+    - `water_heating_requirement` (Section 4)
+    - `internal_gains_appendix_L` 
+    - `internal_gains` (Section 5)
+    - `Solar_gains_appendix_U3`
+    - `solar_gains` (Section 6)
+    - `Utilisation_factor_for_heating`
+    - `Temperature_reduction`
+    - `Heating_requirement`
+    - `mean_internal_temperature` (Section 7)
+    - `Utilisation_factor_for_heating_whole_house`
+    - `space_heating_requirement` (Section 8)
+    - `energy_requirements` (Section 9)
+    - `fuel_costs` (Section 10)
+    - `SAP_rating` (Section 11)
+    - `CO2_emissions` (Section 12)
+    
+    :param inputs: A dictionary of the SAP model inputs
+    :type inputs: dict
+    
+    :returns: A dictionary with the results of all the calculation sections.
+    :rtype: dict
+    
+    """
+    
+    result={}
+    
+    # overall_dwelling_dimensions
+    result['overall_dwelling_dimensions']=(
+        overall_dwelling_dimensions(**inputs['overall_dwelling_dimensions'])
+        )
+    
+    # ventilation_rates
+    result['ventilation_rates']=(
+        ventilation_rates(**inputs['ventilation_rates'],
+            dwelling_volume=result['overall_dwelling_dimensions']['dwelling_volume']
+            )
+        )
+    
+    # heat_losses_and_heat_loss_parameter
+    result['heat_losses_and_heat_loss_parameter']=(
+        heat_losses_and_heat_loss_parameter(
+            **inputs['heat_losses_and_heat_loss_parameter'],
+            **dict(total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
+                   effective_air_change_rate=result['ventilation_rates']['effective_air_change_rate'],
+                   dwelling_volume=result['overall_dwelling_dimensions']['dwelling_volume'])
+            )
+        )
+    
+    # water_heating_requirement
+    result['water_heating_requirements']=(
+        water_heating_requirement(
+            **inputs['water_heating_requirements'],
+            )
+        )
+    
+    # internal_gains_appendix_L
+    result['internal_gains_appendix_L']=(
+        internal_gains_appendix_L(
+            **inputs['internal_gains_appendix_L'],
+            **dict(total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
+                   assumed_occupancy=inputs['water_heating_requirements']['assumed_occupancy'],
+                   days_in_month=inputs['water_heating_requirements']['days_in_month'],
+                   heat_gains_from_water_heating_monthly=result['water_heating_requirements']['heat_gains_from_water_heating_monthly'])
+            )
+        )
+    
+    # internal_gains
+    result['internal_gains']=(
+        internal_gains(
+            **inputs['internal_gains'],
+            **dict(metabolic_gains=result['internal_gains_appendix_L']['metabolic_gains'],
+                   lighting_gains=result['internal_gains_appendix_L']['lighting_gains'],
+                   appliances_gains=result['internal_gains_appendix_L']['appliances_gains'],
+                   cooking_gains=result['internal_gains_appendix_L']['cooking_gains'],
+                   losses=result['internal_gains_appendix_L']['losses'],
+                   water_heating_gains=result['internal_gains_appendix_L']['water_heating_gains'],
+                   )
+            )
+        )
+    
+    
+    return result
+
+
+def calculate_worksheet_old(
         # overall_dwelling_dimensions inputs
         area,
         average_storey_height,    

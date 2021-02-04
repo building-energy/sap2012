@@ -42,6 +42,12 @@ SAP2012 energy calculation method in Python.
    SAP_rating_function
    CO2_emissions_function
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference - SAP Appendices:
+   
+   internal_gains_appendix_L_function
+
 
 Indices and tables
 ==================

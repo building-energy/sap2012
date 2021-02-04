@@ -3,7 +3,7 @@ import unittest
 from pprint import pprint
 import math
 
-from sap2012.calcs.mean_internal_temperature import Mean_Internal_Temperature
+from sap2012.SAP_worksheet.mean_internal_temperature import Mean_Internal_Temperature
 import sap2012.tables
 
 class TestMeanInternalTemperature(unittest.TestCase):

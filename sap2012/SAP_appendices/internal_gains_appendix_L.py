@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 
-def Internal_gains_appendix_L (
+def internal_gains_appendix_L (
         total_floor_area,
         assumed_occupancy,
         number_of_low_energy_light_bulbs,
@@ -14,7 +14,14 @@ def Internal_gains_appendix_L (
         days_in_month,
         heat_gains_from_water_heating_monthly
         ):
+    """Internal gain calculations as given in Appendix L.
     
+    
+    
+    
+    :rtype: dict
+    
+    """
     
     G_L = ((0.9 * window_area * 
             light_transmittance_factor_table_6d * 
@@ -92,24 +99,24 @@ def Internal_gains_appendix_L (
         
         
         
-    return(
-            G_L,
-            C_1,
-            C_2,
-            E_B,
-            initial_annual_lighting_demand,
-            monthly_lighting_demand,
-            annual_lighting_demand,
-            lighting_gains,
-            initial_annual_electrical_appliance_demand,
-            monthly_electrical_appliance_demand,
-            annual_electrical_appliance_demand,
-            appliances_gains,
-            cooking_gains,
-            losses,
-            water_heating_gains,
-            metabolic_gains
-            )
+    return dict(
+        G_L=G_L,
+        C_1=C_1,
+        C_2=C_2,
+        E_B=E_B,
+        initial_annual_lighting_demand=initial_annual_lighting_demand,
+        monthly_lighting_demand=monthly_lighting_demand,
+        annual_lighting_demand=annual_lighting_demand,
+        lighting_gains=lighting_gains,
+        initial_annual_electrical_appliance_demand=initial_annual_electrical_appliance_demand,
+        monthly_electrical_appliance_demand=monthly_electrical_appliance_demand,
+        annual_electrical_appliance_demand=annual_electrical_appliance_demand,
+        appliances_gains=appliances_gains,
+        cooking_gains=cooking_gains,
+        losses=losses,
+        water_heating_gains=water_heating_gains,
+        metabolic_gains=metabolic_gains
+        )
     
     
 

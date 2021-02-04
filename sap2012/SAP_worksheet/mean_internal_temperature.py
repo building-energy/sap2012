@@ -11,7 +11,9 @@ def mean_internal_temperature (
     
     """Calculates Mean Internal Temperature, Section 7.
     
-    .. UNUSED??
+    .. 
+    
+       UNUSED??
     
        :param utilisation_factor_for_gains_living_room_table_9a: See (86).
        :type utilisation_factor_for_gains_living_room_table_9a: list (float)
