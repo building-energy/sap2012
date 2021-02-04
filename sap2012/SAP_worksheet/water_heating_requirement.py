@@ -77,7 +77,7 @@ def water_heating_requirement (
     :param solar_DHW_input_appendix_G: See Appendix G.
     :type solar_DHW_input_appendix_G: float or None
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
             annual_hot_water_usage_litres_per_day,
             hot_water_usage_in_litres_per_day_monthly,
             energy_content_of_water_used,
@@ -166,14 +166,14 @@ def water_heating_requirement (
         heat_gains_from_water_heating_monthly.append(0.25 * (0.85 * energy_content_of_water_used[i] + combi_loss_table_3[i] ) + (0.8 * 
                                                  (distribution_loss[i] + water_storage_loss_monthly[i] + primary_circuit_loss_table_3[i] )))
      
-    return (
-            annual_hot_water_usage_litres_per_day,
-            hot_water_usage_in_litres_per_day_monthly,
-            energy_content_of_water_used,
-            distribution_loss,
-            energy_lost_from_water_storage,
-            water_storage_loss_monthly,
-            total_heat_required_for_water_heating,
-            output_from_water_heater_monthly,
-            heat_gains_from_water_heating_monthly
+    return dict (
+            annual_hot_water_usage_litres_per_day=annual_hot_water_usage_litres_per_day,
+            hot_water_usage_in_litres_per_day_monthly=hot_water_usage_in_litres_per_day_monthly,
+            energy_content_of_water_used=energy_content_of_water_used,
+            distribution_loss=distribution_loss,
+            energy_lost_from_water_storage=energy_lost_from_water_storage,
+            water_storage_loss_monthly=water_storage_loss_monthly,
+            total_heat_required_for_water_heating=total_heat_required_for_water_heating,
+            output_from_water_heater_monthly=output_from_water_heater_monthly,
+            heat_gains_from_water_heating_monthly=heat_gains_from_water_heating_monthly
             )

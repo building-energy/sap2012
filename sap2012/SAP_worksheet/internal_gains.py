@@ -34,8 +34,10 @@ def internal_gains (
     :param water_heating_gains: Calculated using Table 5. See (72), in W.
     :type water_heating_gains: list (float)
     
-    :returns: Sum of all internal gains see (73), in W.
-    :rtype: list(float)
+    :returns: A dictionary with keys ( total_internal_gains )
+    
+    - **total_internal_gains** (`list` (`float`)): Sum of all internal gains. See (73), in W.
+    
     
     """
     
@@ -50,4 +52,4 @@ def internal_gains (
                                 water_heating_gains[i])
         
         
-    return (total_internal_gains)        
+    return dict(total_internal_gains=total_internal_gains)        

@@ -17,7 +17,7 @@ def overall_dwelling_dimensions(
         See (2a) to (2n).
     :type average_storey_height: list (float)
     
-    :return: A tuple of (volume,total_floor_area,dwelling_volume).
+    :return: A dictionary with keys (volume,total_floor_area,dwelling_volume).
     
     - **volume** (`list` (`float`)) - A list of the volumes of each floor. 
       The first item is the basement, the second the ground floor etc. 
@@ -27,7 +27,7 @@ def overall_dwelling_dimensions(
     
     - **dwelling_volume** (`float`) - See (5). 
         
-    :rtype: tuple
+    :rtype: dict
     
     """
     
@@ -42,7 +42,9 @@ def overall_dwelling_dimensions(
     # calculate dwelling volume
     dwelling_volume=sum(volume)
     
-    return volume,total_floor_area,dwelling_volume
+    return dict(volume=volume,
+                total_floor_area=total_floor_area,
+                dwelling_volume=dwelling_volume)
     
     
     

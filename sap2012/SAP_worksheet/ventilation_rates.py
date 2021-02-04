@@ -104,7 +104,7 @@ def ventilation_rates(
     :type efficiency_allowing_for_in_use_factor: float
     
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
             number_of_chimneys_total,
             number_of_chimneys_m3_per_hour,
             number_of_open_flues_total,
@@ -190,7 +190,7 @@ def ventilation_rates(
                                                    number_of_flueless_gas_fires_m3_per_hour) /
                                                   dwelling_volume)
     
-    if air_permeability_value_q50 == 0:
+    if air_permeability_value_q50 is None: # changed from 'air_permeability_value_q50 == 0:' on 4-FEB-2021
         
         additional_infiltration=(number_of_storeys_in_the_dwelling-1)*0.1
         
@@ -284,23 +284,23 @@ def ventilation_rates(
                 effective_air_change_rate[i]=0.5 + (adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed[i]**2 * 0.5)
                 
     
-    return (
-            number_of_chimneys_total,
-            number_of_chimneys_m3_per_hour,
-            number_of_open_flues_total,
-            number_of_open_flues_m3_per_hour,
-            number_of_intermittant_fans_m3_per_hour,
-            number_of_passive_vents_m3_per_hour,
-            number_of_flueless_gas_fires_m3_per_hour,
-            infiltration_due_to_chimneys_flues_fans_PSVs,
-            additional_infiltration,
-            window_infiltration,
-            infiltration_rate,
-            infiltration_rate2,
-            shelter_factor,
-            infiltration_rate_incorporating_shelter_factor,
-            wind_factor,
-            adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed,
-            exhaust_air_heat_pump_air_change_rate_through_system,
-            effective_air_change_rate
+    return dict(
+            number_of_chimneys_total=number_of_chimneys_total,
+            number_of_chimneys_m3_per_hour=number_of_chimneys_m3_per_hour,
+            number_of_open_flues_total=number_of_open_flues_total,
+            number_of_open_flues_m3_per_hour=number_of_open_flues_m3_per_hour,
+            number_of_intermittant_fans_m3_per_hour=number_of_intermittant_fans_m3_per_hour,
+            number_of_passive_vents_m3_per_hour=number_of_passive_vents_m3_per_hour,
+            number_of_flueless_gas_fires_m3_per_hour=number_of_flueless_gas_fires_m3_per_hour,
+            infiltration_due_to_chimneys_flues_fans_PSVs=infiltration_due_to_chimneys_flues_fans_PSVs,
+            additional_infiltration=additional_infiltration,
+            window_infiltration=window_infiltration,
+            infiltration_rate=infiltration_rate,
+            infiltration_rate2=infiltration_rate2,
+            shelter_factor=shelter_factor,
+            infiltration_rate_incorporating_shelter_factor=infiltration_rate_incorporating_shelter_factor,
+            wind_factor=wind_factor,
+            adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed=adjusted_infiltration_rate_allowing_for_shelter_and_wind_speed,
+            exhaust_air_heat_pump_air_change_rate_through_system=exhaust_air_heat_pump_air_change_rate_through_system,
+            effective_air_change_rate=effective_air_change_rate
             )

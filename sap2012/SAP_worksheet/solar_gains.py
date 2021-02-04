@@ -194,7 +194,7 @@ def solar_gains (
     :param FF_table_6b_roof_windows: See (82).
     :type FF_table_6b_roof_windows: float
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
             gains_north,
             gains_north_east,
             gains_east,
@@ -317,17 +317,18 @@ def solar_gains (
     for i in range(12):
         total_internal_and_solar_gains.append(total_internal_gains[i] + solar_gains_watts[i])
         
-    return(
-            gains_north,
-            gains_north_east,
-            gains_east,
-            gains_south_east,
-            gains_south,
-            gains_south_west,
-            gains_west,
-            gains_north_west,
-            gains_roof_windows,
-            solar_gains_watts,
-            total_internal_and_solar_gains)
+    return dict(
+            gains_north=gains_north,
+            gains_north_east=gains_north_east,
+            gains_east=gains_east,
+            gains_south_east=gains_south_east,
+            gains_south=gains_south,
+            gains_south_west=gains_south_west,
+            gains_west=gains_west,
+            gains_north_west=gains_north_west,
+            gains_roof_windows=gains_roof_windows,
+            solar_gains_watts=solar_gains_watts,
+            total_internal_and_solar_gains=total_internal_and_solar_gains
+            )
         
         
