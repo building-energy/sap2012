@@ -2,13 +2,20 @@
 
 import math
 
-def Solar_gains_appendix_U3 (
+def solar_gains_appendix_U3 (
         solar_radiation_horizontal_plane_monthly_table_U3,
         solar_declination_monthly_table_U3,
         location_latitude_table_U4,
         p_tilt,
         ):
+    """Solar gains calculations as given in Appendix U3.
+    
+    
+    :rtype: dict
+    
 
+    """
+    
     solar_declination_radians = []
     for i in range(12):
         solar_declination_radians.append(solar_declination_monthly_table_U3[i] * (math.pi/180))
@@ -140,15 +147,13 @@ def Solar_gains_appendix_U3 (
     for i in range(12):
         solar_flux_north_west.append(R_NW[i] * solar_radiation_horizontal_plane_monthly_table_U3[i])
         
-    return(
-            solar_flux_north,
-            solar_flux_north_east,
-            solar_flux_east,
-            solar_flux_south_east,
-            solar_flux_south,
-            solar_flux_south_west,
-            solar_flux_west,
-            solar_flux_north_west,
-            
-            )
+    return dict(solar_flux_north=solar_flux_north,
+                solar_flux_north_east=solar_flux_north_east,
+                solar_flux_east=solar_flux_east,
+                solar_flux_south_east=solar_flux_south_east,
+                solar_flux_south=solar_flux_south,
+                solar_flux_south_west=solar_flux_south_west,
+                solar_flux_west=solar_flux_west,
+                solar_flux_north_west=solar_flux_north_west,
+                )
     

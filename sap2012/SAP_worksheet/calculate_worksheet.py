@@ -4,31 +4,34 @@ from .overall_dwelling_dimensions import overall_dwelling_dimensions
 from .ventilation_rates import ventilation_rates
 from .heat_losses_and_heat_loss_parameter import heat_losses_and_heat_loss_parameter
 from .water_heating_requirement import water_heating_requirement
+from ..SAP_appendices import internal_gains_appendix_L
 from .internal_gains import internal_gains
+from ..SAP_appendices import solar_gains_appendix_U3
 from .solar_gains import solar_gains
+from ..SAP_tables.utilisation_factor_for_heating_table_9a import utilisation_factor_for_heating_table_9a
 from .mean_internal_temperature import mean_internal_temperature
 from .space_heating_requirement import space_heating_requirement
 from .energy_requirements import energy_requirements
 from .fuel_costs import fuel_costs
 from .SAP_rating import SAP_rating
 from .CO2_emissions import CO2_emissions
-from ..SAP_appendices import internal_gains_appendix_L
-from sap2012.tables.Utilisation_factor_for_heating_table_9a import Utilisation_factor_for_heating
-from sap2012.tables.temperature_reduction_when_heating_is_off import Temperature_reduction
-from sap2012.tables.Heating_Requirement_table_9c import Heating_requirement
-from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisation_factor_for_heating_whole_house 
-from sap2012.tables.solar_gains_appendix_U import Solar_gains_appendix_U3
+#from sap2012.tables.temperature_reduction_when_heating_is_off import Temperature_reduction
+#from sap2012.tables.Heating_Requirement_table_9c import Heating_requirement
+#from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisation_factor_for_heating_whole_house 
 
 
 def calculate_worksheet(inputs):
     """This function runs the complete set of calculations for the SAP2012 worksheet.
     
-    Using the supplied parameters, each of the individual SAP calculation
-    sections are run in turn. 
+    :param inputs: A dictionary of the SAP model inputs.
+    :type inputs: dict
     
-    In some cases, an output from one section is used as an input to a later section.
+    :returns: A dictionary with the results of all the calculation sections.
+    :rtype: dict
     
-    The SAP sections run are as the following functions:
+    .. rubric:: SAP Calculation Sections
+    
+    The SAP calculation sections are run as given in the order below:
         
     - `overall_dwelling_dimensions` (Section 1)
     - `ventilation_rates` (Section 2)
@@ -36,24 +39,209 @@ def calculate_worksheet(inputs):
     - `water_heating_requirement` (Section 4)
     - `internal_gains_appendix_L` 
     - `internal_gains` (Section 5)
-    - `Solar_gains_appendix_U3`
+    - `solar_gains_appendix_U3`
     - `solar_gains` (Section 6)
-    - `Utilisation_factor_for_heating`
-    - `Temperature_reduction`
-    - `Heating_requirement`
+    - `utilisation_factor_for_heating_table_9a`
+    - `temperature_reduction`
+    - `heating_requirement`
     - `mean_internal_temperature` (Section 7)
-    - `Utilisation_factor_for_heating_whole_house`
+    - `utilisation_factor_for_heating_whole_house`
     - `space_heating_requirement` (Section 8)
     - `energy_requirements` (Section 9)
     - `fuel_costs` (Section 10)
     - `SAP_rating` (Section 11)
     - `CO2_emissions` (Section 12)
     
-    :param inputs: A dictionary of the SAP model inputs
-    :type inputs: dict
+    .. rubric:: Inputs
     
-    :returns: A dictionary with the results of all the calculation sections.
-    :rtype: dict
+    The 'inputs' dictionary holds all the inputs to run a complete SAP calculation.
+    The dictionary is a collection of 18 individual dictionaries which contain
+    the model inputs to individual calculation sections as listed above.
+    
+    To see definitions of the model inputs, please see the documentation for the
+    individual calculation sections.
+    
+    For the `calculate_worksheet` function, not all inputs need to be provided
+    for all calculation sections. This is because some inputs for later sections
+    are calculated as outputs by earlier sections.
+    
+    An example of a valid 'inputs' dictionary is:
+        
+    .. code-block:: python
+    
+       {'overall_dwelling_dimensions':
+            {'area':[0,63,63],
+             'average_storey_height': [0,2.5,2.75]
+             }
+        'ventilation_rates':
+            {'number_of_chimneys_main_heating': 0, 
+             'number_of_chimneys_secondary_heating': 0, 
+             'number_of_chimneys_other': 0, 
+             'number_of_open_flues_main_heating': 0, 
+             'number_of_open_flues_secondary_heating': 0, 
+             'number_of_open_flues_other': 0, 
+             'number_of_intermittant_fans_total': 0, 
+             'number_of_passive_vents_total': 0, 
+             'number_of_flueless_gas_fires_total': 0, 
+             'air_permeability_value_q50': 11.78, 
+             'number_of_storeys_in_the_dwelling': 2, 
+             'structural_infiltration': 0, 
+             'suspended_wooden_ground_floor_infiltration': 0, 
+             'no_draft_lobby_infiltration': 0, 
+             'percentage_of_windows_and_doors_draught_proofed': 0, 
+             'number_of_sides_on_which_dwelling_is_sheltered': 2, 
+             'monthly_average_wind_speed': [4.5, 4.5, 4.4, 3.9, 3.8, 3.4, 3.3, 3.3, 3.5, 3.8, 3.9, 4.1], 
+             'applicable_case': 'natural ventilation or whole house positive input ventilation from loft', 
+             'mechanical_ventilation_air_change_rate_through_system': 0.5, 
+             'exhaust_air_heat_pump_using_Appendix_N': False, 
+             'mechanical_ventilation_throughput_factor': None, 
+             'efficiency_allowing_for_in_use_factor': None
+             }
+         'heat_losses_and_heat_loss_parameter':
+             {'solid_door_net_area': 1.5, 
+              'solid_door_u_value': 3, 
+              'semi_glazed_door_net_area': 10.6, 
+              'semi_glazed_door_u_value': 1.4, 
+              'window_net_area': 23, 
+              'window_u_value': 2, 
+              'roof_window_net_area': 0, 
+              'roof_window_u_value': None, 
+              'basement_floor_net_area': 0, 
+              'basement_floor_u_value': None, 
+              'basement_floor_heat_capacity': None, 
+              'ground_floor_net_area': 63, 
+              'ground_floor_u_value': 0.63, 
+              'ground_floor_heat_capacity': 20, 
+              'exposed_floor_net_area': 0, 
+              'exposed_floor_u_value': None, 
+              'exposed_floor_heat_capacity': None, 
+              'basement_wall_gross_area': 0, 
+              'basement_wall_opening': 0, 
+              'basement_wall_u_value': None, 
+              'basement_wall_heat_capacity': None, 
+              'external_wall_gross_area': 120, 
+              'external_wall_opening': 35.1, 
+              'external_wall_u_value': 1.5, 
+              'external_wall_heat_capacity': 190, 
+              'roof_gross_area': 63, 
+              'roof_opening': 0, 
+              'roof_u_value': 0.14, 
+              'roof_heat_capacity': 9, 
+              'party_wall_net_area': 47, 
+              'party_wall_u_value': 0.5, 
+              'party_wall_heat_capacity': 180, 
+              'party_floor_net_area': 0, 
+              'party_floor_heat_capacity': None, 
+              'party_ceiling_net_area': 39, 
+              'party_ceiling_heat_capacity': 100, 
+              'internal_wall_net_area': 131, 
+              'internal_wall_heat_capacity': 9, 
+              'internal_floor_net_area': 63, 
+              'internal_floor_heat_capacity': 18, 
+              'internal_ceiling_net_area': 63, 
+              'internal_ceiling_heat_capacity': 9, 
+              'thermal_bridges_appendix_k': 36.9
+              },
+        'water_heating_requirement':
+            {'assumed_occupancy': 2.88, 
+             'V_dm_table_1c': [1.1, 1.06, 1.02, 0.98, 0.94, 0.9, 0.9, 0.94, 0.98, 1.02, 1.06, 1.1], 
+             'days_in_month': [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], 
+             'T_table_1d': [41.2, 41.4, 40.1, 37.6, 36.4, 33.9, 30.4, 33.4, 33.5, 36.3, 39.4, 39.9], 
+             'water_storage_loss_manufacturer': 0, 
+             'temperature_factor_table_2b': 0, 
+             'storage_volume_litres': 0, 
+             'hot_water_storage_loss_table_2': 0, 
+             'volume_factor_table_2a': 0, 
+             'Vs_appendix_G3': 0, 
+             'solar_storage_WWHRS_factor': 0, 
+             'primary_circuit_loss_table_3': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+             'combi_loss_table_3': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+             'solar_DHW_input_appendix_G': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+             },
+         'internal_gains_appendix_L':
+             {'number_of_low_energy_light_bulbs': 0, 
+              'total_number_of_light_bulbs': 10, 
+              'frame_factor': 0.7, 
+              'window_area': 23, 
+              'light_access_factor_table_6d': 0, 
+              'light_transmittance_factor_table_6d': 0, 
+              'month_number': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+              },
+         'internal_gains':
+             {'pumps_and_fans_gains':[3,3,3,3,3,3,3,3,3,3,3,3]
+              }
+         'solar_gains_appendix_U3':
+             {'solar_radiation_horizontal_plane_monthly_table_U3': [28, 55, 97, 153, 191, 208, 194, 208, 163, 69, 35, 23], 
+              'solar_declination_monthly_table_U3': [-20.7, -12.8, -1.8, 9.8, 18.8, 23.1, 21.2, 13.7, 2.9, -8.7, -18.4, -23], 
+              'location_latitude_table_U4': 53.4, 
+              'p_tilt': 90
+              },
+         'solar_gains':
+             {'access_factor_table_6d_north': 0.77, 
+              'access_factor_table_6d_north_east': 0, 
+              'access_factor_table_6d_east': 0.77, 
+              'access_factor_table_6d_south_east': 0, 
+              'access_factor_table_6d_south': 0.77, 
+              'access_factor_table_6d_south_west': 0, 
+              'access_factor_table_6d_west': 0, 
+              'access_factor_table_6d_north_west': 0, 
+              'access_factor_table_6d_roof_windows': 0, 
+              'area_north': 10, 
+              'area_north_east': 0, 
+              'area_east': 4.9, 
+              'area_south_east': 0, 
+              'area_south': 11.9, 
+              'area_south_west': 0, 
+              'area_west': 0, 
+              'area_north_west': 0, 
+              'area_roof_windows': 0, 
+              'solar_flux_roof_windows': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+              'g_table_6b_north': 0.72, 
+              'g_table_6b_north_east': 0, 
+              'g_table_6b_east': 0.72, 
+              'g_table_6b_south_east': 0, 
+              'g_table_6b_south': 0.72, 
+              'g_table_6b_south_west': 0, 
+              'g_table_6b_west': 0, 
+              'g_table_6b_north_west': 0, 
+              'g_table_6b_roof_windows': 0, 
+              'FF_table_6b_north': 0.72, 
+              'FF_table_6b_north_east': 0, 
+              'FF_table_6b_east': 0.72, 
+              'FF_table_6b_south_east': 0, 
+              'FF_table_6b_south': 0.72, 
+              'FF_table_6b_south_west': 0, 
+              'FF_table_6b_west': 0, 
+              'FF_table_6b_north_west': 0, 
+              'FF_table_6b_roof_windows': 0
+              },
+         'utilisation_factor_for_heating_table_9a':
+             {'temperature_during_heating_living_room': 20, 
+              'heating_controls': 2, 
+              'monthly_external_temperature_table_U1': [4.3, 4.8, 6.6, 9, 11.8, 14.8, 16.6, 16.5, 14, 10.5, 7.1, 4.2]
+              },
+             
+        }
+    
+    .. rubric:: Outputs
+    
+    The `calculate_worksheet` function returns a dictionary containing
+    the outputs of all SAP calculation sections.
+    
+    The output dictionary is a collection of dictionaries, where each
+    dictiionary holds the outputs of an individual calculation section.
+    
+    An example of an output dictionary as returned by the `calculate_worksheet`
+    function is:
+        
+    .. code-block:: python
+    
+       {
+        
+        
+        
+        }
+    
     
     """
     
@@ -82,9 +270,9 @@ def calculate_worksheet(inputs):
         )
     
     # water_heating_requirement
-    result['water_heating_requirements']=(
+    result['water_heating_requirement']=(
         water_heating_requirement(
-            **inputs['water_heating_requirements'],
+            **inputs['water_heating_requirement'],
             )
         )
     
@@ -93,9 +281,9 @@ def calculate_worksheet(inputs):
         internal_gains_appendix_L(
             **inputs['internal_gains_appendix_L'],
             **dict(total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
-                   assumed_occupancy=inputs['water_heating_requirements']['assumed_occupancy'],
-                   days_in_month=inputs['water_heating_requirements']['days_in_month'],
-                   heat_gains_from_water_heating_monthly=result['water_heating_requirements']['heat_gains_from_water_heating_monthly'])
+                   assumed_occupancy=inputs['water_heating_requirement']['assumed_occupancy'],
+                   days_in_month=inputs['water_heating_requirement']['days_in_month'],
+                   heat_gains_from_water_heating_monthly=result['water_heating_requirement']['heat_gains_from_water_heating_monthly'])
             )
         )
     
@@ -113,6 +301,39 @@ def calculate_worksheet(inputs):
             )
         )
     
+    # solar_gains_appendix_U3
+    result['solar_gains_appendix_U3']=(
+        solar_gains_appendix_U3(**inputs['solar_gains_appendix_U3'])
+        )
+    
+    # solar_gains
+    result['solar_gains']=(
+        solar_gains(
+            **inputs['solar_gains'],
+            **dict(solar_flux_north=result['solar_gains_appendix_U3']['solar_flux_north'],
+                   solar_flux_north_east=result['solar_gains_appendix_U3']['solar_flux_north_east'],
+                   solar_flux_east=result['solar_gains_appendix_U3']['solar_flux_east'],
+                   solar_flux_south_east=result['solar_gains_appendix_U3']['solar_flux_south_east'],
+                   solar_flux_south=result['solar_gains_appendix_U3']['solar_flux_south'],
+                   solar_flux_south_west=result['solar_gains_appendix_U3']['solar_flux_south_west'],
+                   solar_flux_west=result['solar_gains_appendix_U3']['solar_flux_west'],
+                   solar_flux_north_west=result['solar_gains_appendix_U3']['solar_flux_north_west'],
+                   total_internal_gains=result['internal_gains']['total_internal_gains']
+                   )
+            )
+        )
+    
+    utilisation_factor_for_heating_table_9a
+    result['utilisation_factor_for_heating_table_9a']=(
+        utilisation_factor_for_heating_table_9a(
+            **inputs['utilisation_factor_for_heating_table_9a'],
+            **dict(heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
+                   total_internal_and_solar_gains=result['solar_gains']['total_internal_and_solar_gains'],
+                   thermal_mass_parameter=result['heat_losses_and_heat_loss_parameter']['thermal_mass_parameter'],
+                   heat_loss_parameter=result['heat_losses_and_heat_loss_parameter']['heat_loss_parameter']
+                   )
+            )
+        )
     
     return result
 

@@ -2,7 +2,7 @@
 
 import pandas as pd
 import importlib.resources
-import sap2012.tables as t
+import sap2012.SAP_tables as t
 
 class U2():
     """

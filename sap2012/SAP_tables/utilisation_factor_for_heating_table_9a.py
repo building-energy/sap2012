@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Utilisation_factor_for_heating(
+def utilisation_factor_for_heating_table_9a(
         heat_transfer_coefficient,
         total_internal_and_solar_gains,
         temperature_during_heating_living_room,
@@ -55,9 +55,8 @@ def Utilisation_factor_for_heating(
     for i in range(12):
         if heating_controls == 1:
             temperature_during_heating_rest_of_dwelling.append(temperature_during_heating_living_room - 0.5 * heat_loss_parameter[i])
-            
         else:
-            temperature_during_heating_rest_of_dwelling.append(temperature_during_heating_living_room - (heat_loss_parameter[i] + heat_loss_parameter[i]**2 / 12))
+            temperature_during_heating_rest_of_dwelling.append(temperature_during_heating_living_room - heat_loss_parameter[i] + heat_loss_parameter[i]**2 / 12)
     
     heat_loss_rate_rest_of_dwelling = []
     for i in range(12):
@@ -87,18 +86,16 @@ def Utilisation_factor_for_heating(
             
     
     
-    return(
-            time_constant,
-            a,
-            heat_loss_rate_living_room,
-            y_living_room,
-            utilisation_factor_for_heating_living_room,
-            temperature_during_heating_rest_of_dwelling,
-            heat_loss_rate_rest_of_dwelling,
-            y_rest_of_dwelling,
-            utilisation_factor_for_heating_rest_of_dwelling,
-            
-            )
+    return dict(time_constant=time_constant,
+                a=a,
+                heat_loss_rate_living_room=heat_loss_rate_living_room,
+                y_living_room=y_living_room,
+                utilisation_factor_for_heating_living_room=utilisation_factor_for_heating_living_room,
+                temperature_during_heating_rest_of_dwelling=temperature_during_heating_rest_of_dwelling,
+                heat_loss_rate_rest_of_dwelling=heat_loss_rate_rest_of_dwelling,
+                y_rest_of_dwelling=y_rest_of_dwelling,
+                utilisation_factor_for_heating_rest_of_dwelling=utilisation_factor_for_heating_rest_of_dwelling,
+                )
             
             
             

@@ -23,12 +23,12 @@ SAP2012 energy calculation method in Python.
    :caption: Reference - Main:
 
    Sap2012_class
+   calculate_worksheet_function
    
 .. toctree::
    :maxdepth: 2
    :caption: Reference - SAP Worksheet:
    
-   calculate_worksheet_function
    overall_dwelling_dimensions_function
    ventilation_rates_function
    heat_losses_and_heat_loss_parameter_function
@@ -47,6 +47,7 @@ SAP2012 energy calculation method in Python.
    :caption: Reference - SAP Appendices:
    
    internal_gains_appendix_L_function
+   solar_gains_appendix_U3_function
 
 
 Indices and tables
