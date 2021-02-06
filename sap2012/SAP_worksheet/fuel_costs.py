@@ -107,7 +107,7 @@ def fuel_costs (
     :param appendix_Q_energy_saved_fuel_price: See (254) in £/kWh.
     :type appendix_Q_energy_saved_fuel_price: float
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
         space_heating_main_system_1_fuel_cost,
         space_heating_main_system_2_fuel_cost,
         space_heating_secondary_fuel_cost,
@@ -237,20 +237,20 @@ def fuel_costs (
                        )
     
     
-    return(space_heating_main_system_1_fuel_cost,
-           space_heating_main_system_2_fuel_cost,
-           space_heating_secondary_fuel_cost,
-           water_heating_high_rate_fuel_cost,
-           water_heating_low_rate_fuel_cost,
-           water_heating_cost_other,
-           space_cooling_cost,
-           pumps_fan_keep_hot_cost,
-           lighting_cost,
-           appendix_Q_fuel_cost,
-           energy_saving_total_fuel_cost,
-           additional_standing_charges_table_12,
-           total_fuel_cost
-            )
+    return dict(space_heating_main_system_1_fuel_cost=space_heating_main_system_1_fuel_cost,
+                space_heating_main_system_2_fuel_cost=space_heating_main_system_2_fuel_cost,
+                space_heating_secondary_fuel_cost=space_heating_secondary_fuel_cost,
+                water_heating_high_rate_fuel_cost=water_heating_high_rate_fuel_cost,
+                water_heating_low_rate_fuel_cost=water_heating_low_rate_fuel_cost,
+                water_heating_cost_other=water_heating_cost_other,
+                space_cooling_cost=space_cooling_cost,
+                pumps_fan_keep_hot_cost=pumps_fan_keep_hot_cost,
+                lighting_cost=lighting_cost,
+                appendix_Q_fuel_cost=appendix_Q_fuel_cost,
+                energy_saving_total_fuel_cost=energy_saving_total_fuel_cost,
+                additional_standing_charges_table_12=additional_standing_charges_table_12,
+                total_fuel_cost=total_fuel_cost
+                )
     
     
     

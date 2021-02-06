@@ -19,11 +19,13 @@ def SAP_rating (
     :param total_floor_area: in m2.
     :type total_floor_area: float
     
-    :returns: A tuple of ( SAP_rating_value )    
+    :returns: A dictionary with keys of ( SAP_rating_value )    
     
     - **energy_cost_factor** (`float`): See (257)
     
     - **SAP_rating_value** (`float`): See (258)
+    
+    :rtype: dict
     
     """
     
@@ -36,9 +38,9 @@ def SAP_rating (
     else:
         SAP_rating_value = 117 - 121 * math.log10(energy_cost_factor)
         
-    return(
-            SAP_rating_value
-            )    
+    return dict(energy_cost_factor=energy_cost_factor,
+                SAP_rating_value=SAP_rating_value
+                )    
         
         
         

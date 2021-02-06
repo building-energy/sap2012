@@ -38,7 +38,6 @@ def CO2_emissions(
     :param space_heating_fuel_secondary: See (213) in kWh/year.
     :type space_heating_fuel_secondary: float
     
-    
     :param space_heating_fuel_emission_factor_main_system_1: See (261) in kg CO2/kWh.
     :type space_heating_fuel_emission_factor_main_system_1: float
     
@@ -96,7 +95,7 @@ def CO2_emissions(
     :param total_floor_area: in m2.
     :type total_floor_area: float
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
         space_heating_main_system_1_emissions,
         space_heating_main_system_2_emissions,
         space_heating_secondary_emissions,
@@ -153,6 +152,7 @@ def CO2_emissions(
     
     - **EI_rating** (`float`): See (274).
     
+    :rtype: dict
     
     """
     
@@ -245,25 +245,25 @@ def CO2_emissions(
         
         
         
-    return(space_heating_main_system_1_emissions,
-           space_heating_main_system_2_emissions,
-           space_heating_secondary_emissions,
-           water_used_emissions,
-           space_cooling_used_emissions,
-           pumps_fans_electric_keep_hot_emissions,
-           lighting_emissions,
-           appendix_Q_used_emissions,
-           appendix_Q_saved_emissions,
-           energy_saving_generation_technologies_emissions,
-           space_and_water_heating_emissions,
-           appendix_Q_total_used_emissions,
-           appendix_Q_total_saved_emissions,
-           energy_saving_generation_technologies_total_emissions,
-           total_CO2_emissions_yearly,
-           dwelling_CO2_emission_rate,
-           CF,
-           EI_rating
-            )
+    return dict(space_heating_main_system_1_emissions=space_heating_main_system_1_emissions,
+                space_heating_main_system_2_emissions=space_heating_main_system_2_emissions,
+                space_heating_secondary_emissions=space_heating_secondary_emissions,
+                water_used_emissions=water_used_emissions,
+                space_cooling_used_emissions=space_cooling_used_emissions,
+                pumps_fans_electric_keep_hot_emissions=pumps_fans_electric_keep_hot_emissions,
+                lighting_emissions=lighting_emissions,
+                appendix_Q_used_emissions=appendix_Q_used_emissions,
+                appendix_Q_saved_emissions=appendix_Q_saved_emissions,
+                energy_saving_generation_technologies_emissions=energy_saving_generation_technologies_emissions,
+                space_and_water_heating_emissions=space_and_water_heating_emissions,
+                appendix_Q_total_used_emissions=appendix_Q_total_used_emissions,
+                appendix_Q_total_saved_emissions=appendix_Q_total_saved_emissions,
+                energy_saving_generation_technologies_total_emissions=energy_saving_generation_technologies_total_emissions,
+                total_CO2_emissions_yearly=total_CO2_emissions_yearly,
+                dwelling_CO2_emission_rate=dwelling_CO2_emission_rate,
+                CF=CF,
+                EI_rating=EI_rating
+                )
     
     
     
