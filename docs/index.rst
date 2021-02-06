@@ -48,6 +48,15 @@ SAP2012 energy calculation method in Python.
    
    internal_gains_appendix_L_function
    solar_gains_appendix_U3_function
+   
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference - SAP Tables:
+      
+   utilisation_factor_for_heating_table_9a_function
+   temperature_reduction_when_heating_is_off_table_9b_function
+   heating_requirement_table_9c_function
+   
 
 
 Indices and tables

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Temperature_reduction(
+def temperature_reduction_when_heating_is_off_table_9b(
         time_constant,
         hours_heating_is_off_1_weekday_living_room,
         hours_heating_is_off_2_weekday_living_room,
@@ -20,7 +20,11 @@ def Temperature_reduction(
         heat_transfer_coefficient,
         total_internal_and_solar_gains
         ):
+    """
     
+    :rtype: dict
+    
+    """
     
     t_c = []
     for i in range(12):
@@ -168,16 +172,15 @@ def Temperature_reduction(
                                                                 internal_temperature_without_heating_rest_of_dwelling[i]) / 
                                                                 (24 * t_c[i]))                                                           
                                                                
-    return(
-            t_c,
-            internal_temperature_without_heating_living_room,
-            internal_temperature_without_heating_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_1_weekday_living_room,
-            temperature_reduction_when_heating_is_off_2_weekday_living_room,
-            temperature_reduction_when_heating_is_off_1_weekend_living_room,
-            temperature_reduction_when_heating_is_off_2_weekend_living_room,
-            temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
-            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling
-            )
+    return dict(t_c=t_c,
+                internal_temperature_without_heating_living_room=internal_temperature_without_heating_living_room,
+                internal_temperature_without_heating_rest_of_dwelling=internal_temperature_without_heating_rest_of_dwelling,
+                temperature_reduction_when_heating_is_off_1_weekday_living_room=temperature_reduction_when_heating_is_off_1_weekday_living_room,
+                temperature_reduction_when_heating_is_off_2_weekday_living_room=temperature_reduction_when_heating_is_off_2_weekday_living_room,
+                temperature_reduction_when_heating_is_off_1_weekend_living_room=temperature_reduction_when_heating_is_off_1_weekend_living_room,
+                temperature_reduction_when_heating_is_off_2_weekend_living_room=temperature_reduction_when_heating_is_off_2_weekend_living_room,
+                temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling=temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling,
+                temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling=temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling,
+                temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling=temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling,
+                temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling=temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling
+                )

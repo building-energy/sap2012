@@ -571,7 +571,7 @@ class Sap2012():
     def run(self):
         """Runs the SAP2012 model calculations and places the results in `outputs`.
         
-        The SAP calcuations are run using the `calcs` function in the 'calcs.py' file.
+        The SAP calcuations are run using the `calculate_worksheet` function.
         The function runs each of the individual SAP calculation sections in turn.
         
         """

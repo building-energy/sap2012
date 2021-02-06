@@ -11,17 +11,6 @@ def mean_internal_temperature (
     
     """Calculates Mean Internal Temperature, Section 7.
     
-    .. 
-    
-       UNUSED??
-    
-       :param utilisation_factor_for_gains_living_room_table_9a: See (86).
-       :type utilisation_factor_for_gains_living_room_table_9a: list (float)
-    
-       :param utilisation_factor_for_gains_rest_of_dwelling_table_9a: See (89).
-       :type utilisation_factor_for_gains_rest_of_dwelling_table_9a: list (float)
-    
-    
     :param mean_internal_temperature_living_room_T1_Table_9c: See (87) in degC.
     :type mean_internal_temperature_living_room_T1_Table_9c: list (float)
     
@@ -38,7 +27,7 @@ def mean_internal_temperature (
         Adjustments found in table 4a.
     :type temperature_adjustment_table_4e: float
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
             living_area_fraction,
             mean_internal_temp_whole_dwelling
             )
@@ -62,7 +51,6 @@ def mean_internal_temperature (
     
     
     
-    return (
-            living_area_fraction,
-            mean_internal_temp_whole_dwelling
-            )
+    return dict(living_area_fraction=living_area_fraction,
+                mean_internal_temp_whole_dwelling=mean_internal_temp_whole_dwelling
+                )

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def Heating_requirement (
+def heating_requirement_table_9c (
         temperature_reduction_when_heating_is_off_1_weekday_living_room,
         temperature_reduction_when_heating_is_off_2_weekday_living_room,
         temperature_reduction_when_heating_is_off_1_weekend_living_room,
@@ -14,7 +14,11 @@ def Heating_requirement (
         temperature_during_heating_rest_of_dwelling,
         temperature_adjustment_table_4e
         ):
+    """
     
+    ;rtype: dict
+    
+    """
     
     
     T_weekday_living_room = [] 
@@ -60,13 +64,12 @@ def Heating_requirement (
 
         
     
-    return(
-            T_weekday_living_room,
-            T_weekend_living_room,
-            mean_internal_temperature_living_room_T1_Table_9c,
-            T_weekday_rest_of_dwelling,
-            T_weekend_rest_of_dwelling,
-            mean_internal_temperature_rest_of_dwelling_T2_table_9c
+    return dict(T_weekday_living_room=T_weekday_living_room,
+                T_weekend_living_room=T_weekend_living_room,
+                mean_internal_temperature_living_room_T1_Table_9c=mean_internal_temperature_living_room_T1_Table_9c,
+                T_weekday_rest_of_dwelling=T_weekday_rest_of_dwelling,
+                T_weekend_rest_of_dwelling=T_weekend_rest_of_dwelling,
+                mean_internal_temperature_rest_of_dwelling_T2_table_9c=mean_internal_temperature_rest_of_dwelling_T2_table_9c
             )
         
         

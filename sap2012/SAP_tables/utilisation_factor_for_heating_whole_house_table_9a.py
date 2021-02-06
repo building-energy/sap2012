@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-def Utilisation_factor_for_heating_whole_house(
+def utilisation_factor_for_heating_whole_house_table_9a(
         heat_transfer_coefficient,
         total_internal_and_solar_gains,
         mean_internal_temp_whole_dwelling,
@@ -8,6 +8,12 @@ def Utilisation_factor_for_heating_whole_house(
         thermal_mass_parameter,
         heat_loss_parameter
         ):
+    """
+    
+    :rtype: dict
+    
+    """
+    
     
     time_constant_whole_house = []
     for i in range(12):
@@ -46,11 +52,10 @@ def Utilisation_factor_for_heating_whole_house(
             
     
     
-    return(
-            time_constant_whole_house,
-            a_whole_house,
-            heat_loss_rate_whole_house,
-            y_whole_house,
-            utilisation_factor_for_heating_whole_house
-            )
+    return dict(time_constant_whole_house=time_constant_whole_house,
+                a_whole_house=a_whole_house,
+                heat_loss_rate_whole_house=heat_loss_rate_whole_house,
+                y_whole_house=y_whole_house,
+                utilisation_factor_for_heating_whole_house=utilisation_factor_for_heating_whole_house
+                )
 
