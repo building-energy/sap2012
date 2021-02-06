@@ -34,7 +34,7 @@ def space_heating_requirement (
     :param total_floor_area: in m.
     :type total_floor_area: float
     
-    :returns: A tuple of (
+    :returns: A dictionary with keys of (
             useful_gains,
             heat_loss_rate_for_mean_internal_temperature,
             space_heating_requirement_monthly,
@@ -77,9 +77,9 @@ def space_heating_requirement (
     space_heating_requirement_yearly_per_m2 = sum(space_heating_requirement_monthly) / total_floor_area
     
     
-    return(
-            useful_gains,
-            heat_loss_rate_for_mean_internal_temperature,
-            space_heating_requirement_monthly,
-            space_heating_requirement_yearly,
-            space_heating_requirement_yearly_per_m2)
+    return dict(useful_gains=useful_gains,
+                heat_loss_rate_for_mean_internal_temperature=heat_loss_rate_for_mean_internal_temperature,
+                space_heating_requirement_monthly=space_heating_requirement_monthly,
+                space_heating_requirement_yearly=space_heating_requirement_yearly,
+                space_heating_requirement_yearly_per_m2=space_heating_requirement_yearly_per_m2
+                )

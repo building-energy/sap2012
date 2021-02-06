@@ -282,9 +282,9 @@ def calculate_worksheet(inputs):
     result['heat_losses_and_heat_loss_parameter']=(
         heat_losses_and_heat_loss_parameter(
             **inputs['heat_losses_and_heat_loss_parameter'],
-            **dict(total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
-                   effective_air_change_rate=result['ventilation_rates']['effective_air_change_rate'],
-                   dwelling_volume=result['overall_dwelling_dimensions']['dwelling_volume'])
+            total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
+            effective_air_change_rate=result['ventilation_rates']['effective_air_change_rate'],
+            dwelling_volume=result['overall_dwelling_dimensions']['dwelling_volume']
             )
         )
     
@@ -299,10 +299,10 @@ def calculate_worksheet(inputs):
     result['internal_gains_appendix_L']=(
         internal_gains_appendix_L(
             **inputs['internal_gains_appendix_L'],
-            **dict(total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
-                   assumed_occupancy=inputs['water_heating_requirement']['assumed_occupancy'],
-                   days_in_month=inputs['water_heating_requirement']['days_in_month'],
-                   heat_gains_from_water_heating_monthly=result['water_heating_requirement']['heat_gains_from_water_heating_monthly'])
+            total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'],
+            assumed_occupancy=inputs['water_heating_requirement']['assumed_occupancy'],
+            days_in_month=inputs['water_heating_requirement']['days_in_month'],
+            heat_gains_from_water_heating_monthly=result['water_heating_requirement']['heat_gains_from_water_heating_monthly']
             )
         )
     
@@ -310,35 +310,35 @@ def calculate_worksheet(inputs):
     result['internal_gains']=(
         internal_gains(
             **inputs['internal_gains'],
-            **dict(metabolic_gains=result['internal_gains_appendix_L']['metabolic_gains'],
-                   lighting_gains=result['internal_gains_appendix_L']['lighting_gains'],
-                   appliances_gains=result['internal_gains_appendix_L']['appliances_gains'],
-                   cooking_gains=result['internal_gains_appendix_L']['cooking_gains'],
-                   losses=result['internal_gains_appendix_L']['losses'],
-                   water_heating_gains=result['internal_gains_appendix_L']['water_heating_gains'],
-                   )
+            metabolic_gains=result['internal_gains_appendix_L']['metabolic_gains'],
+            lighting_gains=result['internal_gains_appendix_L']['lighting_gains'],
+            appliances_gains=result['internal_gains_appendix_L']['appliances_gains'],
+            cooking_gains=result['internal_gains_appendix_L']['cooking_gains'],
+            losses=result['internal_gains_appendix_L']['losses'],
+            water_heating_gains=result['internal_gains_appendix_L']['water_heating_gains'],
             )
         )
     
     # solar_gains_appendix_U3
     result['solar_gains_appendix_U3']=(
-        solar_gains_appendix_U3(**inputs['solar_gains_appendix_U3'])
+        solar_gains_appendix_U3(
+            **inputs['solar_gains_appendix_U3']
+            )
         )
     
     # solar_gains
     result['solar_gains']=(
         solar_gains(
             **inputs['solar_gains'],
-            **dict(solar_flux_north=result['solar_gains_appendix_U3']['solar_flux_north'],
-                   solar_flux_north_east=result['solar_gains_appendix_U3']['solar_flux_north_east'],
-                   solar_flux_east=result['solar_gains_appendix_U3']['solar_flux_east'],
-                   solar_flux_south_east=result['solar_gains_appendix_U3']['solar_flux_south_east'],
-                   solar_flux_south=result['solar_gains_appendix_U3']['solar_flux_south'],
-                   solar_flux_south_west=result['solar_gains_appendix_U3']['solar_flux_south_west'],
-                   solar_flux_west=result['solar_gains_appendix_U3']['solar_flux_west'],
-                   solar_flux_north_west=result['solar_gains_appendix_U3']['solar_flux_north_west'],
-                   total_internal_gains=result['internal_gains']['total_internal_gains']
-                   )
+            solar_flux_north=result['solar_gains_appendix_U3']['solar_flux_north'],
+            solar_flux_north_east=result['solar_gains_appendix_U3']['solar_flux_north_east'],
+            solar_flux_east=result['solar_gains_appendix_U3']['solar_flux_east'],
+            solar_flux_south_east=result['solar_gains_appendix_U3']['solar_flux_south_east'],
+            solar_flux_south=result['solar_gains_appendix_U3']['solar_flux_south'],
+            solar_flux_south_west=result['solar_gains_appendix_U3']['solar_flux_south_west'],
+            solar_flux_west=result['solar_gains_appendix_U3']['solar_flux_west'],
+            solar_flux_north_west=result['solar_gains_appendix_U3']['solar_flux_north_west'],
+            total_internal_gains=result['internal_gains']['total_internal_gains']
             )
         )
     
@@ -346,11 +346,10 @@ def calculate_worksheet(inputs):
     result['utilisation_factor_for_heating_table_9a']=(
         utilisation_factor_for_heating_table_9a(
             **inputs['utilisation_factor_for_heating_table_9a'],
-            **dict(heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
-                   total_internal_and_solar_gains=result['solar_gains']['total_internal_and_solar_gains'],
-                   thermal_mass_parameter=result['heat_losses_and_heat_loss_parameter']['thermal_mass_parameter'],
-                   heat_loss_parameter=result['heat_losses_and_heat_loss_parameter']['heat_loss_parameter']
-                   )
+            heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
+            total_internal_and_solar_gains=result['solar_gains']['total_internal_and_solar_gains'],
+            thermal_mass_parameter=result['heat_losses_and_heat_loss_parameter']['thermal_mass_parameter'],
+            heat_loss_parameter=result['heat_losses_and_heat_loss_parameter']['heat_loss_parameter']
             )
         )
     
@@ -358,15 +357,14 @@ def calculate_worksheet(inputs):
     result['temperature_reduction_when_heating_is_off_table_9b']=(
         temperature_reduction_when_heating_is_off_table_9b(
             **inputs['temperature_reduction_when_heating_is_off_table_9b'],
-            **dict(time_constant=result['utilisation_factor_for_heating_table_9a']['time_constant'], 
-                   temperature_during_heating_living_room=inputs['utilisation_factor_for_heating_table_9a']['temperature_during_heating_living_room'], 
-                   temperature_during_heating_rest_of_dwelling=result['utilisation_factor_for_heating_table_9a']['temperature_during_heating_rest_of_dwelling'], 
-                   monthly_external_temperature_table_U1=inputs['utilisation_factor_for_heating_table_9a']['monthly_external_temperature_table_U1'], 
-                   utilisation_factor_for_heating_living_room=result['utilisation_factor_for_heating_table_9a']['utilisation_factor_for_heating_living_room'], 
-                   utilisation_factor_for_heating_rest_of_dwelling=result['utilisation_factor_for_heating_table_9a']['utilisation_factor_for_heating_rest_of_dwelling'], 
-                   heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
-                   total_internal_and_solar_gains=result['solar_gains']['total_internal_and_solar_gains']
-                   )
+            time_constant=result['utilisation_factor_for_heating_table_9a']['time_constant'], 
+            temperature_during_heating_living_room=inputs['utilisation_factor_for_heating_table_9a']['temperature_during_heating_living_room'], 
+            temperature_during_heating_rest_of_dwelling=result['utilisation_factor_for_heating_table_9a']['temperature_during_heating_rest_of_dwelling'], 
+            monthly_external_temperature_table_U1=inputs['utilisation_factor_for_heating_table_9a']['monthly_external_temperature_table_U1'], 
+            utilisation_factor_for_heating_living_room=result['utilisation_factor_for_heating_table_9a']['utilisation_factor_for_heating_living_room'], 
+            utilisation_factor_for_heating_rest_of_dwelling=result['utilisation_factor_for_heating_table_9a']['utilisation_factor_for_heating_rest_of_dwelling'], 
+            heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
+            total_internal_and_solar_gains=result['solar_gains']['total_internal_and_solar_gains']
             )
         )
     
@@ -374,20 +372,20 @@ def calculate_worksheet(inputs):
     result['heating_requirement_table_9c']=(
         heating_requirement_table_9c(
             **inputs['heating_requirement_table_9c'],
-            **dict(temperature_reduction_when_heating_is_off_1_weekday_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekday_living_room'], 
-                   temperature_reduction_when_heating_is_off_2_weekday_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekday_living_room'], 
-                   temperature_reduction_when_heating_is_off_1_weekend_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekend_living_room'], 
-                   temperature_reduction_when_heating_is_off_2_weekend_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekend_living_room'], 
-                   temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling'], 
-                   temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling'], 
-                   temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling'], 
-                   temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling'],
-                   temperature_during_heating_living_room=inputs['utilisation_factor_for_heating_table_9a']['temperature_during_heating_living_room'],
-                   temperature_during_heating_rest_of_dwelling=result['utilisation_factor_for_heating_table_9a']['temperature_during_heating_rest_of_dwelling'],
-                 )
+            temperature_reduction_when_heating_is_off_1_weekday_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekday_living_room'], 
+            temperature_reduction_when_heating_is_off_2_weekday_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekday_living_room'], 
+            temperature_reduction_when_heating_is_off_1_weekend_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekend_living_room'], 
+            temperature_reduction_when_heating_is_off_2_weekend_living_room=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekend_living_room'], 
+            temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekday_rest_of_dwelling'], 
+            temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekday_rest_of_dwelling'], 
+            temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_1_weekend_rest_of_dwelling'], 
+            temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling=result['temperature_reduction_when_heating_is_off_table_9b']['temperature_reduction_when_heating_is_off_2_weekend_rest_of_dwelling'],
+            temperature_during_heating_living_room=inputs['utilisation_factor_for_heating_table_9a']['temperature_during_heating_living_room'],
+            temperature_during_heating_rest_of_dwelling=result['utilisation_factor_for_heating_table_9a']['temperature_during_heating_rest_of_dwelling'],
             )
         )
     
+    # mean_internal_temperature
     result['mean_internal_temperature']=(
         mean_internal_temperature(
             **inputs['mean_internal_temperature'],
@@ -396,10 +394,9 @@ def calculate_worksheet(inputs):
             total_floor_area=result['overall_dwelling_dimensions']['total_floor_area'], 
             temperature_adjustment_table_4e=inputs['heating_requirement_table_9c']['temperature_adjustment_table_4e'] 
             )
-        
-        
         )
     
+    # utilisation_factor_for_heating_whole_house_table_9a
     result['utilisation_factor_for_heating_whole_house_table_9a']=(
         utilisation_factor_for_heating_whole_house_table_9a(
             heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
@@ -411,7 +408,18 @@ def calculate_worksheet(inputs):
             )
         )
     
-    
+    # space_heating_requirement
+    result['space_heating_requirement']=(
+        space_heating_requirement(
+            utilisation_factor_for_heating_whole_house=result['utilisation_factor_for_heating_whole_house_table_9a']['utilisation_factor_for_heating_whole_house'],
+            total_internal_and_solar_gains=result['solar_gains']['total_internal_and_solar_gains'],
+            monthly_external_temperature_table_U1=inputs['utilisation_factor_for_heating_table_9a']['monthly_external_temperature_table_U1'],
+            mean_internal_temp_whole_dwelling=result['mean_internal_temperature']['mean_internal_temp_whole_dwelling'],
+            heat_transfer_coefficient=result['heat_losses_and_heat_loss_parameter']['heat_transfer_coefficient'],
+            days_in_month=inputs['water_heating_requirement']['days_in_month'],
+            total_floor_area=result['overall_dwelling_dimensions']['total_floor_area']
+            )
+        )
     
     
     return result
