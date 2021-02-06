@@ -240,6 +240,31 @@ def calculate_worksheet(inputs):
          'mean_internal_temperature':
              {'living_room_area': 16
               },
+         'energy_requirements':
+             {'fraction_of_space_heat_secondary_system': 0, 
+              'fraction_of_space_heat_from_main_system_2': 0, 
+              'efficiency_of_main_space_heating_system_1': 88.8, 
+              'efficiency_of_main_space_heating_system_2': 0, 
+              'efficiency_of_secondary_space_heating_system': 0, 
+              'cooling_system_energy_efficiency_ratio_table_10c': 0, 
+              'water_heater_type': 'gas/oil boiler main system', 
+              'efficiency_of_water_heater': 80, 
+              'efficiency_of_water_heater_adjustment_table_4c': 0, 
+              'space_cooling_requirement_monthly': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+              'electricity_demand_mechanical_ventilation_fans_table_4f': 0, 
+              'electricity_demand_warm_air_heating_systems_fans_table_4f': 0, 
+              'electricity_demand_central_heating_pump_or_water_pump_table_4f': 0, 
+              'electricity_demand_oil_boiler_pump_table_4f': 0, 
+              'electricity_demand_boiler_flue_fan_table_4f': 0, 
+              'electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f': 0, 
+              'electricity_demand_pump_for_solar_water_heating_table_4f': 0, 
+              'electricity_demand_pump_for_storage_WWHRS_Table_G3': 0, 
+              'electricity_generated_by_PV_appendix_M': [0], 
+              'electricity_generated_by_wind_turbine_appendix_M': [0], 
+              'electricity_used_or_generated_by_micro_CHP_appendix_N': [0], 
+              'electricity_generated_by_hydro_electric_generator_appendix_M': [0], 
+              'appendix_Q_energy_saved': [0], 'appendix_Q_energy_used': [0]
+              }
         }
     
     .. rubric:: Outputs
@@ -421,6 +446,15 @@ def calculate_worksheet(inputs):
             )
         )
     
+    # energy_requirements
+    result['energy_requirements']=(
+        energy_requirements(
+            **inputs['energy_requirements'],
+            space_heating_requirement_monthly=result['space_heating_requirement']['space_heating_requirement_monthly'],
+            output_from_water_heater_monthly=result['water_heating_requirement']['output_from_water_heater_monthly'],
+            annual_lighting_demand=result['internal_gains_appendix_L']['annual_lighting_demand']
+            )
+        )
     
     return result
 

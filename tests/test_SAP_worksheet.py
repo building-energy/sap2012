@@ -487,7 +487,59 @@ class Test_SAP_worksheet(unittest.TestCase):
                           }
                          )
     
-        
+    
+    def test_energy_requirements(self):
+        ""
+        result=SAP_worksheet.energy_requirements(
+            fraction_of_space_heat_secondary_system=0,
+            fraction_of_space_heat_from_main_system_2=0,
+            efficiency_of_main_space_heating_system_1=88.8,
+            efficiency_of_main_space_heating_system_2=0,
+            efficiency_of_secondary_space_heating_system=0,
+            cooling_system_energy_efficiency_ratio_table_10c=0,
+            space_heating_requirement_monthly=[2222.0637912700713, 1843.2963696438374, 1616.0896383131505, 1051.749951786216, 571.2585018066987, 135.82483111634852, 15.750574039775303, 15.421910406402821, 217.79710501529001, 922.3709515328603, 1589.8517511458213, 2253.428255509213], #
+            output_from_water_heater_monthly=[176.17696800000002, 154.0855008, 159.00243479999997, 138.622176, 133.01127839999998, 114.77861999999999, 106.35926399999998, 122.04881039999997, 123.50646, 143.93487239999996, 157.116168, 170.617986], # water_heating_requirements
+            water_heater_type='gas/oil boiler main system',
+            efficiency_of_water_heater=80,
+            efficiency_of_water_heater_adjustment_table_4c=0,
+            space_cooling_requirement_monthly=[0,0,0,0,0,0,0,0,0,0,0,0],
+            electricity_demand_mechanical_ventilation_fans_table_4f=0,
+            electricity_demand_warm_air_heating_systems_fans_table_4f=0,
+            electricity_demand_central_heating_pump_or_water_pump_table_4f=0,
+            electricity_demand_oil_boiler_pump_table_4f=0,
+            electricity_demand_boiler_flue_fan_table_4f=0,
+            electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f=0,
+            electricity_demand_pump_for_solar_water_heating_table_4f=0,
+            electricity_demand_pump_for_storage_WWHRS_Table_G3=0,
+            annual_lighting_demand=1375.548784405473, # internal_gains_appendix_l
+            electricity_generated_by_PV_appendix_M=[0],
+            electricity_generated_by_wind_turbine_appendix_M=[0],
+            electricity_used_or_generated_by_micro_CHP_appendix_N=[0],
+            electricity_generated_by_hydro_electric_generator_appendix_M=[0],
+            appendix_Q_energy_saved=[0],
+            appendix_Q_energy_used=[0]
+            )
+        #print(result); return
+        self.assertEqual(result,
+                         {'fraction_of_space_heat_from_main_systems': 1, 
+                          'fraction_of_total_space_heat_from_main_system_1': 1, 
+                          'fraction_of_total_space_heat_from_main_system_2': 0, 
+                          'space_heating_fuel_main_system_1': [2502.3240892680983, 2075.7842000493665, 1819.9207638661605, 1184.403098858351, 643.3091236561924, 0, 0, 0, 0, 1038.7060265009688, 1790.3735936326816, 2537.644431879745], 
+                          'space_heating_fuel_main_system_2': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 
+                          'space_heating_fuel_secondary_system': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 
+                          'efficiency_of_water_heater_table_4a': [88.08818571043759, 88.05280057451473, 87.93357632302069, 87.67687598232241, 86.99272176591167, 84.54075372718351, 81.03583975422129, 80.89937924581712, 85.40059859744034, 87.50076184715809, 87.93010620821106, 88.11775553227744], 
+                          'fuel_for_water_heating_monthly': [200.0006772521423, 174.99216355941462, 180.8210713685868, 158.10574275929866, 152.8993181267732, 135.76720686734745, 131.2496598080352, 150.8649529054458, 144.62013384962597, 164.49556479453074, 178.6830185647248, 193.62497940327455], 
+                          'space_cooling_fuel_monthly': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                          'space_heating_fuel_used_main_system_1': 13592.465327711565, 
+                          'space_heating_fuel_used_main_system_2': 0.0, 
+                          'space_heating_fuel_used_secondary': 0.0, 
+                          'water_fuel_used': 1966.1244892592, 
+                          'space_cooling_fuel_used': 0, 
+                          'electricity_for_pumps_fans_electric_keep_hot': 0, 
+                          'energy_saving_generation_technologies_total': 0, 
+                          'appendix_Q_energy_total': 0, 
+                          'energy_for_lighting': 1375.548784405473, 
+                          'total_energy_used': 16934.13860137624})
         
     def test_calculate_worksheet(self):
         ""
@@ -650,6 +702,32 @@ class Test_SAP_worksheet(unittest.TestCase):
                 ),
             'mean_internal_temperature':dict(
                 living_room_area=16
+                ),
+            'energy_requirements':dict(
+                fraction_of_space_heat_secondary_system=0,
+                fraction_of_space_heat_from_main_system_2=0,
+                efficiency_of_main_space_heating_system_1=88.8,
+                efficiency_of_main_space_heating_system_2=0,
+                efficiency_of_secondary_space_heating_system=0,
+                cooling_system_energy_efficiency_ratio_table_10c=0,
+                water_heater_type='gas/oil boiler main system',
+                efficiency_of_water_heater=80,
+                efficiency_of_water_heater_adjustment_table_4c=0,
+                space_cooling_requirement_monthly=[0,0,0,0,0,0,0,0,0,0,0,0],
+                electricity_demand_mechanical_ventilation_fans_table_4f=0,
+                electricity_demand_warm_air_heating_systems_fans_table_4f=0,
+                electricity_demand_central_heating_pump_or_water_pump_table_4f=0,
+                electricity_demand_oil_boiler_pump_table_4f=0,
+                electricity_demand_boiler_flue_fan_table_4f=0,
+                electricity_demand_keep_hot_facility_gas_combi_boiler_table_4f=0,
+                electricity_demand_pump_for_solar_water_heating_table_4f=0,
+                electricity_demand_pump_for_storage_WWHRS_Table_G3=0,
+                electricity_generated_by_PV_appendix_M=[0],
+                electricity_generated_by_wind_turbine_appendix_M=[0],
+                electricity_used_or_generated_by_micro_CHP_appendix_N=[0],
+                electricity_generated_by_hydro_electric_generator_appendix_M=[0],
+                appendix_Q_energy_saved=[0],
+                appendix_Q_energy_used=[0]
                 )
             }
         
@@ -663,6 +741,7 @@ class Test_SAP_worksheet(unittest.TestCase):
         #print(inputs['temperature_reduction_when_heating_is_off_table_9b'])
         #print(inputs['heating_requirement_table_9c'])
         #print(inputs['mean_internal_temperature'])
+        #print(inputs['energy_requirements'])
         
         result=SAP_worksheet.calculate_worksheet(inputs)
         #print(result)
