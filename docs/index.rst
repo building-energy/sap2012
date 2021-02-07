@@ -54,8 +54,10 @@ SAP2012 energy calculation method in Python.
    :caption: Reference - SAP Tables:
       
    utilisation_factor_for_heating_table_9a_function
+   utilisation_factor_for_heating_whole_house_table_9a_function
    temperature_reduction_when_heating_is_off_table_9b_function
    heating_requirement_table_9c_function
+ 
    
 
 

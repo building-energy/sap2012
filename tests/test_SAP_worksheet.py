@@ -540,7 +540,119 @@ class Test_SAP_worksheet(unittest.TestCase):
                           'appendix_Q_energy_total': 0, 
                           'energy_for_lighting': 1375.548784405473, 
                           'total_energy_used': 16934.13860137624})
+    
+    
+    def test_fuel_costs(self):
+        ""
+        result=SAP_worksheet.fuel_costs(
+            space_heating_fuel_used_main_system_1=13592.465327711565, #
+            space_heating_fuel_used_main_system_2=0.0, #
+            space_heating_fuel_used_secondary=0.0, #
+            space_heating_fuel_price_main_system_1=3.48,
+            space_heating_fuel_price_main_system_2=0,
+            space_heating_fuel_price_secondary=0,
+            water_heating_high_rate_fraction_table_13=0,
+            water_heating_low_rate_fraction_table_13=1,
+            high_rate_fuel_price=0,
+            low_rate_fuel_price=3.48,
+            water_fuel_used=1966.1244892592, #
+            water_heating_fuel_price_other=0,
+            space_cooling_fuel_used=0,
+            space_cooling_fuel_price=0,
+            electricity_for_pumps_fans_electric_keep_hot=0,
+            fuel_price_for_pumps_fans_electric_keep_hot=0,
+            energy_for_lighting=1375.548784405473, #
+            fuel_price_for_lighting=13.19,
+            additional_standing_charges_table_12=0,
+            energy_saving_generation_technologies=[0],
+            energy_saving_generation_technologies_fuel_price=[0],
+            appendix_Q_energy_used=[0], # inputs
+            appendix_Q_energy_used_fuel_price=[0],
+            appendix_Q_energy_saved=[0], # inputs
+            appendix_Q_energy_saved_fuel_price=[0]
+            )
+        #print(result); return
+        self.assertEqual(result,
+                         {'space_heating_main_system_1_fuel_cost': 473.01779340436246, 
+                          'space_heating_main_system_2_fuel_cost': 0.0, 
+                          'space_heating_secondary_fuel_cost': 0.0, 
+                          'water_heating_high_rate_fuel_cost': 0.0, 
+                          'water_heating_low_rate_fuel_cost': 68.42113222622015, 
+                          'water_heating_cost_other': 0.0, 
+                          'space_cooling_cost': 0.0, 
+                          'pumps_fan_keep_hot_cost': 0.0, 
+                          'lighting_cost': 181.4348846630819, 
+                          'appendix_Q_fuel_cost': 0.0, 
+                          'energy_saving_total_fuel_cost': 0.0, 
+                          'additional_standing_charges_table_12': 0, 
+                          'total_fuel_cost': 722.8738102936645
+                          }
+                         )
         
+        
+    def test_SAP_rating(self):
+        ""
+        result=SAP_worksheet.SAP_rating(
+            energy_cost_deflator=0.42,
+            total_fuel_cost=722.8738102936645, #
+            total_floor_area=126 #
+            )
+        #print(result); return
+        self.assertEqual(result,
+                         {'energy_cost_factor': 1.7754795340546146, 
+                          'SAP_rating_value': 75.23206049993813})
+    
+    
+    def test_CO2_emissions(self):
+        ""
+        result=SAP_worksheet.CO2_emissions(
+            space_heating_fuel_used_main_system_1=13592.465327711565, # result - energy requirements
+            space_heating_fuel_used_main_system_2=0, #
+            space_heating_fuel_used_secondary=0, #
+            space_heating_fuel_emission_factor_main_system_1=0.216,
+            space_heating_fuel_emission_factor_main_system_2=0,
+            space_heating_fuel_emission_factor_secondary=0,
+            water_fuel_used=1966.1244892592, #
+            water_heating_fuel_emission_factor=0.216,
+            space_cooling_fuel_used=0, #
+            space_cooling_fuel_emission_factor=0,
+            electricity_for_pumps_fans_electric_keep_hot=0, #
+            fuel_emission_factor_for_pumps_fans_electric_keep_hot=0,
+            energy_for_lighting=1375.548784405473, #
+            fuel_emission_factor_for_lighting=0.519,
+            energy_saving_generation_technologies=[0], # input - fuel costs
+            energy_saving_generation_technologies_fuel_emission_factor=[0],
+            appendix_Q_energy_used=[0], # input - fuel costs
+            appendix_Q_energy_used_fuel_emission_factor=[0],
+            appendix_Q_energy_saved=[0], # input - fuel costs
+            appendix_Q_energy_saved_fuel_emission_factor=[0],
+            total_floor_area=126 #
+            )
+        #print(result); return
+        self.assertEqual(result,
+                         {'space_heating_main_system_1_emissions': 2935.972510785698, 
+                          'space_heating_main_system_2_emissions': 0, 
+                          'space_heating_secondary_emissions': 0, 
+                          'water_used_emissions': 424.68288967998717, 
+                          'space_cooling_used_emissions': 0, 
+                          'pumps_fans_electric_keep_hot_emissions': 0, 
+                          'lighting_emissions': 713.9098191064405, 
+                          'appendix_Q_used_emissions': [0], 
+                          'appendix_Q_saved_emissions': [0], 
+                          'energy_saving_generation_technologies_emissions': [0], 
+                          'space_and_water_heating_emissions': 3360.655400465685, 
+                          'appendix_Q_total_used_emissions': 0, 
+                          'appendix_Q_total_saved_emissions': 0, 
+                          'energy_saving_generation_technologies_total_emissions': 0, 
+                          'total_CO2_emissions_yearly': 4074.5652195721254, 
+                          'dwelling_CO2_emission_rate': 32.337819202953376, 
+                          'CF': 23.82786678112354, 
+                          'EI_rating': 68.07065851329446
+                          }
+                         )
+        
+        
+    
     def test_calculate_worksheet(self):
         ""
         inputs={
@@ -728,6 +840,41 @@ class Test_SAP_worksheet(unittest.TestCase):
                 electricity_generated_by_hydro_electric_generator_appendix_M=[0],
                 appendix_Q_energy_saved=[0],
                 appendix_Q_energy_used=[0]
+                ),
+            'fuel_costs':dict(
+                space_heating_fuel_price_main_system_1=3.48,
+                space_heating_fuel_price_main_system_2=0,
+                space_heating_fuel_price_secondary=0,
+                water_heating_high_rate_fraction_table_13=0,
+                water_heating_low_rate_fraction_table_13=1,
+                high_rate_fuel_price=0,
+                low_rate_fuel_price=3.48,
+                water_heating_fuel_price_other=0,
+                space_cooling_fuel_used=0,
+                space_cooling_fuel_price=0,
+                electricity_for_pumps_fans_electric_keep_hot=0,
+                fuel_price_for_pumps_fans_electric_keep_hot=0,
+                fuel_price_for_lighting=13.19,
+                additional_standing_charges_table_12=0,
+                energy_saving_generation_technologies=[0],
+                energy_saving_generation_technologies_fuel_price=[0],
+                appendix_Q_energy_used_fuel_price=[0],
+                appendix_Q_energy_saved_fuel_price=[0]
+                ),
+            'SAP_rating':dict(
+                energy_cost_deflator=0.42
+                ),
+            'CO2_emissions':dict(
+                space_heating_fuel_emission_factor_main_system_1=0.216,
+                space_heating_fuel_emission_factor_main_system_2=0,
+                space_heating_fuel_emission_factor_secondary=0,
+                water_heating_fuel_emission_factor=0.216,
+                space_cooling_fuel_emission_factor=0,
+                fuel_emission_factor_for_pumps_fans_electric_keep_hot=0,
+                fuel_emission_factor_for_lighting=0.519,
+                energy_saving_generation_technologies_fuel_emission_factor=[0],
+                appendix_Q_energy_used_fuel_emission_factor=[0],
+                appendix_Q_energy_saved_fuel_emission_factor=[0],
                 )
             }
         
@@ -742,14 +889,18 @@ class Test_SAP_worksheet(unittest.TestCase):
         #print(inputs['heating_requirement_table_9c'])
         #print(inputs['mean_internal_temperature'])
         #print(inputs['energy_requirements'])
+        #print(inputs['fuel_costs'])
+        #print(inputs['SAP_rating'])
+        #print(inputs['CO2_emissions'])
+        
         
         result=SAP_worksheet.calculate_worksheet(inputs)
-        #print(result)
+       # print(result)
         
-        self.assertEqual(result['overall_dwelling_dimensions'],
-                         {'volume': [0, 157.5, 173.25], 
-                          'total_floor_area': 126, 
-                          'dwelling_volume': 330.75})
+        # self.assertEqual(result['overall_dwelling_dimensions'],
+        #                  {'volume': [0, 157.5, 173.25], 
+        #                   'total_floor_area': 126, 
+        #                   'dwelling_volume': 330.75})
     
         
         

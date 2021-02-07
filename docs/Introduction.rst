@@ -10,6 +10,9 @@ This Python package contains the calculation methods and data in the SAP2012 met
 Installation
 ------------
 
+Available on PyPi. Download using the command :code:`pip install sap2012`.
+
+If using the Anaconda distribution, this command is run using the Anaconda prompt.
 
 Issues & feature requests?
 --------------------------

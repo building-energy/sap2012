@@ -18,9 +18,6 @@ from .energy_requirements import energy_requirements
 from .fuel_costs import fuel_costs
 from .SAP_rating import SAP_rating
 from .CO2_emissions import CO2_emissions
-#from sap2012.tables.temperature_reduction_when_heating_is_off import Temperature_reduction
-#from sap2012.tables.Heating_Requirement_table_9c import Heating_requirement
-#from sap2012.tables.Utilisation_factor_for_heating_whole_house import Utilisation_factor_for_heating_whole_house 
 
 
 def calculate_worksheet(inputs):
@@ -48,7 +45,7 @@ def calculate_worksheet(inputs):
     - `temperature_reduction_when_heating_is_off_table_9b`
     - `heating_requirement_table_9c`
     - `mean_internal_temperature` (Section 7)
-    - `utilisation_factor_for_heating_whole_house`
+    - `utilisation_factor_for_heating_whole_house_table_9a`
     - `space_heating_requirement` (Section 8)
     - `energy_requirements` (Section 9)
     - `fuel_costs` (Section 10)
@@ -264,7 +261,42 @@ def calculate_worksheet(inputs):
               'electricity_used_or_generated_by_micro_CHP_appendix_N': [0], 
               'electricity_generated_by_hydro_electric_generator_appendix_M': [0], 
               'appendix_Q_energy_saved': [0], 'appendix_Q_energy_used': [0]
-              }
+              },
+         'fuel_costs':
+             {'space_heating_fuel_price_main_system_1': 3.48, 
+              'space_heating_fuel_price_main_system_2': 0, 
+              'space_heating_fuel_price_secondary': 0, 
+              'water_heating_high_rate_fraction_table_13': 0, 
+              'water_heating_low_rate_fraction_table_13': 1, 
+              'high_rate_fuel_price': 0, 
+              'low_rate_fuel_price': 3.48, 
+              'water_heating_fuel_price_other': 0, 
+              'space_cooling_fuel_used': 0, 
+              'space_cooling_fuel_price': 0, 
+              'electricity_for_pumps_fans_electric_keep_hot': 0, 
+              'fuel_price_for_pumps_fans_electric_keep_hot': 0, 
+              'fuel_price_for_lighting': 13.19, 
+              'additional_standing_charges_table_12': 0, 
+              'energy_saving_generation_technologies': [0], 
+              'energy_saving_generation_technologies_fuel_price': [0], 
+              'appendix_Q_energy_used_fuel_price': [0], 
+              'appendix_Q_energy_saved_fuel_price': [0]
+              },
+        'SAP_rating':
+            {'energy_cost_deflator': 0.42
+             },
+        'CO2_emissions':
+            {'space_heating_fuel_emission_factor_main_system_1': 0.216, 
+             'space_heating_fuel_emission_factor_main_system_2': 0, 
+             'space_heating_fuel_emission_factor_secondary': 0, 
+             'water_heating_fuel_emission_factor': 0.216, 
+             'space_cooling_fuel_emission_factor': 0, 
+             'fuel_emission_factor_for_pumps_fans_electric_keep_hot': 0, 
+             'fuel_emission_factor_for_lighting': 0.519, 
+             'energy_saving_generation_technologies_fuel_emission_factor': [0], 
+             'appendix_Q_energy_used_fuel_emission_factor': [0], 
+             'appendix_Q_energy_saved_fuel_emission_factor': [0]
+             }
         }
     
     .. rubric:: Outputs
@@ -453,6 +485,47 @@ def calculate_worksheet(inputs):
             space_heating_requirement_monthly=result['space_heating_requirement']['space_heating_requirement_monthly'],
             output_from_water_heater_monthly=result['water_heating_requirement']['output_from_water_heater_monthly'],
             annual_lighting_demand=result['internal_gains_appendix_L']['annual_lighting_demand']
+            )
+        )
+    
+    # fuel_costs
+    result['fuel_costs']=(
+        fuel_costs(
+            **inputs['fuel_costs'],
+            space_heating_fuel_used_main_system_1=result['energy_requirements']['space_heating_fuel_used_main_system_1'], 
+            space_heating_fuel_used_main_system_2=result['energy_requirements']['space_heating_fuel_used_main_system_2'], 
+            space_heating_fuel_used_secondary=result['energy_requirements']['space_heating_fuel_used_secondary'],
+            water_fuel_used=result['energy_requirements']['water_fuel_used'],
+            energy_for_lighting=result['energy_requirements']['energy_for_lighting'],
+            appendix_Q_energy_used=inputs['energy_requirements']['appendix_Q_energy_used'],
+            appendix_Q_energy_saved=inputs['energy_requirements']['appendix_Q_energy_saved'],
+            )
+        )
+    
+    # SAP_rating
+    result['SAP_rating']=(
+        SAP_rating(
+            **inputs['SAP_rating'],
+            total_fuel_cost=result['fuel_costs']['total_fuel_cost'],
+            total_floor_area=result['overall_dwelling_dimensions']['total_floor_area']
+            )
+        )
+    
+    # CO2_emissions
+    result['CO2_emissions']=(
+        CO2_emissions(
+            **inputs['CO2_emissions'],
+            space_heating_fuel_used_main_system_1=result['energy_requirements']['space_heating_fuel_used_main_system_1'], 
+            space_heating_fuel_used_main_system_2=result['energy_requirements']['space_heating_fuel_used_main_system_2'], 
+            space_heating_fuel_used_secondary=result['energy_requirements']['space_heating_fuel_used_secondary'], 
+            water_fuel_used=result['energy_requirements']['water_fuel_used'], 
+            space_cooling_fuel_used=result['energy_requirements']['space_cooling_fuel_used'],
+            electricity_for_pumps_fans_electric_keep_hot=result['energy_requirements']['electricity_for_pumps_fans_electric_keep_hot'], 
+            energy_for_lighting=result['energy_requirements']['energy_for_lighting'], 
+            energy_saving_generation_technologies=inputs['fuel_costs']['energy_saving_generation_technologies'], 
+            appendix_Q_energy_used=inputs['energy_requirements']['appendix_Q_energy_used'],
+            appendix_Q_energy_saved=inputs['energy_requirements']['appendix_Q_energy_saved'],
+            total_floor_area=result['overall_dwelling_dimensions']['total_floor_area']
             )
         )
     
