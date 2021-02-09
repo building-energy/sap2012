@@ -895,7 +895,11 @@ class Test_SAP_worksheet(unittest.TestCase):
         
         
         result=SAP_worksheet.calculate_worksheet(inputs)
-       # print(result)
+        print(result)
+        
+        import json
+        with open('inputs.json','w') as f:
+            json.dump(inputs,f,indent=4)
         
         # self.assertEqual(result['overall_dwelling_dimensions'],
         #                  {'volume': [0, 157.5, 173.25], 

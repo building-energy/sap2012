@@ -19,7 +19,8 @@ def SAP_rating (
     :param total_floor_area: in m2.
     :type total_floor_area: float
     
-    :returns: A dictionary with keys of ( SAP_rating_value )    
+    :returns: A dictionary with keys of ( energy_cost_factor,
+                                         SAP_rating_value )    
     
     - **energy_cost_factor** (`float`): See (257)
     
