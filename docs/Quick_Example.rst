@@ -4,9 +4,9 @@ Quick Example
 This example:
 
 - Imports the `calculate_worksheet` function.
-- Reads in the 'inputs' dictionary from a json file (available to view `here <https://github.com/building-energy/sap2012/blob/master/notebooks/docs/inputs.json>`_).
+- Reads in the 'inputs' dictionary from a json file (available to view `here <https://github.com/building-energy/sap2012/blob/master/notebooks/docs/inputs.json>`__).
 - Runs the `calculate_worksheet` function with the 'inputs' dictionary.
-- Prints the results of the `SAP_rating` section of the SAP worksheet (the full result dictionary is available to view `here <https://github.com/building-energy/sap2012/blob/master/notebooks/docs/result.json>`_).
+- Prints the results of the `SAP_rating` section of the SAP worksheet (the full result dictionary is available to view `here <https://github.com/building-energy/sap2012/blob/master/notebooks/docs/result.json>`__).
 
 .. code-block:: python
 
