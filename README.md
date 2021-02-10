@@ -9,53 +9,40 @@ SAP2012 is developed and published by the Building Research Establishment: https
 
 This Python package contains the calculation methods and data in the SAP2012 methodology. It allows the user to specify the inputs needed for a SAP calculation and then to run a SAP calculation based on these inputs.
 
+## Documentation
+
+Full documentation is available on ReadTheDocs here: https://sap2012.readthedocs.io/en/latest/
+
+## Installation
+
+Available on PyPi. Download using the command `pip install sap2012`.
+
+If using the Anaconda distribution, this command can be run using the Anaconda prompt.
+
 ## Approach
 
-The package is designed to represent the SAP calculation method as simply as possible, to allow for flexibility and customisation based on the underlying equations and data of the method. 
+The package is designed to represent the SAP calculation method as simply as possible, to allow for flexibility and customisation. 
 
-Each section of the SAP2012 calculation method is a separate Python function which takes the input data as a series of arguments and returns the calculation results. For example, the method for calculating ventilation rates is given in the [ventilation_rates.py](./sap2012/calcs/ventilation_rates.py) module.
+Each section of the SAP2012 calculation method is a separate Python function which takes the input data as a series of arguments and returns the calculation results. For example, the method for calculating ventilation rates is given in the *ventilation_rates.py* module.
 
-A complete SAP calculation is run using the Sap2012 class.
+A complete SAP calculation is run using the *calculate_worksheet* function.
 
 ## Quick Example
 
-### Creating a Sap2012 instance
+This example runs a complete SAP2012 calculation using the inputs as stored in the ['inputs.json'](https://github.com/building-energy/sap2012/blob/master/notebooks/docs/inputs.json) file. The example prints the model outputs of the 'SAP_rating' section of the calculations.
 
 ```python
->>> from sap2012 import Sap2012
->>> s=Sap2012()
+from sap2012 import calculate_worksheet
+import json
+with open('inputs.json') as f:
+    inputs=json.load(f)
+result=calculate_worksheet(inputs)
+print(result['SAP_rating'])
 ```
 
-### Reading in model inputs from a csv file
-
-```python
->>> s.read_input_csv('my_input_file.csv')
->>> print(len(s.inputs))
-197
->>> print(s.inputs['external_wall_u_value'])
-1.5
 ```
-
-See [here](./demo/input_csv_file.csv) for an example of an input csv file. The inputs could also be specified by updating the *inputs* dictionary values.
-
-### Run a SAP calculation
-
-```python
->>> s.run()
->>> print(len(s.outputs))
-192
+{'energy_cost_factor': 1.7754795340546146, 'SAP_rating_value': 75.23206049993813}
 ```
-
-The complete set of calculation outputs is stored in the *outputs* dictionary.
-
-### View calculation results
-
-```python
->>> print(s.outputs['total_energy_used'])
-16499.45199251753	
-```
-
-This is the total energy used by the house in kWh. 
 
 ## Issues & feature requests?
 
