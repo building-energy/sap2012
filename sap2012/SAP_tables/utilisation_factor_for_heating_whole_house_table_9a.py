@@ -8,8 +8,44 @@ def utilisation_factor_for_heating_whole_house_table_9a(
         thermal_mass_parameter,
         heat_loss_parameter
         ):
-    """
+    """Utilisation factor calculations for heating from Table 9a.
     
+    :param heat_transfer_coefficient: See (39), in W/K.
+    :type heat_transfer_coefficient: list(float)
+        
+    :param total_internal_and_solar_gains: See (84) in W.
+    :type total_internal_and_solar_gains: list(float)
+    
+    :param mean_internal_temp_whole_dwelling: See (92) in degC.
+    :type mean_internal_temp_whole_dwelling: float
+        
+    :param monthly_external_temperature_table_U1:
+    :type monthly_external_temperature_table_U1: list(float)
+        
+    :param thermal_mass_parameter: See (35), in kJ/m2K.
+    :type thermal_mass_parameter: float
+        
+    :param heat_loss_parameter: See (40), in W/m2K.
+    :type heat_loss_parameter: list(float)
+        
+    :returns: A dictionary with keys of (
+        time_constant_whole_house,
+        a_whole_house,
+        heat_loss_rate_whole_house,
+        y_whole_house,
+        utilisation_factor_for_heating_whole_house
+        )
+    
+    - **time_constant_whole_house** (`list` (`float`)) -
+        
+    - **a_whole_house** (`list` (`float`)) -
+        
+    - **heat_loss_rate_whole_house** (`list` (`float`)) -
+        
+    - **y_whole_house** (`list` (`float`)) -
+        
+    - **utilisation_factor_for_heating_whole_house** (`list` (`float`)) -
+        
     :rtype: dict
     
     """

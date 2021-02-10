@@ -10,10 +10,47 @@ def solar_gains_appendix_U3 (
         ):
     """Solar gains calculations as given in Appendix U3.
     
+    :param solar_radiation_horizontal_plane_monthly_table_U3:
+    :type solar_radiation_horizontal_plane_monthly_table_U3: list(float)
+        
+    :param solar_declination_monthly_table_U3:
+    :type solar_declination_monthly_table_U3: list(float)
+        
+    :param location_latitude_table_U4:
+    :type location_latitude_table_U4: float
+        
+    :param p_tilt:
+    :type p_tilt: float
+        
+    :returns: A dictionary with keys of (
+        solar_flux_north,
+        solar_flux_north_east,
+        solar_flux_east,
+        solar_flux_south_east,
+        solar_flux_south,
+        solar_flux_south_west,
+        solar_flux_west,
+        solar_flux_north_west
+        )
+
+    - **solar_flux_north** (`list` (`float`))-
     
+    - **solar_flux_north_east** (`list` (`float`))-
+    
+    - **solar_flux_east** (`list` (`float`))-
+    
+    - **solar_flux_south_east** (`list` (`float`))-
+    
+    - **solar_flux_south** (`list` (`float`))-
+    
+    - **solar_flux_south_west** (`list` (`float`))-
+    
+    - **solar_flux_west** (`list` (`float`))-
+    
+    - **solar_flux_north_west** (`list` (`float`))-
+
     :rtype: dict
     
-
     """
     
     solar_declination_radians = []

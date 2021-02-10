@@ -16,9 +16,91 @@ def internal_gains_appendix_L (
         ):
     """Internal gain calculations as given in Appendix L.
     
+    :param total_floor_area: See (4).
+    :type total_floor_area: float    
+        
+    :param assumed_occupancy: See (42). Calculated using equation from (42). 
+        If TFA > 13.9, N = 1 + 1.76 * [1 - exp(-0.000349 * (TFA -13.9)2)] + 0.0013 * (TFA -13.9). if TFA =< 13.9, N = 1. Where TFA is the Total Floor Area.
+    :type assumed_occupancy: float
     
+    :param number_of_low_energy_light_bulbs:
+    :type number_of_low_energy_light_bulbs: int
+        
+    :param total_number_of_light_bulbs:
+    :type total_number_of_light_bulbs: int
+        
+    :param frame_factor:
+    :type frame_factor: float
+        
+    :param window_area:
+    :type window_area: float
+        
+    :param light_access_factor_table_6d:
+    :type light_access_factor_table_6d: float
+        
+    :param light_transmittance_factor_table_6d:
+    :type light_transmittance_factor_table_6d: float
+        
+    :param month_number:
+    :type month_number: list(int)
+        
+    :param days_in_month: List of the number of days in each month of the calendar year.
+    :type days_in_month: float(int)
     
+    :param heat_gains_from_water_heating_monthly: (65) in kWh/month.
+    :type heat_gains_from_water_heating_monthly: list(float)
     
+    :returns: A dictionary with keys of (
+        G_L,
+        C_1,
+        C_2,
+        E_B,
+        initial_annual_lighting_demand,
+        monthly_lighting_demand,
+        annual_lighting_demand,
+        lighting_gains,
+        initial_annual_electrical_appliance_demand,
+        monthly_electrical_appliance_demand,
+        annual_electrical_appliance_demand,
+        appliances_gains,
+        cooking_gains,
+        losses,
+        water_heating_gains,
+        metabolic_gains
+        )
+    
+    - **G_L** (`float`)-
+    
+    - **C_1** (`float`)-
+    
+    - **C_2** (`float`)-
+    
+    - **E_B** (`float`)-
+    
+    - **initial_annual_lighting_demand** (`float`)-
+    
+    - **monthly_lighting_demand** (`list` (`float`))-
+    
+    - **annual_lighting_demand** (`float`)-
+    
+    - **lighting_gains** (`list` (`float`))-
+    
+    - **initial_annual_electrical_appliance_demand** (`float`)-
+    
+    - **monthly_electrical_appliance_demand** (`list` (`float`))-
+    
+    - **annual_electrical_appliance_demand** (`float`)-
+    
+    - **appliances_gains** (`list` (`float`))-
+    
+    - **cooking_gains** (`list` (`float`))-
+    
+    - **losses** (`list` (`float`))-
+    
+    - **water_heating_gains** (`list` (`float`))-
+    
+    - **metabolic_gains** (`list` (`float`))-
+
     :rtype: dict
     
     """

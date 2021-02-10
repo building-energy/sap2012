@@ -306,7 +306,7 @@ def heat_losses_and_heat_loss_parameter(
     
     - **heat_transfer_coefficient** (`list` (`float`): See (39), in W/K.
     
-    - **average_heat_transfer_coefficient**  (float`): See (39), in W/K.
+    - **average_heat_transfer_coefficient**  (`float`): See (39), in W/K.
     
     - **heat_loss_parameter** (`list` (`float`): See (40), in W/m2K.
     

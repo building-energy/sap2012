@@ -227,7 +227,7 @@ def solar_gains (
     
     - **solar_gains_watts** (`list` (`float`)): See (83) in W.
     
-    - **total_internal_and_solar_gains**: See (84) in W.
+    - **total_internal_and_solar_gains** (`list` (`float`)): See (84) in W.
     
     """
 
