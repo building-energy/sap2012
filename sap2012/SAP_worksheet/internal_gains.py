@@ -38,6 +38,7 @@ def internal_gains (
     
     - **total_internal_gains** (`list` (`float`)): Sum of all internal gains. See (73), in W.
     
+    :rtype: dict
     
     """
     

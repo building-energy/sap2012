@@ -3,7 +3,7 @@
 import unittest
 
 from sap2012 import SAP_worksheet, SAP_appendices, SAP_tables
-import sap2012
+
 
 class Test_SAP_worksheet(unittest.TestCase):
     "Test for the SAP_worksheet subpackage"

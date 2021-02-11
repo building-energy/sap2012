@@ -36,6 +36,8 @@ def mean_internal_temperature (
      
     - **mean_internal_temp_whole_dwelling** (float): See (92) in degC.
     
+    :rtype: dict
+    
     """
     
     living_area_fraction = living_room_area / total_floor_area

@@ -51,6 +51,8 @@ def space_heating_requirement (
     
     - **space_heating_requirement_yearly_per_m2** (`float`): See (99) in kWh/m2/yr.
     
+    :rtype: dict
+    
     """
     
     useful_gains =[]

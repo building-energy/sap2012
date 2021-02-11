@@ -229,6 +229,8 @@ def solar_gains (
     
     - **total_internal_and_solar_gains** (`list` (`float`)): See (84) in W.
     
+    :rtype: dict
+    
     """
 
     gains_north=[]

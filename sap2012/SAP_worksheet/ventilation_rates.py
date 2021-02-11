@@ -155,7 +155,7 @@ def ventilation_rates(
     
     - **effective_air_change_rate** list (`float`) - See (25).
 
-    :rtype: tuple
+    :rtype: dict
 
     """
     

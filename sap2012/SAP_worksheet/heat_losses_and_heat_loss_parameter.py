@@ -312,9 +312,7 @@ def heat_losses_and_heat_loss_parameter(
     
     - **average_heat_loss_parameter** (`float`): See (40), in W/m2K.
 
-
-    rtype: tuple
-
+    :rtype: dict
 
     """
 

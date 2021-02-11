@@ -153,6 +153,8 @@ def fuel_costs (
     
     - **total_fuel_cost** (`float`): See (255) in £/year.
     
+    :rtype: dict
+    
     """
     
     space_heating_main_system_1_fuel_cost = (space_heating_fuel_used_main_system_1 * 

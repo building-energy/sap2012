@@ -306,7 +306,7 @@ def calculate_worksheet(inputs):
     the outputs of all SAP calculation sections.
     
     The output dictionary is a collection of dictionaries, where each
-    dictiionary holds the outputs of an individual calculation section.
+    dictionary holds the outputs of an individual calculation section.
     
     An example of an output dictionary as returned by the `calculate_worksheet`
     function is:

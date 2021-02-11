@@ -33,21 +33,21 @@ def solar_gains_appendix_U3 (
         solar_flux_north_west
         )
 
-    - **solar_flux_north** (`list` (`float`))-
+    - **solar_flux_north** (`list` (`float`)) -
     
-    - **solar_flux_north_east** (`list` (`float`))-
+    - **solar_flux_north_east** (`list` (`float`)) -
     
-    - **solar_flux_east** (`list` (`float`))-
+    - **solar_flux_east** (`list` (`float`)) -
     
-    - **solar_flux_south_east** (`list` (`float`))-
+    - **solar_flux_south_east** (`list` (`float`)) -
     
-    - **solar_flux_south** (`list` (`float`))-
+    - **solar_flux_south** (`list` (`float`)) -
     
-    - **solar_flux_south_west** (`list` (`float`))-
+    - **solar_flux_south_west** (`list` (`float`)) -
     
-    - **solar_flux_west** (`list` (`float`))-
+    - **solar_flux_west** (`list` (`float`)) -
     
-    - **solar_flux_north_west** (`list` (`float`))-
+    - **solar_flux_north_west** (`list` (`float`)) -
 
     :rtype: dict
     

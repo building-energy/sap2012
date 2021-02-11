@@ -107,7 +107,9 @@ def water_heating_requirement (
     
     - **heat_gains_from_water_heating_monthly** (`list` (`float`)): (65) in kWh/month.
     
-   """
+    :rtype: dict
+    
+    """
     
     
     
