@@ -14,7 +14,7 @@ setup(
     description='Python package implementing the SAP2012 domestic building energy calculations',  # Required
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/stevenkfirth/sap2012',  # Optional
+    url='https://github.com/building-energy/sap2012',  # Optional
     packages=find_packages(), # Required
     classifiers=[
         "Programming Language :: Python :: 3",
