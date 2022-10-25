@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(  
     name='sap2012', 
-    version='0.0.0',  
+    version='0.0.1',  
     author='Steven K Firth & Ben Halls',  # Optional
     author_email='s.k.firth@lboro.ac.uk',  # Optional
     description='Python package implementing the SAP2012 domestic building energy calculations',  # Required

@@ -495,7 +495,7 @@ def heat_losses_and_heat_loss_parameter(
                 total_floor_area
                 )
 
-    average_heat_loss_parameter = sum(heat_loss_parameter) / total_floor_area
+    average_heat_loss_parameter = sum(heat_loss_parameter) / 12.0
 
     return dict(
             solid_floor_UA=solid_floor_UA,
