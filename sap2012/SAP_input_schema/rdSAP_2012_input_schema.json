@@ -1,0 +1,2425 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "",
+    "type": "object",
+    "title": "rdSAP_2012_input_schema",
+    "description": "JSON schema for an input file for rdSAP 2012 calculations",
+    "required": ["whole_dwelling", "building_parts"],
+    "properties": {
+        "whole_dwelling": {
+            "type": "object",
+            "required": [
+                "country",
+                "region",
+                "transaction_type",
+                "dwelling_type",
+                "built_form_and_detachment",
+                "number_of_habitable_rooms",
+                "number_of_heated_habitable_rooms",
+                "dimension_type",
+                "conservatory",
+                "conservatory_details",
+                "flats_and_maisonettes_details",
+                "number_of_extensions",
+                "number_of_external_doors",
+                "number_of_insulated_external_doors",
+                "insulated_door_u_value",
+                "window_area",
+                "window_details",
+                "windows",
+                "draught_proofing",
+                "fireplaces",
+                "main_heating_system",
+                "second_main_heating_system",
+                "community_heating_system",
+                "main_heating_controls",
+                "second_main_heating_controls",
+                "secondary_heating_systems",
+                "water_heating",
+                "solar_water_heating",
+                "solar_water_heating_details_known",
+                "solar_water_heating_details",
+                "solar_collector_details_known",
+                "solar_collector_details",
+                "solar_store_details_known",
+                "solar_store_details",
+                "flue_gas_heat_recovery",
+                "flue_gas_heat_recovery_details",
+                "pv_for_flue_gas_heat_recovery",
+                "pv_for_flue_gas_heat_recovery_details",
+                "number_of_rooms_with_bath_and_or_shower",
+                "number_of_rooms_with_mixer_shower_and_no_bath",
+                "number_of_rooms_with_mixer_shower_and_bath",
+                "waste_water_heat_recovery",
+                "waste_water_heat_recovery_details",
+                "space_coooling_system_present", 
+                "mechanical_ventilation",
+                "mechanical_ventilation_details",
+                "electricity_meter",
+                "mains_gas_available",
+                "photovoltaic_array",
+                "photovoltaic_array_details",
+                "terrain",
+                "wind_tubine",
+                "wind_turbine_details_known",
+                "wind_turbine_details",
+                "total_number_of_fixed_lighting_outlets",
+                "total_number_of_low_energy_fixed_lighting_outlets",
+                "swimming_pool"
+            ],
+            "properties": {
+                "country": {
+                    "title":"Country",
+                    "description": "",
+                    "enum": [
+                        "England & Wales",
+                        "Scotland",
+                        "Northern Ireland"
+                    ]
+                },
+                "region": {
+                    "title":"Region",
+                    "description": "One of those in SAP2012 Table U1. Derived from the postcode of the property.",
+                    "enum": [
+                        "Thames",
+                        "South East England",
+                        "Southern England",
+                        "South West England",
+                        "Severn Wales / Severn England","Midlands",
+                        "West Pennines Wales / West Pennines England",
+                        "north West England / South West Scotland",
+                        "Borders Scotland / Borders England",
+                        "North East England",
+                        "East Pennines",
+                        "East Anglia",
+                        "Wales",
+                        "West Scotland",
+                        "East Scotland",
+                        "North East Scotland",
+                        "Highland",
+                        "Western Isles",
+                        "Orkney",
+                        "Shetland",
+                        "Northern Ireland"
+                    ]
+                },
+                "transaction_type": {
+                    "title":"Transaction type",
+                    "description": "Non-marketed sale include right-to-buy.",
+                    "enum": [
+                        "marketed sale",
+                        "non-marketed sale",
+                        "rental",
+                        "stock condition survey",
+                        "assessment for Green Deal",
+                        "following Green Deal",
+                        "FIT application",
+                        "RHI application",
+                        "ECO assessment",
+                        "none of the above"
+                    ]
+                },
+                "tenure": {
+                    "title":"Tenure",
+                    "description": "",
+                    "enum": [
+                        "owner-occupied",
+                        "rented (social)",
+                        "rented (private)",
+                        "unknown"
+                    ]
+                },
+                "dwelling_type": {
+                    "title":"Dwelling type",
+                    "description": "",
+                    "enum": [
+                        "house",
+                        "bungalow",
+                        "flat",
+                        "maisonette",
+                        "park home"
+                    ]
+                },
+                "built_form_and_detachment": {
+                    "title":"Built form and detachment",
+                    "description": "Classification according to S1. Detachment does not need to be recorded for flats/maisonettes, provided that internal dimensions are being used. ",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "detached",
+                                "semi-detached",
+                                "mid-terrace",
+                                "end-terrace",
+                                "enclosed mid-terrace",
+                                "enclosed end-terrace"
+                            ]
+                        }
+                    ]
+                },
+                "number_of_habitable_rooms": {
+                    "title":"Number of habitable rooms",
+                    "description": "Total as defined in S9.1, inclusive of main property and any extension.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "number_of_heated_habitable_rooms": {
+                    "title":"Number of heated habitable rooms",
+                    "description": "Total as defined in S9.1, inclusive of main prooerty and any extension. A heated room is one with a fixed heat emitter in the room.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "dimension_type": {
+                    "title":"Dimension type",
+                    "description": "Measured_internally_or_externally. Applies to areas and perimiters. Room heights always measured internally within the room. See S3.",
+                    "enum": [
+                        "measured_internally",
+                        "measured_externally"
+                    ]
+                },
+                "conservatory": {
+                    "title":"Conservatory",
+                    "description": "",
+                    "enum": [
+                        "no conservatory",
+                        "separated, no fixed heaters",
+                        "separated, fixed heaters",
+                        "not separated"
+                    ]    
+                },
+                "conservatory_details": {
+                    "title": "Conservatory details",
+                    "description": "Non-separated conservatory only.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "description": "See section 3.3.3.",
+                            "type": "object",
+                            "required": ["type", "floor_area", "glazed_perimeter", "double_glazed", "height"],
+                            "properties": {
+                                "type": {
+                                    "title": "Type",
+                                    "description": "",
+                                    "const": "not separated"
+                                },
+                                "floor_area": {
+                                    "title": "Floor area",
+                                    "description": "",
+                                    "type": "number",
+                                    "exclusiveMinimum": 0
+                                },
+                                "glazed_perimeter": {
+                                    "title": "Glazed perimeter",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "double_glazed": {
+                                    "title": "Double glazed",
+                                    "description": "",
+                                    "enum": [
+                                        "yes",
+                                        "no"
+                                    ]
+                                },
+                                "height": {
+                                    "title": "Height",
+                                    "description": "Number of half storeys of the main dwelling.",
+                                    "type": "integer",
+                                    "exclusiveMinimum": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "flats_and_maisonettes_details": {
+                    "title":"Flats and maisonettes details",
+                    "description": "",
+                    "oneOf":[
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required":["heat_loss_corridor", "length_of_sheltered_wall", "floor_level_relative_to_the_lowest_level_of_the_building", "property_position"],
+                            "properties": {
+                                "heat_loss_corridor": {
+                                    "title":"Heat loss corridor",
+                                    "description": "",
+                                    "enum": [
+                                        "no corridor",
+                                        "heated corridor",
+                                        "unheated corridor"
+                                    ]
+                                },
+                                "length_of_sheltered_wall": {
+                                    "title":"Length of sheltered wall",
+                                    "description": "If unheated corridor, length of sheltered wall. The length of wall between the flat and corridor. If a flat or maisonette is sheltered on more than on storey this is the total of the sheltered lengths on each storey.",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "floor_level_relative_to_the_lowest_level_of_the_building": {
+                                    "title":"Floor level relative to the lowest level of the building",
+                                    "description": "0 for ground floor. This is the lowest floor level if property has more than one storey. If there is a basement, the basement is level 0 and the other floors from 1 upwards.",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "property_position": {
+                                    "title": "Property position",
+                                    "description": "This is used for the description of the dwelling type on the EPC (eg. `Top-floor flat`).",
+                                    "enum": [
+                                        "basement",
+                                        "ground floor",
+                                        "mid floor",
+                                        "top floor"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "number_of_extensions": {
+                    "title": "Number of extensions",
+                    "type": "integer",
+                    "minimum" :0,
+                    "maximum": 4
+                },
+                "number_of_external_doors": {
+                    "title": "Number of external doors",
+                    "description": "Doors to a heated access corridor are not included in the door count.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "number_of_insulated_external_doors": {
+                    "title": "Number of insulated external doors",
+                    "description": "Only if their U-value is known.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "insulated_door_u_value": {
+                    "title": "Insulated door U-value",
+                    "description": "Where there are insulated doors. Value in W/m2K. Average for the insulated external doors (where applicable).",
+                    "oneOf":[
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                        }
+                    ]
+                },
+                "window_area": {
+                    "title": "Window area",
+                    "description": "Of the dwelling only, not including any conservatory. `typical` refers to normal construction for the property type and age band concerned. If assessed as much more or much less than typical the area of each window should be measured.",
+                    "enum": [
+                        "typical",
+                        "less than typical",
+                        "much less than typical",
+                        "more than typical",
+                        "much more than typical"
+                    ]
+                },
+                "window_details": {
+                    "title": "Window details",
+                    "description": "If window area is `typical`, `less than typical` or `more than typical`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["proportion_with_multiple_glazing", "multiple_glazing_type","pvc_window_frames","pvc_window_glazing_gap", "window_u_value", "window_g_value", "window_data_source"],
+                            "properties": {
+                                "proportion_with_multiple_glazing": {
+                                    "title": "Proportion with multiple glazing",
+                                    "description": "As percentage.",
+                                    "type": "number"
+                                },
+                                "multiple_glazing_type":{
+                                    "title": "Multiple glazing type",
+                                    "description": "",
+                                    "enum": [
+                                        "double glazing pre year 2002 in England & Wales",
+                                        "double glazing pre year 2003 in Scotland",
+                                        "double glazing pre year 2006 in Northern Ireland",
+                                        "double glazing during or post year 2002 in England & Wales",
+                                        "double glazing during or post year 2003 in Scotland",
+                                        "double glazing during or post year 2006 in Northern Ireland",
+                                        "double glazing unknown date",
+                                        "secondary glazing",
+                                        "triple glazing",
+                                        "double, known U-value",
+                                        "triple, known U-value"
+                                    ]
+                                },
+                                "pvc_window_frames": {
+                                    "title": "PVC window frames",
+                                    "description": "To be included when the multiple glazing type is `double glazing pre year 2002 in England & Wales`, `double glazing pre year 2003 in Scotland`, `double glazing pre year 2006 in Northern Ireland` or `double glazing unknown date`.",
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "enum": [
+                                                "yes",
+                                                "no"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "pvc_window_glazing_gap" :{
+                                    "title": "PVC window glazing gap",
+                                    "description": "To be included if PVC window frames",
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "enum": [
+                                                "6 mm",
+                                                "12 mm",
+                                                "16 mm or more"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "window_u_value": {
+                                    "title": "Window U-value",
+                                    "description": "Value in W/m2K. Only when multiple glazing type is double or triple with known U-value.",
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "type": "number",
+                                            "exclusiveMinimum": 0
+                                        }
+                                    ]
+                                },
+                                "window_g_value": {
+                                    "title": "Window g-value",
+                                    "description": "Value to 2 d.p. Only when multiple glazing type is double or triple with known U-value.", 
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "type": "number"
+                                        }
+                                    ]
+                                },
+                                "window_data_source": {
+                                    "title": "Window data source",
+                                    "description": "Manufacturer or BFRC",
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "windows": {
+                    "title": "Windows",
+                    "description": "If window area is much less or much more than typical. For each window. This option can also be used if more than one type of multiple glazing.",
+                    "oneOf": [
+                        {
+                            "const": "Not applicable"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/window"
+                            }
+                        }
+                    ]
+                },
+                "draught_proofing": {
+                    "title": "Draught proofing",
+                    "description": "Percentage of all windows and doors that are draught proofed.",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "fireplaces": {
+                    "title": "Fireplaces",
+                    "description": "Number of open fireplaces",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "main_heating_system": {
+                    "title": "Main heating system",
+                    "description": "",
+                    "oneOf":[
+                        {
+                            "const":"none"
+                        },
+                        {
+                            "$ref": "#/$defs/heating_system"
+                        }
+                    ]
+                },
+                "second_main_heating_system": {
+                    "title": "Second main heating systme",
+                    "description": "System 1 is that heating the living area. If there is a boiler providing DHW only, assign it as the 2nd main system with a space heating percentage of zero",
+                    "oneOf": [
+                        {
+                            "const":"not applicable"
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/$defs/heating_system"
+                                },
+                                {
+                                    "type": "object",
+                                    "required": ["percentage_of_heated_floor_area"],
+                                    "properties": {
+                                        "percentage_of_heated_floor_area": {
+                                            "title": "Percentage of heated floor area",
+                                            "description": "The percentage of the heated floor area served by the second system. Estimate percentage to nearest 10%.",
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 100
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                        
+                    ]
+                },
+                "community_heating_system": {
+                    "title": "Community heating system",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const":"not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["index_number", "fuel", "heat_generator_type"],
+                            "properties": {
+                                "index_number": {
+                                    "title": "Index number",
+                                    "description": "index number of community heat network if known",
+                                    "oneOf": [
+                                        {
+                                            "const": "unknown"
+                                        },
+                                        {
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "fuel": {
+                                    "title": "Fuel",
+                                    "description": "Required if index number is `unknown`. Fuel used by comunity system. If fuel cannot be ascertained, assume mains gas.",
+                                    "oneOf": [
+                                        {
+                                            "const": "not appliable"
+                                        },
+                                        {
+                                            "enum": [
+                                                "mains gas",
+                                                "..."
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "heat_generator_type": {
+                                    "title": "Heat generator type",
+                                    "description": "Required if index number is `unknown`.",
+                                    "oneOf": [
+                                        {
+                                            "const": "not appliable"
+                                        },
+                                        {
+                                            "enum": [
+                                                "boilers",
+                                                "CHP and boilers",
+                                                "heat pump"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "main_heating_controls": {
+                    "title": "Main heating controls",
+                    "description": "",
+                    "$ref": "#/$defs/heating_controls"
+                },
+                "second_main_heating_controls": {
+                    "title": "Second main heating controls",
+                    "description": "",
+                    "$ref": "#/$defs/heating_controls"
+                },
+                "secondary_heating_systems": {
+                    "title": "Secondary heating system",
+                    "description": "`none` if no secondary heating system.",
+                    "oneOf": [
+                        {
+                            "const": "none"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["fuel", "system"],
+                            "properties": {
+                                "fuel": {
+                                    "title": "Fuel",
+                                    "description": "",
+                                    "enum": [
+                                        "..."
+                                    ]
+                                },
+                                "system":{
+                                    "title": "System",
+                                    "description": "System from room heater section of Table 4a.",
+                                    "enum": [
+                                        "..."
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "water_heating": {
+                    "title": "Water heating",
+                    "description": "",
+                    "type": "object",
+                    "required": ["system", "fuel", "cylinder_size", "cylinder_insulation_type", "cylinder_insulation_thickness", "single_or_dual", "cylinderstat"],
+                    "properties": {
+                        "system": {
+                            "title": "System",
+                            "description": "If no system, the calculation is done for an electric immersion, see text below table S17.",
+                            "enum": [
+                                "from main heating system",
+                                "from 2nd main system",
+                                "from secondary system",
+                                "... [any other water heater marked `rd` in hot-water only section of Table 4a] ...",
+                                "no DHW system present"
+                            ]
+                        },
+                        "fuel": {
+                            "title": "Fuel",
+                            "description": "Fuel also needed if not from main system.",
+                            "oneOf": [
+                                {
+                                    "const": "from main system"
+                                },
+                                {
+                                    "enum": [
+                                        "..."
+                                    ]
+                                }
+                            ]
+                        },
+                        "cylinder_size": {
+                            "title": "Cylinder size",
+                            "description": "Separate thermal store (hot-water only or integrated) treated as if it were a cylinder.",
+                            "enum": [
+                                "no cylinder",
+                                "no access",
+                                "normal (up to 130 litres",
+                                "medium (131-170 litres)",
+                                "large (> 170litres)"
+                            ]
+                        },
+                        "cylinder_insulation_type": {
+                            "title": "Cylinder insulation type",
+                            "description": "unless no access",
+                            "oneOf": [
+                                {
+                                    "const": "no access"
+                                },
+                                {   
+                                    "enum": [
+                                        "none",
+                                        "loose jacket",
+                                        "factory applied"
+                                    ]
+                                }
+                            ]
+                        },
+                        "cylinder_insulation_thickness": {
+                            "title": "Cylinder insulation thickness",
+                            "description": "",
+                            "enum": [
+                                "not applicable",
+                                "0 mm",
+                                "12 mm",
+                                "25 mm",
+                                "38 mm",
+                                "50 mm",
+                                "80 mm",
+                                "120 mm",
+                                "160 mm"
+                            ]
+                        },
+                        "single_or_dual": {
+                            "title": "single_or_dual",
+                            "description": "If immersion, whether single or dual.",
+                            "enum": [
+                                "not applicable",
+                                "single",
+                                "dual"
+                            ]
+                        },
+                        "cylinderstat": {
+                            "title": "Cylinderstat",
+                            "description": "Unless no access.",
+                            "enum":[
+                                "no access",
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    }
+                },
+                "solar_water_heating": {
+                    "title": "Solar water heating",
+                    "description": "Solar panel",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "solar_water_heating_details_known": {
+                    "title": "Solar water heating details known",
+                    "description": "If yes, then details",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "solar_water_heating_details": {
+                    "title": "Solar water heating details",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["tilt", "orientation", "overshading", "solar_water_pump", "types_of_showers"],
+                            "properties": {
+                                "tilt": {
+                                    "title": "Tilt",
+                                    "description": "",
+                                    "enum": [
+                                        "horizontal",
+                                        "30 deg",
+                                        "45 deg",
+                                        "60 deg",
+                                        "vertical"
+                                    ]
+                                },
+                                "orientation": {
+                                    "title": "orientation",
+                                    "description": "If not horizontal.",
+                                    "enum": [
+                                        "Not applicable",
+                                        "S",
+                                        "SE",
+                                        "E",
+                                        "NE",
+                                        "N",
+                                        "NW",
+                                        "W",
+                                        "SW"
+                                    ]
+                                },
+                                "overshading": {
+                                    "title": "Overshading",
+                                    "description": "",
+                                    "enum": [
+                                        "very little",
+                                        "modest",
+                                        "significant",
+                                        "heavy"
+                                    ]
+                                },
+                                "solar_water_pump": {
+                                    "title": "Solar water pump",
+                                    "description": "",
+                                    "enum": [
+                                        "electrically powered",
+                                        "solar powered",
+                                        "unknown"
+                                    ]
+                                },
+                                "types_of_showers": {
+                                    "title": "Type(s) of showers",
+                                    "description": "`electric only` where the ware is heated as the shower runs. If the shower is supplied from a hot-water cylinder it is classified as non-electric even though the cylinder is electrically heated.",
+                                    "$comment": "should this be an array??",
+                                    "enum": [
+                                        "non-electric only",
+                                        "electric only",
+                                        "both electric and non-electric",
+                                        "no shower"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "solar_collector_details_known": {
+                    "title": "Solar collector details known",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "solar_collector_details": {
+                    "title": "Solar collector details",
+                    "description": "Only if solar panel present and solar water heating details known. Documentary evidence is required to enter collector values.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["collector_aperture_area", "collector_type", "collector_zero_loss_efficiency", "collector_linear_heat_loss_coefficient", "collector_2nd_order_heat_loss_coefficient"],
+                            "properties": {
+                                "collector_aperture_area": {
+                                    "title": "Collector aperture area",
+                                    "description": "",
+                                    "type": "number",
+                                    "exclusiveMinimum": 0
+                                },
+                                "collector_type": {
+                                    "title": "Collector type",
+                                    "description": "",
+                                    "enum": [
+                                        "evacuated tube",
+                                        "flat plate",
+                                        "unglazed"
+                                    ]
+                                },
+                                "collector_zero_loss_efficiency": {
+                                    "title": "Collector zero loss efficiency",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                },
+                                "collector_linear_heat_loss_coefficient": {
+                                    "title": "Collector linear heat loss coefficient",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                },
+                                "collector_2nd_order_heat_loss_coefficient": {
+                                    "title": "Collector 2nd order heat loss coefficient",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1
+                                }
+
+                            }
+                        }
+                    ]
+                },
+                "solar_store_details_known": {
+                    "title": "Solar store details known",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "solar_store_details": {
+                    "title": "Solar store details",
+                    "description": "Only if solar panel present and solar water heating details known and solar collector details known.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["combined_solar_store", "total_hot_water_store_volume", "dedicated_solar_volume"],
+                            "properties": {
+                                "combined_solar_store": {
+                                    "title": "Combined solar store",
+                                    "description": "",
+                                    "enum": [
+                                        "yes",
+                                        "no"
+                                    ]
+                                },
+                                "total_hot_water_store_volume": {
+                                    "title": "Total hot water store volume",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "dedicated_solar_volume": {
+                                    "title": "Dedicated solar volume",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "flue_gas_heat_recovery": {
+                    "title": "Flue gas heat recovery",
+                    "description": "",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "flue_gas_heat_recovery_details": {
+                    "title": "Flue gas heat recovery details",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["product_index_number"],
+                            "properties": {
+                                "product_index_number": {
+                                    "title": "Product index number",
+                                    "description": "Only if located in database.",
+                                    "type": "string",
+                                    "$comment": "... or should the type be `number` or `integer`??"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "pv_for_flue_gas_heat_recovery": {
+                    "title": "PV for flue gas heat recovery",
+                    "description": "Only for systems with a PV powered immersion.",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "pv_for_flue_gas_heat_recovery_details": {
+                    "title": "PV for flue gas heat recovery details",
+                    "description": "Only for systems with a PV powered immersion.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "$ref": "#/$defs/pv_array"
+                        }
+                    ]
+                },
+                "number_of_rooms_with_bath_and_or_shower": {
+                    "title": "Number of rooms with bath and/or shower",
+                    "description": "These items are always collected, to enable a recommendation for waste water heat recovery.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "number_of_rooms_with_mixer_shower_and_no_bath": {
+                    "title": "Number of rooms with mixer shower and no bath",
+                    "description": "These items are always collected, to enable a recommendation for waste water heat recovery.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "number_of_rooms_with_mixer_shower_and_bath": {
+                    "title": "Number of rooms with mixer shower and bath",
+                    "description": "These items are always collected, to enable a recommendation for waste water heat recovery.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "waste_water_heat_recovery": {
+                    "title": "Waste water heat recovery",
+                    "description": "",
+                    "enum": [
+                        "none",
+                        "instantaneous",
+                        "storage"
+                    ]
+                },
+                "waste_water_heat_recovery_details": {
+                    "title": "Waste water heat recovery details",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "description": "If instantaneous type present. if located in database. Number of rooms with bath and/or shower includes rooms with only an electric shower. If two showers found in a room, count as one. Only mixer showers count for instantaneous waste water heat recovery. Mixer shower means a dhower where the hot water is provided by a boiler (combi or regular), heat pump or immersion heater. A mixer shower attached to bath taps is recorded as a mixer shower only if there is a permenant bracket over the bath at least 1.5m above the plughole and there is a shower curtain or screen.",
+                            "type": "object",
+                            "required": ["number_of_systems", "system_1_product_index_number", "number_of_mixer_showers_with_system_1_in_rooms_with_bath", "number_of_mixer_showers_with_system_1_in_rooms_without_bath", "system_2_product_index_number", "number_of_mixer_showers_with_system_2_in_rooms_with_bath", "number_of_mixer_showers_with_system_2_in_rooms_without_bath"],
+                            "properties": {
+                                "number_of_systems": {
+                                    "title": "Number of systems",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 2
+                                },
+                                "system_1_product_index_number": {
+                                    "title": "System 1 product index number",
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "number_of_mixer_showers_with_system_1_in_rooms_with_bath": {
+                                    "title": "Number of mixer showers with system 1 in rooms with bath",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "number_of_mixer_showers_with_system_1_in_rooms_without_bath": {
+                                    "title": "Number of mixer showers with system 1 in rooms without bath",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "system_2_product_index_number": {
+                                    "title": "System 2 product index number",
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "number_of_mixer_showers_with_system_2_in_rooms_with_bath": {
+                                    "title": "Number of mixer showers with system 2 in rooms with bath",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "number_of_mixer_showers_with_system_2_in_rooms_without_bath": {
+                                    "title": "Number of mixer showers with system 2 in rooms without bath",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0
+                                }
+                            }
+                        },
+                        {
+                            "description":"If storage type present. if located in database.",
+                            "type": "object",
+                            "properties": {
+                                "product_index_number": {
+                                    "title": "Product Index Number",
+                                    "description": "",
+                                    "type": "string"
+                                },
+                                "total_showers_and_bath": {
+                                    "title": "Total shower and bath",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "number_of_showers_and_bath_routed_through_WWHRS": {
+                                    "title": "Number of showers and bath routed through WWHRS",
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "space_coooling_system_present": {
+                    "title": "Space cooling system present",
+                    "description": "",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "mechanical_ventilation": {
+                    "title": "Mechanical ventilation",
+                    "description": "Applies to whole house ventilation system only. Otherwise natural ventilation is assumed. Intermittent extract fans (kitched and bathrooms) are not a mechanical ventilation system for SAP calculations, but continuously running extract fans in wet rooms are treated as mechanical ventilation.",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "mechanical_ventilation_details": {
+                    "title": "Mechanical ventilation details",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["type"],
+                            "properties": {
+                                "type": {
+                                    "title": "Type",
+                                    "description": "",
+                                    "enum": [
+                                        "extract-only",
+                                        "balanced"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "electricity_meter": {
+                    "title": "Electricity meter",
+                    "description": "See S12",
+                    "enum": [
+                        "dual",
+                        "single",
+                        "18-hour",
+                        "24-hour",
+                        "unknown"
+                    ]
+                },
+                "mains_gas_available": {
+                    "title": "Mains gas available",
+                    "description": "Yes means that there is a gas meter or a gas-burning appliance (e.g. a cooker) in the dwelling. A closed-off gas pipe does not count. Where a boiler is present attached to a heating system (not in a box), and the mains gas meter has been removed for security reasons, enter a gas boiler as the main form of heating and indicate that mains gas is present. Can be relevant to improvemnt recommendations.",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "photovoltaic_array": {
+                    "title": "Photovoltaic array",
+                    "description": "",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "photovoltaic_array_details": {
+                    "title": "Photovoltaic array details",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "description": "a)",
+                            "type": "object",
+                            "required": ["percentage_of_external_roof_area", "connected_to_dwellings_electricity_meter"],
+                            "properties": {
+                                "percentage_of_external_roof_area": {
+                                    "title": "Percentage of external roof area",
+                                    "description": "% of external roof area with PVs",
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 100
+                                },
+                                "connected_to_dwellings_electricity_meter": {
+                                    "title": "Connected to dwelling's electricity meter",
+                                    "description": "A convention will define what to do when the situation is not immediately obvious.",
+                                    "enum": [
+                                        "yes",
+                                        "no"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "description": "b) to be used when the information on kWp is available. In this case up to 3 PV arrays can be specified.",
+                            "type": "object",
+                            "required": ["pv_array_1", "pv_array_2", "pv_array_3"],
+                            "properties":{
+                                "pv_array_1": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/$defs/pv_array"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "required": ["connected_to_dwellings_electricity_meter"],
+                                            "properties": {
+                                                "connected_to_dwellings_electricity_meter": {
+                                                    "title": "Connected to dwelling's electricity meter",
+                                                    "description": "A convention will define what to do when the situation is not immediately obvious.",
+                                                    "enum": [
+                                                        "yes",
+                                                        "no"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "pv_array_2": {
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/$defs/pv_array"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "required": ["connected_to_dwellings_electricity_meter"],
+                                                    "properties": {
+                                                        "connected_to_dwellings_electricity_meter": {
+                                                            "title": "Connected to dwelling's electricity meter",
+                                                            "description": "A convention will define what to do when the situation is not immediately obvious.",
+                                                            "enum": [
+                                                                "yes",
+                                                                "no"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "pv_array_3": {
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/$defs/pv_array"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "required": ["connected_to_dwellings_electricity_meter"],
+                                                    "properties": {
+                                                        "connected_to_dwellings_electricity_meter": {
+                                                            "title": "Connected to dwelling's electricity meter",
+                                                            "description": "A convention will define what to do when the situation is not immediately obvious.",
+                                                            "enum": [
+                                                                "yes",
+                                                                "no"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "terrain": {
+                    "title": "Terrain",
+                    "description": "Used to generate wind turbine recommendation where appropriate - data item must always be collected.",
+                    "enum": [
+                        "dense urban",
+                        "low rise urban or suburban",
+                        "rural"
+                    ]
+                },
+                "wind_tubine": {
+                    "title": "Wind turbine",
+                    "description": "",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                },
+                "wind_turbine_details_known": {
+                    "title": "Wind turbine details known",
+                    "description": "Only if wind turbine is present.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "wind_turbine_details": {
+                    "title": "Wind turbine details",
+                    "description": "",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["number_of_turbines", "rotor_diameter", "height_above_ridge"],
+                            "properties": {
+                                "number_of_turbines": {
+                                    "title": "Number of turbines",
+                                    "description": "",
+                                    "type": "integer",
+                                    "exclusiveMinimum": 0
+                                },
+                                "rotor_diameter": {
+                                    "title": "Rotor diameter",
+                                    "description": "",
+                                    "type": "number",
+                                    "exclusiveMinimum": 0
+                                },
+                                "height_above_ridge": {
+                                    "title": "Height above ridge",
+                                    "description": "",
+                                    "type": "number",
+                                    "exclusiveMinimum": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "total_number_of_fixed_lighting_outlets": {
+                    "title": "Total number of fixed lighting outlets",
+                    "description": "Where there are 4 or more downlighters / ceiling lights divide the bulb count by 2. Include fixed under-cupboard kitchen strip lights.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "total_number_of_low_energy_fixed_lighting_outlets": {
+                    "title": "Total number of low energy fixed lighting outlets",
+                    "description": "LEDs are considered as low energy lights. Where there are 4 or more downlighters / ceiling lights divide the bulb count by 2. Include fixed under-cupboard kitchen strip lights.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "swimming_pool": {
+                    "title": "Swimming pool",
+                    "description": "A swimming pool is not included in the dataset. Count the room containing the swimming pool as a habitable room and add addendum 4 (see S15).",
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                }
+            }
+        },
+        "building_parts": {
+            "type": "object",
+            "required": ["main_dwelling", "extension_1", "extension_2", "extension_3", "extension_4"],
+            "properties": {
+                "main_dwelling": {
+                    "$ref": "#/$defs/building_part"
+                },
+                "extension_1": {
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "$ref": "#/$defs/building_part"
+                        }
+                    ]
+                },
+                "extension_2": {
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "$ref": "#/$defs/building_part"
+                        }
+                    ]
+                },
+                "extension_3": {
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "$ref": "#/$defs/building_part"
+                        }
+                    ]
+                },
+                "extension_4": {
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "$ref": "#/$defs/building_part"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "$defs": {
+        "building_part":{
+            "type": "object",
+            "required": [
+                "age_band",
+                "below_the_building_part",
+                "above_the_building_part",
+                "dimensions",
+                "floor_construction",
+                "floor_insulation",
+                "floor_insulation_thickness",
+                "floor_u_value",
+                "wall_construction",
+                "wall_thickness",
+                "wall_insulation_type",
+                "wall_insulation_thickness",
+                "wall_u_value",
+                "wall_dry_lined_or_lath_and_plaster",
+                "alternative_wall",
+                "party_wall_construction",
+                "roof_insulation",
+                "roof_insulation_thickness",
+                "rafter_insulation_thickness",
+                "flat_roof_insulation_thickness",
+                "sloping_ceiling_insulation_thickness",
+                "roof_U_value",
+                "roof_room_age_band",
+                "roof_rooms_connected",
+                "roof_room_insulation",
+                "roof_room_insulation_thickness_flat_part",
+                "roof_room_insulation_thickness_other_parts",
+                "roof_room_area_and_u_value_details"
+            ],
+            "properties": {
+                "age_band": {
+                    "title": "Age band",
+                    "description": "According to S2",
+                    "enum": ["A","B","C","D","E","F","G","H","I","J","K","L"]
+                },
+                "below_the_building_part": {
+                    "title": "Below the building part",
+                    "description": "Whether the lowest floor is/has [see options]. A partially heated space below applies when it is above non-domestic premises. An unheated space below applies when it is above a space not used for habitation. If above more than one type, it is classified according to the largest floor area concerned.",
+                    "enum": [
+                        "ground floor",
+                        "above partially / intermittently heated space (commerical premises)",
+                        "above unheated space",
+                        "to external air",
+                        "same dwelling below",
+                        "another dwelling below"
+                    ]
+                },
+                "above_the_building_part": {
+                    "title": "Above the building part",
+                    "description": "Whether the highest floor has [see options]. For a park home select pitched or flat as appropriate.",
+                    "enum": [
+                        "pitched roof (slates or tiles), access to loft",
+                        "pitched roof (slates or tiles), no access",
+                        "pitched roof, sloping ceiling",
+                        "pitched roof (thatched)",
+                        "flat roof",
+                        "same dwelling above",
+                        "another dwelling above"
+                    ]
+                },
+                "dimensions": {
+                    "title": "Dimensions",
+                    "description": "For each storey from lowest occupied floor up to lowest occupied + 6. For rooms-in-roof, measure floor area only, inside the dwelling.",
+                    "type": "object",
+                    "required": ["lowest_occupied_floor", "lowest_occupied_floor_plus_1", "lowest_occupied_floor_plus_2", "lowest_occupied_floor_plus_3", "lowest_occupied_floor_plus_4", "lowest_occupied_floor_plus_5", "lowest_occupied_floor_plus_6"],
+                    "properties": {
+                        "lowest_occupied_floor": {
+                            "title": "Lowest occupied floor",
+                            "description": "",
+                            "type": "object",
+                            "$ref": "#/$defs/dimensions"
+                        },
+                        "lowest_occupied_floor_plus_1": {
+                            "title": "Lowest occupied floor + 1",
+                            "description": "",
+                            "oneOf": [
+                                {
+                                    "const": "not applicable"
+                                },
+                                {
+                                    "$ref": "#/$defs/dimensions"
+                                }
+                            ]
+                        },
+                        "lowest_occupied_floor_plus_2": {
+                            "title": "Lowest occupied floor + 2",
+                            "description": "",
+                            "oneOf": [
+                                {
+                                    "const": "not applicable"
+                                },
+                                {
+                                    "$ref": "#/$defs/dimensions"
+                                }
+                            ]
+                        },
+                        "lowest_occupied_floor_plus_3": {
+                            "title": "Lowest occupied floor + 3",
+                            "description": "",
+                            "oneOf": [
+                                {
+                                    "const": "not applicable"
+                                },
+                                {
+                                    "$ref": "#/$defs/dimensions"
+                                }
+                            ]
+                        },
+                        "lowest_occupied_floor_plus_4": {
+                            "title": "Lowest occupied floor + 4",
+                            "description": "",
+                            "oneOf": [
+                                {
+                                    "const": "not applicable"
+                                },
+                                {
+                                    "$ref": "#/$defs/dimensions"
+                                }
+                            ]
+                        },
+                        "lowest_occupied_floor_plus_5": {
+                            "title": "Lowest occupied floor + 5",
+                            "description": "",
+                            "oneOf": [
+                                {
+                                    "const": "not applicable"
+                                },
+                                {
+                                    "$ref": "#/$defs/dimensions"
+                                }
+                            ]
+                        },
+                        "lowest_occupied_floor_plus_6": {
+                            "title": "Lowest occupied floor + 6",
+                            "description": "",
+                            "oneOf": [
+                                {
+                                    "const": "not applicable"
+                                },
+                                {
+                                    "$ref": "#/$defs/dimensions"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "floor_construction": {
+                    "title": "Floor construction",
+                    "description": "For the lowest floor of the building part. Not if another dwelling or other premises below.",
+                    "enum": [
+                        "unknown",
+                        "solid",
+                        "suspended timber",
+                        "suspended, not timber"
+                    ]
+                },
+                "floor_insulation": {
+                    "title": "Floor insulation",
+                    "description": "Not if another dwelling or other premises below. There must be evidence for retrofit insulation.",
+                    "enum": [
+                        "unknown",
+                        "as built",
+                        "retrofitted"
+                    ]
+                },
+                "floor_insulation_thickness": {
+                    "title": "Floor insulation thickness",
+                    "description": "Only if floor insulation is retrofitted. Applies to ground floors and exposed upper floors. `Insulation thickness` and `U-value` are mutually exclusive.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "50mm",
+                                "100 mm",
+                                "150 mm"
+                            ]
+                        }
+                    ]
+                },
+                "floor_u_value": {
+                    "title": "Floor U-value",
+                    "description": "Value in W/m2K. `Insulation thickness` and `U-value` are mutually exclusive.",
+                    "oneOf": [
+                        {
+                            "const": "not appliable"
+                        },
+                        {
+                            "type": "number",
+                        "exclusiveMinimum": 0
+                        }
+                    ]
+                },
+                "wall_construction": {
+                    "$ref": "#/$defs/wall_construction"
+                },
+                "wall_thickness": {
+                    "$ref": "#/$defs/wall_thickness"
+                },
+                "wall_insulation_type": {
+                    "$ref": "#/$defs/wall_insulation_type"
+                },
+                "wall_insulation_thickness": {
+                    "$ref": "#/$defs/wall_insulation_thickness"
+                },
+                "wall_u_value": {
+                    "$ref": "#/$defs/wall_u_value"
+                },
+                "wall_dry_lined_or_lath_and_plaster": {
+                    "$ref": "#/$defs/wall_dry_lined_or_lath_and_plaster"
+                },
+                "alternative_wall": {
+                    "title": "Alternative wall",
+                    "description": "For any building part with an alternative wall.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["wall_construction", "wall_thickness", "wall_insulation_type", "wall_insulation_thickness", "wall_u_value", "wall_dry_lined_or_lath_and_plaster", "net_area_of_alternative_wall", "is_sheltered_wall"],
+                            "properties": {
+                                "wall_construction": {
+                                    "$ref": "#/$defs/wall_construction"
+                                },
+                                "wall_thickness": {
+                                    "$ref": "#/$defs/wall_thickness"
+                                },
+                                "wall_insulation_type": {
+                                    "$ref": "#/$defs/wall_insulation_type"
+                                },
+                                "wall_insulation_thickness": {
+                                    "$ref": "#/$defs/wall_insulation_thickness"
+                                },
+                                "wall_u_value": {
+                                    "$ref": "#/$defs/wall_u_value"
+                                },
+                                "wall_dry_lined_or_lath_and_plaster": {
+                                    "$ref": "#/$defs/wall_dry_lined_or_lath_and_plaster"
+                                },
+                                "net_area_of_alternative_wall": {
+                                    "title": "Net area of alternative wall",
+                                    "description": "",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "is_sheltered_wall": {
+                                    "title": "Is sheltered wall",
+                                    "description": "Sheltered wall apples only to the building part of a flat or maisonette that is adjacent to an unheated corridor or stairwell. If sheltered its area is calculated from the shelter length and not specified separately.",
+                                    "enum": [
+                                        "yes",
+                                        "no"
+                                    ]
+                                }
+                            } 
+                        }
+                    ]
+                },
+                "party_wall_construction": {
+                    "title": "Party wall construction",
+                    "description": "Except for detached properties there must be at least one building part with a party wall. `not applicable` applies to a detached property and to building parts of other properties not adjoining a party wall.",
+                    "enum": [
+                        "solid masonry, timber frame or system built",
+                        "masonry cavity unfilled",
+                        "masonry cavity filled",
+                        "not applicable",
+                        "unable to determine"
+                    ]
+                },
+                "roof_insulation": {
+                    "title": "Roof insulation",
+                    "description": "If not same or another dwelling above. `None` does not apply to a flat roof or a pitched roof with sloping ceiling. There must be evidence for joist, rafter, flat roof or sloping ceiling insulation, toherwise it is `unknown`. `At rafters` can appy to a thatched roof.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "none",
+                                "at joists",
+                                "at rafters",
+                                "flat roof insulation",
+                                "sloping ceiling insulation",
+                                "unknown"
+                            ]
+                        }
+                    ]
+                },
+                "roof_insulation_thickness": {
+                    "title": "Roof insulation thickness",
+                    "description": "loft space [OR?] pitched roof with insulation at joists, applies to roof or parts of roof without roof room. Only for roof insulation at joist level and where can be accessed. If none or unknown this is recorded via the preceding item.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "12 mm",
+                                "15 mm",
+                                "50 mm",
+                                "75 mm",
+                                "100 mm",
+                                "150 mm",
+                                "200 mm",
+                                "250 mm",
+                                "270 mm",
+                                "300 mm",
+                                "350 mm",
+                                "400+ mm"
+                            ]
+                        }
+                    ]
+                },
+                "rafter_insulation_thickness": {
+                    "title": "Rafter insulation thickness",
+                    "description": "Only if roof insulation is `at rafters`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "as built",
+                                "50 mm",
+                                "100 mm",
+                                "150 mm or more"
+                            ]
+                        }
+                    ]
+                },
+                "flat_roof_insulation_thickness": {
+                    "title": "Flat roof insulation thickness",
+                    "description": "Only if roof insulation is `flat roof insulation`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "as built",
+                                "50 mm",
+                                "100 mm",
+                                "150 mm or more"
+                            ]
+                        }
+                    ]
+                },
+                "sloping_ceiling_insulation_thickness": {
+                    "title": "Sloping ceiling insulation thickness",
+                    "description": "Only if roof insulation is `sloping ceiling insulation`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "as built",
+                                "50 mm",
+                                "100 mm",
+                                "150 mm or more"
+                            ]
+                        }
+                    ]
+                },
+                "roof_u_value": {
+                    "title": "Roof U-value",
+                    "description": "Value in W/m2K. `Insulation thickness` (loft, rafter or flat roof) and `U-value` are mutually exclusive alternatives.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                        }
+                    ]
+                },
+                "roof_room_age_band": {
+                    "title": "Room roof age band",
+                    "description": "According to S2",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": ["A","B","C","D","E","F","G","H","I","J","K","L"]
+                        }
+                    ]
+                },
+                "roof_rooms_connected": {
+                    "title": "Roof rooms connected",
+                    "description": "Whether the roof rooms are connected to or are adjacent to antoher building part of the same dwelling. An adjacent part can be another roof room or a normal storey.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "roof_room_insulation": {
+                    "title": "Roof room insulation",
+                    "description": "Only when there is a roof room in the building part concerned. There must be evidence for insulation of flat ceiling or all elements, toherwise it is `as built` or `unknown`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "as built",
+                                "flat ceiling only",
+                                "all elements"
+                            ]
+                        }
+                    ]
+                },
+                "roof_room_insulation_thickness_flat_part": {
+                    "title": "Roof room insulation thickness flat part",
+                    "description": "On flat part of roof of roof room. Only if roof room insulation is `flat ceiling only` or `all elements`. `not applicable` is for the case of (documentary) evidence of insulation of all elements, but it is a vaulted ceiling with no flat part.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "as built",
+                                "50 mm",
+                                "100 mm",
+                                "150 mm or more"
+                            ]
+                        }
+                    ]
+                },
+                "roof_room_insulation_thickness_other_parts": {
+                    "title": "Roof room insulation thickness other parts",
+                    "description": "Other parts of roof room. Only if roof room insulation is `all elements`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "as built",
+                                "50 mm",
+                                "100 mm",
+                                "150 mm or more"
+                            ]
+                        }
+                    ]
+                },
+                "roof_room_area_and_u_value_details": {
+                    "title": "Roof room area and u_value details",
+                    "description": "Up to 2 of each of these. Only where these details are collected; if so they supercede roof room insulation and roof room insulation thickness.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "object",
+                            "required": ["roof_room_1", "roof_room_2"],
+                            "properties": {
+                                "roof_room_1": {
+                                    "title": "Roof room 1",
+                                    "description": "",
+                                    "type": "object",
+                                    "required": ["flat_ceiling", "sloping_ceiling", "stud_wall", "gable_wall"],
+                                    "properties": {
+                                        "flat_ceiling": {
+                                            "title": "Flat ceiling",
+                                            "description": "",
+                                            "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                        },
+                                        "sloping_ceiling": {
+                                            "title": "Sloping ceiling",
+                                            "description": "",
+                                            "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                        },
+                                        "stud_wall": {
+                                            "title": "Stud wall",
+                                            "description": "",
+                                            "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                        },
+                                        "gable_wall": {
+                                            "title": "Gable wall",
+                                            "description": "",
+                                            "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                        }
+                                    }
+                                },
+                                "roof_room_2": {
+                                    "title": "Roof room 2",
+                                    "description": "",
+                                    "oneOf": [
+                                        {
+                                            "const": "not applicable"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "required": ["flat_ceiling", "sloping_ceiling", "stud_wall", "gable_wall"],
+                                            "properties": {
+                                                "flat_ceiling": {
+                                                    "title": "Flat ceiling",
+                                                    "description": "",
+                                                    "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                                },
+                                                "sloping_ceiling": {
+                                                    "title": "Sloping ceiling",
+                                                    "description": "",
+                                                    "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                                },
+                                                "stud_wall": {
+                                                    "title": "Stud wall",
+                                                    "description": "",
+                                                    "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                                },
+                                                "gable_wall": {
+                                                    "title": "Gable wall",
+                                                    "description": "",
+                                                    "$ref": "#/$defs/roof_room_area_and_u_value_details"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "dimensions": {
+            "type": "object",
+            "required": ["area", "average_room_height", "exposed_perimieter", "party_wall_length"],
+            "properties": {
+                "area": {
+                    "title": "Area",
+                    "description": "",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "average_room_height": {
+                    "title": "Average room height",
+                    "description": "",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "exposed_perimieter": {
+                    "title": "Exposed perimiter",
+                    "description": "",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "party_wall_length": {
+                    "title": "Party wall length",
+                    "description": "",
+                    "type": "number",
+                    "minimum": 0
+                }
+            }
+        },
+        "wall_construction": {
+            "title": "Wall construction",
+            "description": "`park home wall` is the only option for a park home.",
+            "enum": [
+                "stone (granite or shinstone)",
+                "stone (sandstone or limestone)",
+                "solid brick",
+                "cob",
+                "cavity",
+                "timber frame",
+                "park home wall",
+                "system build (i.e. an other)"
+            ]
+        },
+        "wall_thickness": {
+            "title": "Wall thickness",
+            "description": "Wall thickness in mm (or unknown if it cannot be measured. Where thickness varies for the same construction use the average of the measured values.",
+            "type": "number",
+            "minimum": 0
+        },
+        "wall_insulation_type": {
+            "title": "Wall insulation type",
+            "description": "External, cavity or internal insulation to be indicated only if added subsequent to original construction and evidence exists. If it has only the insulation that was part of the original construction it is `as built`.",
+            "enum": [
+                "as built",
+                "external",
+                "filled cavity",
+                "internal",
+                "cavity plus external",
+                "cavity plus internal",
+                "unknown"
+            ]
+        },
+        "wall_insulation_thickness": {
+            "title": "Wall insulation thickness",
+            "description": "Only if wall insulation is external, internal or cavity (filled or unfilled) plus external or internal.",
+            "oneOf": [
+                {
+                    "const": "not applicable"
+                },
+                {
+                    "enum": [
+                        "unknown",
+                        "50 mm",
+                        "100 mm",
+                        "150 mm",
+                        "200 mm"
+                    ]
+                }
+            ]
+        },
+        "wall_u_value": {
+            "title": "Wall U-value",
+            "description": "Value in W/m2K. Can be given where known for any wall. `Insulation thickness` and `U-value` are mutually exclusive.",
+            "oneOf": [
+                {
+                    "const": "not applicable"
+                },
+                {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                }
+            ]
+        },
+        "wall_dry_lined_or_lath_and_plaster": {
+            "title": "Wall dry-lined or lath and plaster",
+            "description": "Only for uninsulated stone, solid brick or cavity walls in age bands A to E.",
+            "oneOf": [
+                {
+                    "const": "not applicable"
+                },
+                {
+                    "enum": [
+                        "yes",
+                        "no"
+                    ]
+                }
+            ]
+        },
+        "roof_room_area_and_u_value_details": {
+            "type": "object",
+            "properties": {
+                "area": {
+                    "title": "Area",
+                    "description": "",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "u_value": {
+                    "title": "U-value",
+                    "description": "",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                }
+            }
+        },
+        "window": {
+            "type": "object",
+            "required": ["location", "window_or_roof_window", "area", "glazing_type", "pvc_window_frames", "pvc_window_glazing_gap", "orientation", "window_u_value", "window_g_value", "window_data_source"],
+            "properties": {
+                "location": {
+                    "title": "Location",
+                    "description": "",
+                    "enum": [
+                        "mian_dwelling",
+                        "extension_1",
+                        "extension_2",
+                        "extension_3",
+                        "extension_4"
+                    ]
+                },
+                "window_or_roof_window": {
+                    "title": "Window or roof window",
+                    "description": "",
+                    "enum": [
+                        "window",
+                        "roof window"
+                    ]
+                },
+                "area": {
+                    "title": "Area",
+                    "description": "Including frame",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "glazing_type": {
+                    "title": "Glazing type",
+                    "description": "",
+                    "enum": [
+                        "single glazing",
+                        "double glazing pre year 2002 in England & Wales",
+                        "double glazing pre year 2003 in Scotland",
+                        "double glazing pre year 2006 in Northern Ireland",
+                        "double glazing during or post year 2002 in England & Wales",
+                        "double glazing during or post year 2003 in Scotland",
+                        "double glazing during or post year 2006 in Northern Ireland",
+                        "double glazing unknown date",
+                        "secondary glazing",
+                        "triple glazing",
+                        "double, known U-value",
+                        "triple, known U-value"
+                    ]
+                },
+                "pvc_window_frames": {
+                    "title": "PVC window frames",
+                    "description": "To be included when the glazing type is `double glazing pre year 2002 in England & Wales`, `double glazing pre year 2003 in Scotland`, `double glazing pre year 2006 in Northern Ireland` or `double glazing unknown date`.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "pvc_window_glazing_gap" :{
+                    "title": "PVC window glazing gap",
+                    "description": "To be included if PVC window frames",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "6 mm",
+                                "12 mm",
+                                "16 mm or more"
+                            ]
+                        }
+                    ]
+                },
+                "orientation": {
+                    "title": "Orientation",
+                    "description": "",
+                    "enum": [
+                        "S",
+                        "SE",
+                        "E",
+                        "NE",
+                        "N",
+                        "NW",
+                        "W",
+                        "SW",
+                        "horizontal"
+                    ]
+                },
+                "window_u_value": {
+                    "title": "Window U-value",
+                    "description": "Value in W/m2K. Only when glazing type is double or triple with known U-value.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                        }
+                    ]
+                },
+                "window_g-value": {
+                    "title": "Window g-value",
+                    "description": "Value to 2 d.p. Only when glazing type is double or triple with known U-value.", 
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ]
+                },
+                "window_data_source": {
+                    "title": "Window data source",
+                    "description": "Manufacturer or BFRC",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        },
+        "heating_system": {
+            "type": "object",
+            "required": ["fuel", "product_index_number", "flue_type", "ignition_type", "fan_flued", "heat_emitter_type", "central_heating_pump_age", "mcs_installation", "design_flow_temperature"],
+            "properties": {
+                "fuel": {
+                    "title": "Fuel",
+                    "description": "Fuel for heating. If `none`, the calcuation is done for portable electric heaters with no controls.",
+                    "enum": [
+                        "none",
+                        "..."
+                    ]
+                },
+                "product_index_number": {
+                    "title": "Product index number",
+                    "description": "Product index number whenever possible for boilers, micro-CHP, heat pumps, warm air systems, storage heaters, otherwise system (marked `rd`) from Table 4a or 4b. If product can be identified, its characteristics are obtained via the database. Storage heaters (high heat retention types only): index number of each heater.",
+                    "oneOf": [
+                        {
+                            "const": "unknown"
+                        },
+                        {
+                            "type":"string"
+                        },
+                        {
+                            "type": "array",
+                            "$comment": "For storage heaters (high heat retention types only)",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "const": "unknown"
+                                    },
+                                    {
+                                        "type":"string"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+
+                },
+                "flue_type": {
+                    "title": "Flue type",
+                    "description": "Applies to boilers, micro-CHP and warm-air systems. For fires and roomheaters use normal flue type indicated in Table 4a.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "open",
+                                "room-sealed"
+                            ]
+                        }
+                    ]
+                },
+                "ignition_type": {
+                    "title": "Ignition type",
+                    "description": "Not if from database. For gas boilers 1998 or later.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "auto-ignition",
+                                "permenant pilot light"
+                            ]
+                        }
+                    ]
+                },
+                "fan_flued": {
+                    "title": "Fan flued",
+                    "description": "Not if from database. For gas boilers 1998 or later, [the] whether or not fan-flued.", 
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "heat_emitter_type": {
+                    "title": "Heat emitter type",
+                    "description": "For gas and oil boilers, for heat pumps to water and for electric CPSUs. If underfloor downstairs and radiators upstairs, select `radiators`. `fan coil units` for heat pumps only.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "radiators",
+                                "underfloor",
+                                "fan coil units"
+                            ]
+                        }
+                    ]
+                },
+                "central_heating_pump_age": {
+                    "title": "Central heating pump age",
+                    "description": "For wet systems. `unknown` if the pump cannot be located.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "2012 or earlier",
+                                "2013 or later",
+                                "unknown"
+                            ]
+                        }
+                    ]
+                },
+                "mcs_installation": {
+                    "title": "MCS installation",
+                    "description": "For heat pumps. `yes` only if documentary evidence is available.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "yes",
+                                "no"
+                            ]
+                        }
+                    ]
+                },
+                "design_flow_temperature": {
+                    "title": "Design flow temperature",
+                    "description": "Design flow temperature of heat generator. Applicable to heat pumps and condensing boilers. `unknown` unless documentary evidence is available giving the design flow temperature. Option `<=45C and over 35C` not available for heat pumps from SAP tables.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "unknown",
+                                "over 45C",
+                                "<= 45C and over 35C",
+                                "<= 35C"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "heating_controls": {
+            "type": "object",
+            "required": ["item", "compensating_controller", "product_index_number"],
+            "properties": {
+                "item": {
+                    "title": "Item from table 4e accroding to main system type.",
+                    "oneOf": [
+                        {
+                            "const": "unknown"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "compensating_controller": {
+                    "title": "Compensating controller",
+                    "description": "",
+                    "enum": [
+                        "yes",
+                        "no",
+                        "not applicable"
+                    ]
+                },
+                "product_index_number": {
+                    "title": "Product index number",
+                    "description": "Product index number of controller if applicable.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+
+            }
+        },
+        "pv_array": {
+            "type": "object",
+            "required": ["size", "tilt", "orientation", "overshading"],
+            "properties": {
+                "size": {
+                    "title": "Size",
+                    "description": "Size in kWp.",
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                },
+                "tilt": {
+                    "title": "Tilt",
+                    "description": "",
+                    "enum": [
+                        "horizontal",
+                        "30 deg",
+                        "45 deg",
+                        "60 deg",
+                        "vertical"
+                    ]
+                },
+                "orientation": {
+                    "title": "orientation",
+                    "description": "If not horizontal.",
+                    "oneOf": [
+                        {
+                            "const": "not applicable"
+                        },
+                        {
+                            "enum": [
+                                "S",
+                                "SE",
+                                "E",
+                                "NE",
+                                "N",
+                                "NW",
+                                "W",
+                                "SW"
+                            ]
+                        }
+                    ]
+                },
+                "overshading": {
+                    "title": "Overshading",
+                    "description": "",
+                    "enum": [
+                        "very little",
+                        "modest",
+                        "significant",
+                        "heavy"
+                    ]
+                }
+            }
+        }
+    }
+}
