@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "",
+    "$id": "https://raw.githubusercontent.com/building-energy/sap2012/master/sap2012/SAP_input_schema/rdSAP_2012_input_schema.json",
     "type": "object",
     "title": "rdSAP_2012_input_schema",
     "description": "JSON schema for an input file for rdSAP 2012 calculations",
